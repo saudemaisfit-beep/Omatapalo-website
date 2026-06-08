@@ -32,8 +32,12 @@ function AnimatedNumber({ end, suffix }: { end: number; suffix: string }) {
     }, { threshold: 0.5 });
     obs.observe(el); return () => obs.disconnect();
   }, [end]);
-  const fmt = val >= 1_000_000 ? (val/1_000_000).toFixed(1).replace('.',',')+' M'
-    : val >= 1_000 ? val.toLocaleString('pt-PT') : String(val);
+  // Formatter manual — não depende do locale do sistema
+  const fmt = val >= 1_000_000
+    ? (val / 1_000_000).toFixed(1).replace('.', ',') + ' M'
+    : val >= 1_000
+    ? String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+    : String(val);
   return <span ref={ref} className="tabular-nums">{fmt}{suffix}</span>;
 }
 
@@ -204,22 +208,47 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.35 }}
+          className="mt-12"
         >
-          <div className="h-px bg-white/10 mb-8" aria-hidden="true" />
-          <div role="list" aria-label="Indicadores do Grupo Omatapalo" className="grid grid-cols-2 md:grid-cols-4 gap-0">
+          {/* Separator */}
+          <div className="flex items-center gap-4 mb-8" aria-hidden="true">
+            <div className="h-px flex-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
+            <svg width="14" height="14" viewBox="0 0 100 100" fill="none">
+              <path d="M5 5 L80 5 L80 20 L30 20 L20 30 L20 80 L5 80 Z" fill="rgba(255,255,255,0.15)" />
+              <path d="M95 95 L20 95 L20 80 L70 80 L80 70 L80 20 L95 20 Z" fill="rgba(255,255,255,0.15)" />
+              <rect x="40" y="40" width="20" height="20" fill="rgba(255,255,255,0.15)" />
+            </svg>
+            <div className="h-px flex-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
+          </div>
+
+          <div role="list" aria-label="Indicadores do Grupo Omatapalo" className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((s, i) => (
               <motion.div
                 key={s.label}
                 role="listitem"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.45 + i * 0.08 }}
-                className={`flex flex-col py-4 ${i < stats.length - 1 ? 'pr-8 md:border-r md:border-white/10' : ''} ${i > 0 ? 'md:px-8' : ''}`}
+                transition={{ delay: 1.45 + i * 0.1 }}
+                className={[
+                  'flex flex-col py-5',
+                  i % 2 === 0 ? 'pr-6' : 'pl-6',
+                  'md:px-8',
+                  i === 0 ? 'md:pl-0' : '',
+                  i === stats.length - 1 ? 'md:pr-0' : '',
+                  i < stats.length - 1 ? 'md:border-r' : '',
+                  i < 2 ? 'border-b md:border-b-0' : '',
+                ].join(' ')}
+                style={{ borderColor: 'rgba(255,255,255,0.08)' }}
               >
-                <span className="font-black text-white leading-none mb-2" style={{ fontSize: 'clamp(1.9rem,3.2vw,2.8rem)', letterSpacing: '-0.03em' }}>
+                <span
+                  className="font-black text-white leading-none mb-2 tabular-nums"
+                  style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', letterSpacing: '-0.04em' }}
+                >
                   <AnimatedNumber end={s.end} suffix={s.suffix} />
                 </span>
-                <span className="t-label leading-tight" style={{ color: 'rgba(255,255,255,0.4)' }}>{s.label}</span>
+                <span className="t-label" style={{ color: 'rgba(255,255,255,0.38)', letterSpacing: '0.08em' }}>
+                  {s.label}
+                </span>
               </motion.div>
             ))}
           </div>

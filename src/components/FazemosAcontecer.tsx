@@ -20,8 +20,10 @@ function Counter({ value, prefix = '', suffix = '' }: { value: number; prefix?: 
     requestAnimationFrame(tick);
   }, [inView, value]);
   const fmt = count >= 1_000_000
-    ? (count / 1_000_000).toFixed(1).replace('.', ',') + 'M'
-    : count.toLocaleString('pt-PT');
+    ? (count / 1_000_000).toFixed(1).replace('.', ',') + ' M'
+    : count >= 1_000
+    ? String(count).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+    : String(count);
   return <span ref={ref}>{prefix}{fmt}{suffix}</span>;
 }
 
