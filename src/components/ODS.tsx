@@ -69,7 +69,7 @@ export default function ODS({ selectedODS = null, onSelect = () => {} }: Props) 
   return (
     <section ref={sectionRef} style={{ background: '#fff', position: 'relative', overflow: 'hidden' }}>
 
-      <div className="ods-divider" style={{ height: '3px', background: 'var(--navy-950)', transformOrigin: 'left', scaleX: 0 }} />
+      <div className="ods-divider" style={{ height: '3px', background: 'var(--navy-950)', transformOrigin: 'left', transform: 'scaleX(0)' }} />
 
       <div className="wrap" style={{ padding: 'clamp(72px,9vw,120px) 0' }}>
 
