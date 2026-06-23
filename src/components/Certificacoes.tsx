@@ -4,14 +4,14 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 
 const CERTS = [
-  { src: '/ISO-9001-3.png',          label: 'ISO 9001',          sub: 'Sistemas de Gestão da Qualidade',         n: '01' },
-  { src: '/ISO-14001-3.png',         label: 'ISO 14001',         sub: 'Gestão Ambiental',                        n: '02' },
-  { src: '/ISO-45001-3.png',         label: 'ISO 45001',         sub: 'Saúde e Segurança no Trabalho',           n: '03' },
+  { src: '/ISO-9001-3.png',          label: 'ISO 9001',          sub: 'Sistemas de Gestão da Qualidade',         n: '01', bg: '/ISO-9001-2.png' },
+  { src: '/ISO-14001-3.png',         label: 'ISO 14001',         sub: 'Gestão Ambiental',                        n: '02', bg: '/ISO-14001-2.png' },
+  { src: '/ISO-45001-3.png',         label: 'ISO 45001',         sub: 'Saúde e Segurança no Trabalho',           n: '03', bg: '/ISO-45001-2.png' },
   { src: '/UN-GLOBAL-COMPACT-3.png', label: 'UN Global Compact', sub: 'Pacto Global das Nações Unidas',          n: '04' },
 ];
 
 function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
-  cert: typeof CERTS[0];
+  cert: typeof CERTS[0] & { bg?: string };
   index: number;
   hovered: number | null;
   onEnter: () => void;
@@ -70,6 +70,17 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
         minWidth: 0,
       }}
     >
+      {/* certificate background image */}
+      {cert.bg && (
+        <Image
+          src={cert.bg}
+          alt=""
+          fill
+          aria-hidden
+          style={{ objectFit: 'cover', objectPosition: 'center', opacity: isHov ? 0.18 : 0.08, transition: 'opacity 0.5s ease', pointerEvents: 'none' }}
+        />
+      )}
+
       {/* glow */}
       <div ref={glowRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', transition: 'background .12s' }} />
 
