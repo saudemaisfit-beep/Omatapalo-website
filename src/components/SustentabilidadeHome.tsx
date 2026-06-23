@@ -143,7 +143,7 @@ export default function SustentabilidadeHome() {
               letterSpacing: '-0.035em', lineHeight: 0.92, textTransform: 'uppercase',
             }}>
               Construir<br />hoje,<br />
-              <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.22)' }}>respeitar<br />amanhã</span>
+              <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.22)' }}>preservar<br />amanhã</span>
             </h2>
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, margin: 0 }}>
               A aposta nas energias renováveis é um compromisso ambicioso — suportado pelos nossos 60 ha de inovação — por um futuro mais limpo e sustentável.
