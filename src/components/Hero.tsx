@@ -9,7 +9,7 @@ const STATS = [
   { value: 5000, prefix: '+', suffix: ' km',  label: 'de Estrada', thousands: true },
 ];
 
-const TICKER = ['Engenharia', 'Construção', 'Infra-estruturas', 'Mineração', 'Energia', 'Gestão Hoteleira', 'Agro-negócio', 'Imobiliário', 'Transporte', 'Pescas'];
+const TICKER = ['Engenharia', 'Construção', 'Infra-estruturas', 'Mineração', 'Energia', 'Gestão Hoteleira', 'Agro-negócio', 'Imobiliário', 'Transporte', 'Pescas', 'Indústria'];
 
 const SQUARES = [
   { size: 180, x: '72%',  y: '12%', opacity: 0.045, speed: -18, rotate: 22  },
