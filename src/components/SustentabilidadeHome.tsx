@@ -146,7 +146,7 @@ export default function SustentabilidadeHome() {
               <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.22)' }}>preservar<br />amanhã</span>
             </h2>
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, margin: 0 }}>
-              A aposta nas energias renováveis é um compromisso ambicioso — suportado pelos nossos 60 ha de inovação — por um futuro mais limpo e sustentável.
+              Acreditamos que o desenvolvimento só é verdadeiramente sustentável quando gera valor para as pessoas, para a economia e para o ambiente. É por isso que investimos continuamente em soluções energéticas renováveis e em práticas responsáveis que promovem um crescimento mais equilibrado e duradouro.
             </p>
           </div>
 
