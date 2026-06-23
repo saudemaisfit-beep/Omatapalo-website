@@ -27,6 +27,7 @@ const SECTORS: Sector[] = [
       { logo: '/SelaGrup-Logotipo.png',   name: 'Selagrup',   year: '2020', area: 'Captação de Água',         desc: 'Furos e redes de distribuição de água.' },
       { logo: '/Emadel.png',              name: 'Emadel',     year: '2010', area: 'Carpintaria',              desc: 'Soluções em madeira para construção e decoração.' },
       { logo: '/EMADEL LAR.png',          name: 'Emadellar',  year: '2012', area: 'Mobiliário',               desc: 'Design e produção de mobiliário de interiores.' },
+      { logo: '/Enerline.png',            name: 'Enerline',   year: '2014', area: 'Energia',                  desc: 'Soluções energéticas e energias renováveis.' },
     ],
   },
   {
@@ -38,7 +39,6 @@ const SECTORS: Sector[] = [
       { logo: '/ONTOUR.png',                name: 'OnTour',           year: '2022', area: 'Turismo',             desc: 'Serviços de turismo e hospitalidade em Angola.' },
       { logo: '/Venture Vanguard.jpg',      name: 'Venture Vanguard', year: '2024', area: 'Trading',             desc: 'Consultoria e trading de commodities e serviços.' },
       { logo: '/SOTRANS-Logo.jpg',          name: 'Sotrans',          year: '2014', area: 'Transportes',         desc: 'Transporte de passageiros e logística.' },
-      { logo: '/Enerline.png',              name: 'Enerline',         year: '2014', area: 'Energia',             desc: 'Soluções energéticas e energias renováveis.' },
     ],
   },
 ];
