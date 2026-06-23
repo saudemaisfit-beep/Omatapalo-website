@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 
 const GALLERY = [
   '/Formação omatapalo.jpg',
-  '/omt-academia.jpg',
-  '/Academia-barra3.jpg',
+  '/Academia-barra.jpg',
+  '/academia-barra1.jpg',
   '/Academia-barra.jpg',
 ];
 
