@@ -212,7 +212,7 @@ export default function SustentabilidadeHome() {
                       {p.statSuffix}
                     </span>
                   </div>
-                  <div style={{ fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginTop: 4 }}>
+                  <div style={{ fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#fff', marginTop: 4 }}>
                     {p.statLabel}
                   </div>
                 </div>
