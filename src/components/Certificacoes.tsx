@@ -56,67 +56,46 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
       style={{
         flex: isHov ? '2.2' : '1',
         transition: 'flex 0.55s cubic-bezier(0.77,0,0.175,1)',
-        background: '#07101f',
-        borderRight: index < CERTS.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-        padding: 'clamp(24px,3vw,40px) clamp(20px,2.5vw,36px)',
+        background: '#fff',
+        border: '0.5px solid #dde2f0',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
         position: 'relative',
         overflow: 'hidden',
         cursor: 'default',
         willChange: 'flex, transform',
         transformStyle: 'preserve-3d',
         minWidth: 0,
-        opacity: anyHov && !isHov ? 0.5 : 1,
+        opacity: anyHov && !isHov ? 0.6 : 1,
       }}
     >
       {/* glow */}
-      <div ref={glowRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', transition: 'background .12s' }} />
+      <div ref={glowRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', transition: 'background .12s', zIndex: 2 }} />
 
-      {/* accent line bottom */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: isHov ? '3px' : '2px', background: isHov ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.12)', transition: 'height 0.3s, background 0.3s' }} />
-
-      {/* top row: numbering + doc thumbnail */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', position: 'relative', zIndex: 1 }}>
-        <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)' }}>
-          {cert.n} / 04
-        </div>
-        {/* doc thumbnail */}
+      {/* certificate image — top portion */}
+      <div style={{ position: 'relative', flex: 1, overflow: 'hidden', minHeight: 0 }}>
         {cert.bg && (
-          <div style={{
-            width: isHov ? 'clamp(90px,8vw,120px)' : 'clamp(64px,6vw,90px)',
-            height: isHov ? 'clamp(68px,6vw,90px)' : 'clamp(48px,4.5vw,68px)',
-            border: '1.5px solid rgba(255,255,255,0.15)',
-            borderRadius: 2,
-            overflow: 'hidden',
-            position: 'relative',
-            flexShrink: 0,
-            transition: 'width 0.4s ease, height 0.4s ease',
-          }}>
-            <Image src={cert.bg} alt="" fill style={{ objectFit: 'cover', objectPosition: 'top left', opacity: 0.85 }} />
-          </div>
+          <Image src={cert.bg} alt="" fill style={{ objectFit: 'cover', objectPosition: 'top left', transition: 'transform 0.6s ease', transform: isHov ? 'scale(1.04)' : 'scale(1)' }} />
         )}
+        {/* seal top-left */}
+        <div style={{ position: 'absolute', top: 10, left: 12, width: 44, height: 44, zIndex: 1 }}>
+          <Image src={cert.src} alt={cert.label} fill style={{ objectFit: 'contain', filter: 'brightness(10)', opacity: 0.85 }} />
+        </div>
       </div>
 
-      {/* bottom: line + title + subtitle + seal */}
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ width: 24, height: 2, background: 'rgba(255,255,255,0.25)', marginBottom: 14 }} />
+      {/* footer navy */}
+      <div style={{ background: '#0d1e52', borderTop: '3px solid #1a396e', padding: '14px 16px' }}>
         <div style={{
           fontFamily: 'var(--font-display)', fontWeight: 900,
-          fontSize: 'clamp(1.1rem,1.8vw,2rem)',
-          color: '#fff', letterSpacing: '-0.03em', lineHeight: 0.95,
-          textTransform: 'uppercase', marginBottom: 10,
+          fontSize: 'clamp(0.75rem,1.1vw,1rem)',
+          color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.1,
+          textTransform: 'uppercase', marginBottom: 5,
         }}>{cert.label}</div>
         <div style={{
-          fontFamily: 'var(--font-label)', fontSize: 9,
+          fontFamily: 'var(--font-label)', fontSize: 8,
           letterSpacing: '0.14em', textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.4)', lineHeight: 1.6,
+          color: 'rgba(255,255,255,0.45)', lineHeight: 1.5,
         }}>{cert.sub}</div>
-        {/* seal bottom right */}
-        <div style={{ position: 'absolute', right: 0, bottom: 0, width: 36, height: 36 }}>
-          <Image src={cert.src} alt={cert.label} fill style={{ objectFit: 'contain', opacity: 0.65 }} />
-        </div>
       </div>
     </div>
   );
