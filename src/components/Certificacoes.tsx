@@ -4,10 +4,10 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 
 const CERTS = [
-  { src: '/ISO-9001-3.png',          label: 'ISO 9001',          sub: 'Sistemas de Gestão da Qualidade',         n: '01', bg: '/ISO-9001-2.png' },
-  { src: '/ISO-14001-3.png',         label: 'ISO 14001',         sub: 'Gestão Ambiental',                        n: '02', bg: '/ISO-14001-2.png' },
-  { src: '/ISO-45001-3.png',         label: 'ISO 45001',         sub: 'Saúde e Segurança no Trabalho',           n: '03', bg: '/ISO-45001-2.png' },
-  { src: '/UN-GLOBAL-COMPACT-3.png', label: 'UN Global Compact', sub: 'Pacto Global das Nações Unidas',          n: '04', bg: '/UN-GLOBAL-COMPACT-2.png' },
+  { src: '/ISO-9001-3.png',          label: 'ISO 9001',          sub: 'Sistemas de Gestão da Qualidade',         n: '01', bg: '/ISO-9001-2.png',          ghost: '9001'  },
+  { src: '/ISO-14001-3.png',         label: 'ISO 14001',         sub: 'Gestão Ambiental',                        n: '02', bg: '/ISO-14001-2.png',         ghost: '14001' },
+  { src: '/ISO-45001-3.png',         label: 'ISO 45001',         sub: 'Saúde e Segurança no Trabalho',           n: '03', bg: '/ISO-45001-2.png',         ghost: '45001' },
+  { src: '/UN-GLOBAL-COMPACT-3.png', label: 'UN Global Compact', sub: 'Pacto Global das Nações Unidas',          n: '04', bg: '/UN-GLOBAL-COMPACT-2.png', ghost: 'UN'    },
 ];
 
 function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
@@ -56,7 +56,7 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
       style={{
         flex: isHov ? '2.2' : '1',
         transition: 'flex 0.55s cubic-bezier(0.77,0,0.175,1)',
-        background: '#0a1a45',
+        background: '#0e1e5a',
         borderRight: index < CERTS.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
         padding: 'clamp(32px,4vw,56px) clamp(20px,2.5vw,40px)',
         display: 'flex',
@@ -77,12 +77,12 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
           alt=""
           fill
           aria-hidden
-          style={{ objectFit: 'cover', objectPosition: 'center', opacity: isHov ? 0.58 : 0.58, transition: 'opacity 0.5s ease', pointerEvents: 'none' }}
+          style={{ objectFit: 'cover', objectPosition: 'center', opacity: isHov ? 0.18 : 0.1, transition: 'opacity 0.5s ease', pointerEvents: 'none' }}
         />
       )}
 
-      {/* dark gradient overlay */}
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,20,60,0.25) 0%, rgba(10,20,60,0.75) 100%)', pointerEvents: 'none' }} />
+      {/* ghost number */}
+      <div aria-hidden style={{ position: 'absolute', bottom: -10, right: -4, fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(60px,8vw,100px)', color: 'rgba(255,255,255,0.06)', lineHeight: 1, letterSpacing: '-0.05em', pointerEvents: 'none', userSelect: 'none' }}>{(cert as any).ghost}</div>
 
       {/* glow */}
       <div ref={glowRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', transition: 'background .12s' }} />
@@ -90,7 +90,7 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
       {/* animated accent line — grows from bottom on hover */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0,
-        height: isHov ? '3px' : '0px',
+        height: '2px',
         background: 'rgba(255,255,255,0.25)',
         transition: 'height 0.4s ease',
       }} />
@@ -99,7 +99,7 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
       {/* centre: seal — fades + scales in on hover */}
       <div style={{
         display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 24,
-        opacity: isHov ? 1 : anyHov ? 0.15 : 0.6,
+        opacity: anyHov && !isHov ? 0.4 : 0.9,
         transform: isHov ? 'translateZ(24px) translateY(0px)' : 'translateZ(0px) translateY(12px)',
         transition: 'opacity 0.4s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)',
       }}>
