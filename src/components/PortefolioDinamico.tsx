@@ -225,7 +225,7 @@ export default function PortefolioDinamico() {
             </h2>
             <div style={{ display: 'flex', gap: 'clamp(24px,4vw,48px)', paddingBottom: 4 }}>
               {[
-                { n: `${PROJECTS.length}+`, l: 'Projectos' },
+                { n: `+${PROJECTS.length}`, l: 'Projectos' },
                 { n: '12',                  l: 'Categorias' },
                 { n: '18',                  l: 'Províncias' },
               ].map(s => (
