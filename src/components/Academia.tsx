@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 const GALLERY = [
-  'https://omatapalo.com/wp-content/uploads/Academia-barra6.jpg',
+  '/Formação omatapalo.jpg',
   'https://omatapalo.com/wp-content/uploads/Academia-barra3.jpg',
   'https://omatapalo.com/wp-content/uploads/academia-barra2.jpg',
   'https://omatapalo.com/wp-content/uploads/academia-barra.jpg',
@@ -108,18 +108,6 @@ export default function Academia() {
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(15px,1.35vw,18px)', color: '#ffffff', lineHeight: 1.85, margin: '0 0 32px' }}>
                 <strong style={{ color: '#fff' }}>ACADEMIA OMATAPALO</strong>, inaugurada em 2021, tem como objetivo primordial a formação de quadros e funcionários do Grupo, com vista ao desenvolvimento e especialização dos seus profissionais.
               </p>
-              <a
-                href="#contactos"
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 10,
-                  fontFamily: 'var(--font-label)', fontSize: 10, letterSpacing: '0.18em',
-                  textTransform: 'uppercase', color: '#fff', textDecoration: 'none',
-                  borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: 2,
-                }}
-              >
-                Saber mais
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
             </div>
           </div>
 

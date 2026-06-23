@@ -42,7 +42,7 @@ export default function Pessoas() {
               <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(26,57,110,0.22)' }}>Pessoas</span>
             </h2>
             <p className="shead__lead" style={{ marginTop: 'var(--space-4)', color: '#1a1a1a' }}>
-              Contando com mais de 12.000 colaboradores directos, a OMATAPALO possui no seu quadro técnico áreas de conhecimento relacionadas com a sua actividade.
+              Contando com mais de 15.000 colaboradores directos, a OMATAPALO possui no seu quadro técnico áreas de conhecimento relacionadas com a sua actividade.
               <br /><br />
               A empresa assenta a sua actuação em níveis de empenho, diligência na execução, responsabilidade na sua conduta, formando uma equipa pluridisciplinar capaz de conduzir processos, produzir resultados e garantir padrões de qualidade, cumprimento de prazos rigorosos, para uma sociedade que, cada vez mais, exige soluções mais céleres.
             </p>

@@ -177,7 +177,7 @@ export default function Mundo() {
               {[['3', 'Continentes'], ['8', 'Países'], ['23', 'Anos']].map(([n, l]) => (
                 <div key={l}>
                   <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(2rem,3.5vw,3.5rem)', color: '#fff', letterSpacing: '-0.04em', lineHeight: 1 }}>{n}</div>
-                  <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginTop: 4 }}>{l}</div>
+                  <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff', marginTop: 4 }}>{l}</div>
                 </div>
               ))}
             </div>

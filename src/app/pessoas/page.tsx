@@ -10,7 +10,7 @@ export default function PessoasPage() {
     <>
       <Nav />
       <main>
-        <PageHero title="As nossas Pessoas" imgSrc="/Academia-barra3.jpg" position="center" eyebrow="Grupo Omatapalo · 15 000+ Colaboradores" outlineWord="Pessoas" />
+        <PageHero title="As nossas Pessoas" imgSrc="/Academia-barra3.jpg" position="center" eyebrow="Grupo Omatapalo · +15 000 Colaboradores" outlineWord="Pessoas" />
         <Pessoas />
         <Testemunhos />
         <Academia />

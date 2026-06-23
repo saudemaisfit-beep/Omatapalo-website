@@ -183,7 +183,7 @@ export default function Certificacoes() {
             </h2>
           </div>
           <p style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, maxWidth: 380 }}>
-            A segurança e a saúde no trabalho é a pedra angular na Omatapalo. Comprometemo-nos a contribuir para o desenvolvimento sustentado da engenharia segundo os mais elevados padrões éticos.
+            A segurança e a saúde no trabalho é a pedra angular no Grupo Omatapalo. Comprometemo-nos a contribuir para o desenvolvimento sustentado da engenharia segundo os mais elevados padrões éticos.
           </p>
         </div>
 

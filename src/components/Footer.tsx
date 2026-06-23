@@ -28,7 +28,7 @@ export default function Footer() {
               style={{ marginBottom: 'var(--space-3)', filter: 'brightness(0) invert(1)' }}
             />
             <p style={{ fontSize: 'var(--text-sm)', lineHeight: 1.65, color: '#fff', maxWidth: '320px' }}>
-              Engenharia, Construção e Infraestrutura a transformar Angola e o continente africano desde 1994. Fazemos acontecer.
+              Engenharia, Construção e Infra-estruturas a transformar Angola e o continente africano desde 2003. Fazemos acontecer.
             </p>
             <div style={{ display: 'flex', gap: '10px', marginTop: 'var(--space-5)' }}>
               {SOCIALS.map((s) => (
@@ -63,7 +63,7 @@ export default function Footer() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-4)', flexWrap: 'wrap', marginTop: 'var(--space-9)', paddingTop: 'var(--space-5)', borderTop: '1px solid var(--border-dark)', fontSize: 'var(--text-xs)', color: '#fff' }}>
           <span>© 2026 Grupo Omatapalo · Todos os direitos reservados · Luanda, Angola</span>
           <div style={{ display: 'flex', gap: 'var(--space-5)' }}>
-            {['Privacidade', 'Termos de Uso', 'Cookies'].map((l) => (
+            {['Política do Sistema de Gestão Integrado', 'Termos de Uso', 'Cookies'].map((l) => (
               <a key={l} href="#" style={{ color: '#fff', transition: 'color 0.2s' }} className="ftr-link">{l}</a>
             ))}
           </div>

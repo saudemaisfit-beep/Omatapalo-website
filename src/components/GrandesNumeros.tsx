@@ -6,7 +6,7 @@ const ITEMS = [
   { value: 14,   label: 'Hospitais',          img: '/inauguracao.jpg'                      },
   { value: 5000, label: 'Estradas',            img: '/EN-230-omatapalo-2.jpg', thousands: true, suffix: 'km' },
   { value: 4,    label: 'Portos',             img: '/TOPSIDE NAMIBE.JPG'                   },
-  { value: 6,    label: 'Linhas Alta Tensão', img: '/Sustentabilidade-omatapalo.png'       },
+  { value: 6,    label: 'Linhas Alta Tensão', img: '/omatapalo-electrificacao.jpg'          },
   { value: 6,    label: 'Construções Esp.',   img: '/MINISTÉRIO DO PLANEAMENTO.JPG'        },
   { value: 10,   label: 'Escolas',            img: '/colegio-paula-frassinetti.jpg'        },
   { value: 2,    label: 'Aeroportos',         img: '/aeroporto-namibe.jpg'                 },
@@ -167,14 +167,14 @@ export default function GrandesNumeros() {
                   }} />
 
                   {/* content — sits above image */}
-                  <div style={{ position: 'relative', zIndex: 1 }}>
+                  <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
 
                     {/* big number */}
                     <div style={{
                       fontFamily: 'var(--font-display)', fontWeight: 900,
-                      fontSize: (item as any).thousands ? 'clamp(2.3rem,4.2vw,5.5rem)' : 'clamp(2.6rem,5vw,6.5rem)', color: '#fff',
+                      fontSize: (item as any).thousands ? 'clamp(1.8rem,3.2vw,4rem)' : 'clamp(2rem,3.8vw,5rem)', color: '#fff',
                       letterSpacing: '-0.04em', lineHeight: 1,
-                      display: 'flex', alignItems: 'baseline',
+                      display: 'flex', alignItems: 'baseline', justifyContent: 'center',
                       transition: 'transform .3s ease',
                       transform: hovered === i ? 'translateY(-4px)' : 'none',
                     }}>

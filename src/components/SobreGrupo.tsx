@@ -97,13 +97,13 @@ export default function SobreGrupo() {
   return (
     <>
       {/* ── scroll distance wrapper (250vh gives room for full strip travel) ── */}
-      <div ref={wrapperRef} id="grupo" style={{ height: '250vh', position: 'relative' }}>
+      <div ref={wrapperRef} id="grupo" className="sgc-wrapper" style={{ height: '250vh', position: 'relative' }}>
 
         {/* ── sticky viewport ── */}
-        <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', overflow: 'hidden', background: '#ffffff' }}>
+        <div className="sgc-sticky" style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', overflow: 'hidden', background: '#ffffff' }}>
 
           {/* ── LEFT: static text panel ── */}
-          <div style={{
+          <div className="sgc-left" style={{
             flexShrink: 0,
             width: 'clamp(280px, 36vw, 520px)',
             display: 'flex',
@@ -124,13 +124,13 @@ export default function SobreGrupo() {
             </div>
 
             {/* title */}
-            <div style={{ overflow: 'hidden', marginBottom: 28 }}>
+            <div style={{ overflow: 'visible', marginBottom: 28 }}>
               <h2 style={{ margin: 0, fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 0.9, letterSpacing: '-0.035em', fontSize: 'clamp(2.4rem,4.5vw,5rem)' }}>
                 {['Quem', 'Somos'].map((w, i) => (
                   <span key={w} className="sgc-word" style={{
                     display: 'block', opacity: 0,
                     color: i === 0 ? '#0F1A2E' : 'transparent',
-                    WebkitTextStroke: i === 0 ? '0px' : '1.5px rgba(26,57,110,0.28)',
+                    WebkitTextStroke: i === 0 ? '0px' : '2px rgba(26,57,110,0.55)',
                   }}>{w}</span>
                 ))}
               </h2>
@@ -200,8 +200,8 @@ export default function SobreGrupo() {
           </div>
 
           {/* ── RIGHT: horizontal image strip ── */}
-          <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
-            <div ref={stripRef} style={{ display: 'flex', gap: 'clamp(12px,1.5vw,20px)', height: '100%', paddingInline: 'clamp(20px,2.5vw,40px)', alignItems: 'center', willChange: 'transform' }}>
+          <div className="sgc-right" style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
+            <div ref={stripRef} className="sgc-strip" style={{ display: 'flex', gap: 'clamp(12px,1.5vw,20px)', height: '100%', paddingInline: 'clamp(20px,2.5vw,40px)', alignItems: 'center', willChange: 'transform' }}>
               {IMAGES.map((img, i) => (
                 <div key={i} style={{
                   flexShrink: 0,
@@ -237,6 +237,16 @@ export default function SobreGrupo() {
 
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .sgc-wrapper { height: auto !important; }
+          .sgc-sticky { position: relative !important; height: auto !important; flex-direction: column !important; overflow: visible !important; }
+          .sgc-left  { width: 100% !important; border-right: none !important; border-bottom: 1px solid #e5e7eb; padding: 48px 24px !important; }
+          .sgc-right { width: 100% !important; height: 320px; overflow: hidden; }
+          .sgc-strip { transform: none !important; flex-wrap: nowrap; overflow-x: auto; padding-inline: 24px !important; height: 100% !important; }
+        }
+      `}</style>
 
       {/* Video Modal */}
       {videoOpen && (

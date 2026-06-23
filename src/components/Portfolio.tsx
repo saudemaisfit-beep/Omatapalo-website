@@ -6,11 +6,11 @@ import Link from 'next/link';
 
 const PROJECTS = [
   { img: 'photo-1487958449943-2429e8be8625', cat: 'Edifícios', title: 'Centro Hospitalar de Referência', meta: ['Luanda', '2023', '48 000 m²'], feature: true },
-  { img: 'photo-1545459720-aac8509eb02c', cat: 'Infraestrutura', title: 'Corredor Rodoviário Norte', meta: ['Uíge', '320 km'] },
+  { img: 'photo-1545459720-aac8509eb02c', cat: 'Infra-estruturas', title: 'Corredor Rodoviário Norte', meta: ['Uíge', '320 km'] },
   { img: 'photo-1473341304170-971dccb5ac1e', cat: 'Energia', title: 'Parque Solar 66 ha', meta: ['Huíla', '2024'] },
   { img: 'photo-1504307651254-35680f356dfd', cat: 'Edifícios', title: 'Complexo Habitacional', meta: ['Luanda', '2 000 Hab.'] },
   { img: 'photo-1581094794329-c8112a89af12', cat: 'Água', title: 'Estação de Tratamento de Água', meta: ['Benguela', '2022'] },
-  { img: 'photo-1590674899484-d5640e854abe', cat: 'Infraestrutura', title: 'Ponte Sobre o Kwanza', meta: ['Kwanza Sul', '280 m'] },
+  { img: 'photo-1590674899484-d5640e854abe', cat: 'Infra-estruturas', title: 'Ponte Sobre o Kwanza', meta: ['Kwanza Sul', '280 m'] },
 ];
 
 export default function Portfolio() {

@@ -15,7 +15,7 @@ const businesses = [
     num: '02', title: 'Obras Públicas',
     desc: 'Mais de 5.000 km de estradas pavimentadas. Barragens, pontes e infraestrutura crítica para o desenvolvimento nacional.',
     img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&q=80&auto=format&fit=crop',
-    tag: 'Infraestrutura',
+    tag: 'Infra-estruturas',
   },
   {
     num: '03', title: 'Imobiliário',
