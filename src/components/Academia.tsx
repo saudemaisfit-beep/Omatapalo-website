@@ -100,7 +100,7 @@ export default function Academia() {
               <div style={{ marginBottom: 32 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/LOGO%20ACADEMIA%2002.png"
+                  src="/LOGO-ACADEMIA-02.png"
                   alt="Academia Omatapalo"
                   style={{ height: 84, width: 'auto', objectFit: 'contain' }}
                 />
