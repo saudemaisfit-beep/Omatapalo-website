@@ -99,7 +99,7 @@ export default function Academia() {
               </div>
               <div style={{ position: 'relative', width: 420, height: 84, marginBottom: 32 }}>
                 <Image
-                  src="https://omatapalo.com/wp-content/uploads/logotipo-academia.png"
+                  src="/LOGO ACADEMIA 02.png"
                   alt="Academia Omatapalo"
                   fill
                   style={{ objectFit: 'contain', objectPosition: 'left' }}
