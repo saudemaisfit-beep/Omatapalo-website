@@ -116,7 +116,7 @@ export default function SobreGrupo() {
           }}>
 
             {/* eyebrow */}
-            <div className="sgc-eyebrow" style={{ opacity: 0, display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
+            <div className="sgc-eyebrow" style={{ opacity: 1, display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0 }}><rect width="10" height="10" fill="#1a396e" /></svg>
               <span style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1a396e' }}>
                 Grupo Omatapalo · Desde 2003
