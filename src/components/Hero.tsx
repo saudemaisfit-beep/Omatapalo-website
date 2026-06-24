@@ -246,7 +246,7 @@ export default function Hero() {
                 <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.5rem,2.8vw,2.4rem)', color: '#fff', letterSpacing: '-0.03em', lineHeight: 1, display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 2 }}>
                   {s.prefix && <span style={{ fontSize: '0.6em', color: '#fff', fontFamily: 'var(--font-sans)' }}>{s.prefix}</span>}
                   <span data-count={s.value} data-float={(s as any).decimals ? '1' : '0'} data-thousands={(s as any).thousands ? '1' : '0'}>
-                    {(s as any).thousands ? s.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : (s as any).decimals ? s.value.toFixed(1) : s.value}
+                    {(s as any).thousands ? s.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : (s as any).decimals ? s.value.toFixed(1).replace('.', ',') : s.value}
                   </span>
                   <span style={{ fontSize: '0.42em', color: '#fff', fontFamily: 'var(--font-sans)', fontWeight: 400, marginLeft: 2 }}>
                     {s.suffix.includes('m²') ? <>M m<sup>2</sup></> : s.suffix}
