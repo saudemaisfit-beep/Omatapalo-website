@@ -12,7 +12,7 @@ const IMAGES = [
 ];
 
 const STATS = [
-  { target: 23,   suffix: '',        prefix: '+',  format: (n: number) => Math.round(n).toString(),                          l: 'Anos'          },
+  { target: 23,   suffix: '',        prefix: '',   format: (n: number) => Math.round(n).toString(),                          l: 'Anos'          },
   { target: 15000, suffix: '',       prefix: '+',  format: (n: number) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'), l: 'Colaboradores' },
   { target: 1.5,  suffix: 'M m²',   prefix: '+',  format: (n: number) => n.toFixed(1).replace('.', ','),                    l: 'Construídos'   },
   { target: 5000, suffix: ' km',     prefix: '+',  format: (n: number) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'), l: 'de Estrada' },
@@ -152,9 +152,9 @@ export default function SobreGrupo() {
               {STATS.map((s, i) => {
                 const fmt = s.suffix === ' km' || s.target === 15000 ? 'thousands' : s.suffix === 'M m²' ? 'decimal' : 'int';
                 return (
-                  <div key={i} className="sgc-stat" style={{ opacity: 0, borderTop: '1.5px solid #e5e7eb', paddingTop: 14 }}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.2rem,1.8vw,1.8rem)', color: '#1a396e', letterSpacing: '-0.02em', lineHeight: 1, display: 'flex', alignItems: 'baseline', gap: 2 }}>
-                      <span style={{ fontSize: '0.65em' }}>{s.prefix}</span>
+                  <div key={i} className="sgc-stat" style={{ opacity: 0, borderTop: '1.5px solid #e5e7eb', paddingTop: 14, textAlign: 'center' }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.2rem,1.8vw,1.8rem)', color: '#1a396e', letterSpacing: '-0.02em', lineHeight: 1, display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 2 }}>
+                      {s.prefix && <span style={{ fontSize: '0.65em' }}>{s.prefix}</span>}
                       <span
                         data-counter={s.target}
                         data-fmt={fmt}
