@@ -111,7 +111,6 @@ export default function CDH() {
             <div className="cdh-photo-plus" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%) scale(0)', width: 44, height: 44, background: 'rgba(255,255,255,0.92)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.3s ease', pointerEvents: 'none' }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a396e" strokeWidth="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </div>
-            <div className="cdh-photo-label" style={{ position: 'absolute', bottom: 'clamp(8px,1.2vw,14px)', left: 'clamp(8px,1.2vw,14px)', fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff', opacity: 0, transition: 'opacity 0.3s', pointerEvents: 'none' }}>{p.label}</div>
             {i === 0 && (
               <div style={{ position: 'absolute', bottom: 'clamp(14px,2vw,22px)', left: 'clamp(14px,2vw,22px)' }}>
                 <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff', marginBottom: 4 }}>Formação desportiva</div>
