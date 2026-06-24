@@ -61,7 +61,7 @@ export default function Footer() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-4)', flexWrap: 'wrap', marginTop: 'var(--space-9)', paddingTop: 'var(--space-5)', borderTop: '1px solid var(--border-dark)', fontSize: 'var(--text-xs)', color: '#fff' }}>
-          <span>© 2026 Grupo Omatapalo · Todos os direitos reservados · Luanda, Angola</span>
+          <span>© 2026 Grupo Omatapalo · Todos os direitos reservados</span>
           <div style={{ display: 'flex', gap: 'var(--space-5)' }}>
             {['Política do Sistema de Gestão Integrado', 'Termos de Uso', 'Cookies'].map((l) => (
               <a key={l} href="#" style={{ color: '#fff', transition: 'color 0.2s' }} className="ftr-link">{l}</a>
