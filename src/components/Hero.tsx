@@ -252,7 +252,7 @@ export default function Hero() {
                     {s.suffix.includes('m²') ? <>M m<sup>2</sup></> : s.suffix}
                   </span>
                 </div>
-                <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#fff', marginTop: 7 }}>{s.label}</div>
+                <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.14em', color: '#fff', marginTop: 7 }}>{s.label}</div>
               </div>
             ))}
           </div>
