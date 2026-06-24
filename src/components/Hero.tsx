@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 
 const STATS = [
-  { value: 23,   prefix: '+', suffix: '',     label: 'Anos de Experiência' },
+  { value: 23,   prefix: '',  suffix: '',     label: 'Anos de Experiência' },
   { value: 15000, prefix: '+', suffix: '',    label: 'Colaboradores', thousands: true },
   { value: 1.5,  prefix: '+', suffix: 'M m²', label: 'Área Construída', decimals: 1 },
   { value: 5000, prefix: '+', suffix: ' km',  label: 'de Estrada', thousands: true },
@@ -242,9 +242,9 @@ export default function Hero() {
           {/* stats */}
           <div ref={statsRef} style={{ opacity: 0, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 'clamp(16px,3vw,40px)', paddingBottom: 4 }} className="hero-stats">
             {STATS.map(s => (
-              <div key={s.label} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 14 }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.5rem,2.8vw,2.4rem)', color: '#fff', letterSpacing: '-0.03em', lineHeight: 1, display: 'flex', alignItems: 'baseline', gap: 2 }}>
-                  <span style={{ fontSize: '0.6em', color: '#fff', fontFamily: 'var(--font-sans)' }}>{s.prefix}</span>
+              <div key={s.label} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 14, textAlign: 'center' }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.5rem,2.8vw,2.4rem)', color: '#fff', letterSpacing: '-0.03em', lineHeight: 1, display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 2 }}>
+                  {s.prefix && <span style={{ fontSize: '0.6em', color: '#fff', fontFamily: 'var(--font-sans)' }}>{s.prefix}</span>}
                   <span data-count={s.value} data-float={(s as any).decimals ? '1' : '0'} data-thousands={(s as any).thousands ? '1' : '0'}>
                     {(s as any).thousands ? s.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : (s as any).decimals ? s.value.toFixed(1) : s.value}
                   </span>
