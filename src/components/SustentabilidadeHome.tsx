@@ -106,13 +106,6 @@ export default function SustentabilidadeHome() {
       style={{ background: '#07101f', overflow: 'hidden', position: 'relative',
         paddingTop: 'clamp(72px,10vh,120px)', paddingBottom: 'clamp(72px,10vh,120px)' }}
     >
-      {/* grid texture */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.025,
-        backgroundImage: 'linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px)',
-        backgroundSize: '60px 60px',
-      }} />
-
       {/* radial glow behind image */}
       <div style={{
         position: 'absolute', top: '50%', left: '50%',

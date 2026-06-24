@@ -73,7 +73,7 @@ export default function GrandesNumeros() {
       <div ref={wrapperRef} id="grandes-numeros" style={{ height: '250vh', position: 'relative' }}>
         <div style={{
           position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
-          background: '#07101f', display: 'flex', flexDirection: 'column',
+          background: '#1a396e', display: 'flex', flexDirection: 'column',
         }}>
 
           {/* subtle grid texture */}
