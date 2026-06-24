@@ -8,7 +8,7 @@ export default function ResponsabilidadeSocial() {
     <>
       <Nav />
       <main>
-        <PageHero title="Responsabilidade Social" imgSrc="/DSC_0030.jpg" position="center" eyebrow="Grupo Omatapalo · Missão Fazer Sorrir" outlineWord="Social" />
+        <PageHero title="Responsabilidade Social" imgSrc="/DSC_0030.jpg" position="center" eyebrow="Grupo Omatapalo · Missão Fazer Sorrir" outlineWord="Social" imgOpacity={0.45} />
         <ResponsabilidadeSocialContent />
       </main>
       <Footer />

@@ -12,6 +12,7 @@ export default function SustentabilidadePage() {
           title="Sustentabilidade"
           imgSrc="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1600&q=80"
           position="center"
+          imgOpacity={0.45}
         />
         <Sustentabilidade />
       </main>
