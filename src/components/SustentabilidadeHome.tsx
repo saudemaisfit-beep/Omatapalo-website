@@ -160,6 +160,11 @@ export default function SustentabilidadeHome() {
 
           {/* RIGHT: ODS */}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="sus-reveal" style={{ opacity: 0, marginBottom: 20 }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(0.85rem,1.1vw,1rem)', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.04em', margin: 0 }}>
+                O Nosso Contributo para a Agenda 2030
+              </p>
+            </div>
             {ODS.map((o, i) => (
               <div key={o.n} className="sus-reveal" style={{
                 opacity: 0,
