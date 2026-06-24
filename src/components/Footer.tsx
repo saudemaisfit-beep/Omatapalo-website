@@ -30,21 +30,17 @@ export default function Footer() {
             <p style={{ fontSize: 'var(--text-sm)', lineHeight: 1.65, color: '#fff', maxWidth: '320px' }}>
               Engenharia, Construção e Infra-estruturas a transformar Angola e o continente africano desde 2003. Fazemos acontecer.
             </p>
-            <div style={{ display: 'flex', gap: '12px', marginTop: 'var(--space-5)' }}>
+            <div style={{ display: 'flex', gap: '10px', marginTop: 'var(--space-5)' }}>
               {SOCIALS.map((s) => (
-                <a key={s.label} href="#" aria-label={s.label} className="ftr-social" style={{
-                  display: 'block', width: '40px', height: '40px',
-                  borderRadius: '10px', overflow: 'hidden',
-                  transition: 'transform 0.2s ease, opacity 0.2s ease',
-                  flexShrink: 0,
-                }}>
-                  <Image
-                    src={`/${s.label.toLowerCase()}.png`}
-                    alt={s.label}
-                    width={40}
-                    height={40}
-                    style={{ objectFit: 'cover', display: 'block', width: '100%', height: '100%' }}
-                  />
+                <a key={s.label} href="#" aria-label={s.label} style={{
+                  width: '38px', height: '38px', border: '1px solid var(--border-dark)',
+                  borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center',
+                  justifyContent: 'center', color: '#fff', fontSize: '14px', fontWeight: 700,
+                  transition: 'background 0.2s, border-color 0.2s, color 0.2s',
+                }}
+                  className="ftr-social"
+                >
+                  {s.icon}
                 </a>
               ))}
             </div>
@@ -75,7 +71,7 @@ export default function Footer() {
       </div>
 
       <style>{`
-        .ftr-social:hover { transform: scale(1.1) !important; opacity: 0.85 !important; }
+        .ftr-social:hover { background: var(--brand) !important; border-color: var(--brand) !important; color: #fff !important; }
         .ftr-link:hover { color: #fff !important; }
         @media (max-width:880px) { .ftr-grid { grid-template-columns: 1fr 1fr !important; gap: var(--space-7) !important; } }
         @media (max-width:540px) { .ftr-grid { grid-template-columns: 1fr !important; } }
