@@ -106,20 +106,20 @@ export default function ResponsabilidadeSocialContent() {
     <div style={{ overflow: 'hidden' }}>
 
       {/* ── HERO ────────────────────────────────────────────────── */}
-      <section style={{ background: '#1a396e', position: 'relative', overflow: 'hidden', paddingTop: 'clamp(72px,10vh,112px)', paddingBottom: 'clamp(60px,8vh,88px)' }}>
-        <div aria-hidden style={{ position: 'absolute', right: -16, bottom: -20, fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(100px,18vw,260px)', color: 'rgba(255,255,255,0.025)', lineHeight: 1, letterSpacing: '-0.05em', pointerEvents: 'none', userSelect: 'none' }}>MFS</div>
+      <section style={{ background: '#f6f8fb', position: 'relative', overflow: 'hidden', paddingTop: 'clamp(72px,10vh,112px)', paddingBottom: 'clamp(60px,8vh,88px)' }}>
+        <div aria-hidden style={{ position: 'absolute', right: -16, bottom: -20, fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(100px,18vw,260px)', color: 'rgba(26,57,110,0.05)', lineHeight: 1, letterSpacing: '-0.05em', pointerEvents: 'none', userSelect: 'none' }}>MFS</div>
 
         <div className="wrap rsa-hero" style={{ position: 'relative', zIndex: 1 }}>
           {/* eyebrow */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 'clamp(20px,3vh,32px)' }}>
-            <svg width="10" height="10" viewBox="0 0 10 10"><rect width="10" height="10" fill="rgba(255,255,255,0.35)" /></svg>
-            <span style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#fff' }}>Responsabilidade Social · Grupo Omatapalo</span>
+            <svg width="10" height="10" viewBox="0 0 10 10"><rect width="10" height="10" fill="#1a396e" /></svg>
+            <span style={{ fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1a396e' }}>Responsabilidade Social · Grupo Omatapalo</span>
           </div>
 
           {/* Título full-width */}
-          <h2 style={{ margin: '0 0 clamp(24px,4vh,40px)', fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(2.4rem,5vw,5.5rem)', color: '#fff', letterSpacing: '-0.05em', lineHeight: 0.83, textTransform: 'uppercase' }}>
+          <h2 style={{ margin: '0 0 clamp(24px,4vh,40px)', fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(2.4rem,5vw,5.5rem)', color: '#07101f', letterSpacing: '-0.05em', lineHeight: 0.83, textTransform: 'uppercase' }}>
             Missão Fazer<br />
-            <span style={{ color: 'transparent', WebkitTextStroke: '2.5px rgba(255,255,255,0.15)' }}>Sorrir</span>
+            <span style={{ color: 'transparent', WebkitTextStroke: '2.5px rgba(7,16,31,0.15)' }}>Sorrir</span>
           </h2>
 
           {/* vídeo + citação lado a lado */}
@@ -139,16 +139,16 @@ export default function ResponsabilidadeSocialContent() {
             {/* citação */}
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 28 }}>
               <div>
-                <div style={{ fontSize: 'clamp(2rem,3vw,3.5rem)', color: 'rgba(255,255,255,0.12)', fontFamily: 'Georgia, serif', lineHeight: 0.8, marginBottom: 10 }}>"</div>
-                <blockquote style={{ margin: 0, padding: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(14px,1.15vw,18px)', color: '#fff', lineHeight: 1.75, fontStyle: 'italic' }}>
+                <div style={{ fontSize: 'clamp(2rem,3vw,3.5rem)', color: 'rgba(26,57,110,0.2)', fontFamily: 'Georgia, serif', lineHeight: 0.8, marginBottom: 10 }}>"</div>
+                <blockquote style={{ margin: 0, padding: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(14px,1.15vw,18px)', color: '#07101f', lineHeight: 1.75, fontStyle: 'italic' }}>
                   Para nós, a responsabilidade social começa na nossa casa e nas condições que damos aos nossos Colaboradores. É nesta matriz e nesta filosofia que assenta a nossa capacidade de fazer acontecer.
                 </blockquote>
               </div>
-              <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <p style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.9vw,14px)', color: '#fff', lineHeight: 1.8 }}>
+              <div style={{ borderTop: '1px solid rgba(7,16,31,0.1)', paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <p style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.9vw,14px)', color: '#222936', lineHeight: 1.8 }}>
                   Num país onde existe pobreza e desigualdade, a OMATAPALO considera a responsabilidade social de extrema importância. A contribuição para a melhoria da qualidade de vida das pessoas e comunidades é desenvolvida através da promoção e apoio em iniciativas de natureza social nos domínios da beneficência e solidariedade social.
                 </p>
-                <p style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.9vw,14px)', color: '#fff', lineHeight: 1.8 }}>
+                <p style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.9vw,14px)', color: '#222936', lineHeight: 1.8 }}>
                   Nesse sentido, a OMATAPALO abraça 4 dos 17 objectivos fixados pela ONU na Agenda 2030, como vectores para a sua participação activa nas perspetivas económicas, social e ambiental.
                 </p>
               </div>
@@ -156,7 +156,7 @@ export default function ResponsabilidadeSocialContent() {
           </div>
 
           {/* Faixa de 4 stats com cores ODS */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 'clamp(16px,2.5vw,24px)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', borderTop: '1px solid rgba(7,16,31,0.1)', paddingTop: 'clamp(16px,2.5vw,24px)' }}>
             {[
               { v: '720k+', l: 'Vidas Tocadas',      c: '#fff',    bc: 'rgba(26,57,110,0.5)'  },
               { v: '500k+', l: 'Sopas Distribuídas', c: '#DDA63A', bc: 'rgba(221,166,58,0.25)' },
@@ -165,7 +165,7 @@ export default function ResponsabilidadeSocialContent() {
             ].map((s, i) => (
               <div key={i} style={{ paddingLeft: i > 0 ? 'clamp(16px,2.5vw,32px)' : 0, borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
                 <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.4rem,2.5vw,2.8rem)', color: s.c, letterSpacing: '-0.05em', lineHeight: 1, marginBottom: 5 }}>{s.v}</div>
-                <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)' }}>{s.l}</div>
+                <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(7,16,31,0.45)' }}>{s.l}</div>
               </div>
             ))}
           </div>
