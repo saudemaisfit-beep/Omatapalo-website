@@ -257,7 +257,7 @@ export default function ResponsabilidadeSocialContent() {
                   <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: '0.7rem', color: activeOds.color, opacity: 0.6 }}>{String(j + 1).padStart(2, '0')}</div>
                   <div>
                     <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(0.85rem,1.2vw,1.05rem)', color: '#0F1A2E', letterSpacing: '-0.02em', textTransform: 'uppercase', marginBottom: 6, lineHeight: 1.1 }}>{p.title}</div>
-                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.9vw,14px)', color: '#475569', lineHeight: 1.75, margin: '0 0 6px', maxWidth: '70ch' }}>{p.desc}</p>
+                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.9vw,14px)', color: '#07101f', lineHeight: 1.75, margin: '0 0 6px', maxWidth: '70ch' }}>{p.desc}</p>
                     <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                       <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#07101f' }}>{p.location}</span>
                       <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#CBD5E1', display: 'inline-block' }} />
