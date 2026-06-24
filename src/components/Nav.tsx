@@ -142,7 +142,7 @@ export default function Nav() {
             ))}
             <a href="/contactos"
               className="btn btn-ghost-white ml-2"
-              style={{ height: '40px', paddingInline: '20px', fontSize: '13px' }}>
+              style={{ height: '40px', paddingInline: '20px', fontSize: '13px', textTransform: 'uppercase' }}>
               Contactos
             </a>
           </nav>
