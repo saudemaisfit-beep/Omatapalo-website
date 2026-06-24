@@ -47,6 +47,8 @@ export default function Footer() {
                     <Image src="/instagram.png" alt="Instagram" width={38} height={38} style={{ objectFit: 'cover', display: 'block' }} />
                   ) : s.label === 'Facebook' ? (
                     <Image src="/facebook.png" alt="Facebook" width={38} height={38} style={{ objectFit: 'cover', display: 'block' }} />
+                  ) : s.label === 'YouTube' ? (
+                    <Image src="/youtube.png" alt="YouTube" width={38} height={38} style={{ objectFit: 'cover', display: 'block' }} />
                   ) : s.icon}
                 </a>
               ))}
