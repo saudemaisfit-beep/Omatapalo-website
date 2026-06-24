@@ -7,7 +7,7 @@ import type React from 'react';
 
 const ODS = [
   {
-    num: 1, key: 'ods1', color: '#1a396e',
+    num: 1, key: 'ods1', color: '#E5243B',
     label: 'Erradicação da Pobreza', logo: '/responsabilidade-1.png',
     totalDirecta: 25234, totalIndirecta: 494962,
     desc: 'Apoio directo a famílias e crianças em situação de vulnerabilidade, através de infraestrutura social, educação e solidariedade.',
