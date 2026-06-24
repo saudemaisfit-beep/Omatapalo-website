@@ -103,7 +103,7 @@ export default function SustentabilidadeHome() {
   return (
     <section
       ref={sectionRef}
-      style={{ background: '#07101f', overflow: 'hidden', position: 'relative',
+      style={{ background: '#1a396e', overflow: 'hidden', position: 'relative',
         paddingTop: 'clamp(72px,10vh,120px)', paddingBottom: 'clamp(72px,10vh,120px)' }}
     >
       {/* radial glow behind image */}
