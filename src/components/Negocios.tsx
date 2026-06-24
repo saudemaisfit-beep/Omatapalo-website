@@ -96,6 +96,7 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
         cursor: 'default',
         willChange: 'transform',
         transformStyle: 'preserve-3d',
+        minHeight: 220,
       }}
     >
       {/* glow overlay */}
