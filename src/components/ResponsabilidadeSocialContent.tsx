@@ -165,7 +165,7 @@ export default function ResponsabilidadeSocialContent() {
             ].map((s, i) => (
               <div key={i} style={{ paddingLeft: i > 0 ? 'clamp(16px,2.5vw,32px)' : 0, borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
                 <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.4rem,2.5vw,2.8rem)', color: s.c, letterSpacing: '-0.05em', lineHeight: 1, marginBottom: 5 }}>{s.v}</div>
-                <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(7,16,31,0.45)' }}>{s.l}</div>
+                <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#07101f' }}>{s.l}</div>
               </div>
             ))}
           </div>
