@@ -129,7 +129,7 @@ export default function SobreGrupo() {
                 {['Quem', 'Somos'].map((w, i) => (
                   <span key={w} className="sgc-word" style={{
                     display: 'block', opacity: 0,
-                    color: i === 0 ? '#0F1A2E' : 'transparent',
+                    color: i === 0 ? '#1a396e' : 'transparent',
                     WebkitTextStroke: i === 0 ? '0px' : '2px rgba(26,57,110,0.55)',
                   }}>{w}</span>
                 ))}

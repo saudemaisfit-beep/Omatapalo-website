@@ -118,7 +118,7 @@ export default function Sustentabilidade() {
       </section>
 
       {/* ── 2. ESG PILLARS ── */}
-      <section ref={s2Ref} style={{ background: '#07101f', position: 'relative', overflow: 'hidden', paddingTop: 'clamp(72px,10vh,120px)', paddingBottom: 'clamp(72px,10vh,120px)' }}>
+      <section ref={s2Ref} style={{ background: '#1a396e', position: 'relative', overflow: 'hidden', paddingTop: 'clamp(72px,10vh,120px)', paddingBottom: 'clamp(72px,10vh,120px)' }}>
         <div aria-hidden style={{ position: 'absolute', inset: 0, pointerEvents: 'none', ...gridTexture }} />
         <div ref={bgRef} aria-hidden style={{ position: 'absolute', bottom: -40, right: -20, zIndex: 0, fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(120px,18vw,260px)', lineHeight: 1, color: 'rgba(255,255,255,0.03)', letterSpacing: '-0.05em', pointerEvents: 'none', userSelect: 'none' }}>03</div>
 
