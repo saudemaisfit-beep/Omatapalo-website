@@ -124,8 +124,8 @@ export default function SobreGrupo() {
             </div>
 
             {/* title */}
-            <div style={{ overflow: 'visible', marginBottom: 28 }}>
-              <h2 style={{ margin: 0, fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 0.9, letterSpacing: '-0.035em', fontSize: 'clamp(2.4rem,4.5vw,5rem)' }}>
+            <div style={{ overflow: 'visible', marginBottom: 28, paddingTop: 8 }}>
+              <h2 style={{ margin: 0, fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 1, letterSpacing: '-0.035em', fontSize: 'clamp(1.8rem,3.5vw,5rem)' }}>
                 {['Quem', 'Somos'].map((w, i) => (
                   <span key={w} className="sgc-word" style={{
                     display: 'block', opacity: 0,
