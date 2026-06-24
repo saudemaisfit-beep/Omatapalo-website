@@ -32,7 +32,7 @@ const ODS = [
   {
     num: 3, key: 'ods3', color: '#4C9F38',
     label: 'Saúde de Qualidade', logo: '/responsabilidade-3.png',
-    totalDirecta: 400, totalIndirecta: null,
+    totalDirecta: 400, totalIndirecta: 1190,
     desc: 'Campanhas médicas anuais e doação de sangue para garantir acesso a cuidados de saúde primários em comunidades remotas.',
     projects: [
       { title: 'Campanha Médica do Tchivinguiro',      location: 'Humpata, Huíla', since: '2016', directa: 400, indirecta: null, desc: 'Consultas médicas, medicamentos, alimentação e material escolar para 400 crianças anuais com voluntários do Hospital S. António.' },
