@@ -6,7 +6,7 @@ const NEWS = [
   {
     img: '/EN-230-omatapalo-2.jpg',
     cat: 'Construção', date: '15 Mai 2026',
-    title: 'Omatapalo vence Prémio FORTES de Responsabilidade Social',
+    title: 'Omatapalo vence Prémio FORTES de Responsabilidade Social Construção',
     excerpt: 'O Grupo Omatapalo foi distinguido pelo seu compromisso com as comunidades e com o desenvolvimento sustentável de Angola.',
     featured: true,
   },
