@@ -244,6 +244,7 @@ export default function SobreGrupo() {
           .sgc-left  { width: 100% !important; border-right: none !important; border-bottom: 1px solid #e5e7eb; padding: 48px 24px !important; }
           .sgc-right { width: 100% !important; height: 320px; overflow: hidden; }
           .sgc-strip { transform: none !important; flex-wrap: nowrap; overflow-x: auto; padding-inline: 24px !important; height: 100% !important; }
+          .sgc-eyebrow, .sgc-word, .sgc-text, .sgc-stat { opacity: 1 !important; transform: none !important; }
         }
       `}</style>
 
