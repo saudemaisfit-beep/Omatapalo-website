@@ -153,7 +153,7 @@ export default function SobreGrupo() {
                 const fmt = s.suffix === ' km' || s.target === 15000 ? 'thousands' : s.suffix === 'M m²' ? 'decimal' : 'int';
                 return (
                   <div key={i} className="sgc-stat" style={{ opacity: 0, borderTop: '1.5px solid #e5e7eb', paddingTop: 14 }}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.2rem,1.8vw,1.8rem)', color: '#0F1A2E', letterSpacing: '-0.02em', lineHeight: 1, display: 'flex', alignItems: 'baseline', gap: 2 }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.2rem,1.8vw,1.8rem)', color: '#1a396e', letterSpacing: '-0.02em', lineHeight: 1, display: 'flex', alignItems: 'baseline', gap: 2 }}>
                       <span style={{ fontSize: '0.65em' }}>{s.prefix}</span>
                       <span
                         data-counter={s.target}
