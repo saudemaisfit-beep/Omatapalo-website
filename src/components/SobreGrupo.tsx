@@ -138,10 +138,10 @@ export default function SobreGrupo() {
 
             {/* body */}
             <p className="sgc-text" style={{ opacity: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#0a0f1e', lineHeight: 1.85, marginBottom: 12 }}>
-              Somos um grupo empresarial angolano com presença em sectores estratégicos da economia.
+              Somos um grupo empresarial angolano com presença em sectores estratégicos da economia, comprometido com a criação de valor, o desenvolvimento sustentável e o progresso de Angola.
             </p>
             <p className="sgc-text" style={{ opacity: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#0a0f1e', lineHeight: 1.85, marginBottom: 12 }}>
-              Fundado em 2003, o Grupo Omatapalo tem vindo a consolidar uma trajectória de crescimento assente na excelência, na inovação e no impacto positivo. Através dos nossos projectos e investimentos, contribuímos para o desenvolvimento económico, social e humano das comunidades onde actuamos.
+              Fundado em 2003, o Grupo Omatapalo tem vindo a consolidar uma trajectória de crescimento assente na excelência, na inovação e no impacto positivo.
             </p>
             <p className="sgc-text" style={{ opacity: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#0a0f1e', lineHeight: 1.85, marginBottom: 32 }}>
               Mais do que construir infra-estruturas, construímos confiança, oportunidades e futuro.
