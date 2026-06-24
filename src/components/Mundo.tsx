@@ -173,7 +173,7 @@ export default function Mundo() {
           {/* bottom: stats + scroll hint */}
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', pointerEvents: 'auto' }}>
             {/* stats */}
-            <div className="mundo-hdr-el" style={{ opacity: 0, display: 'flex', gap: 'clamp(24px,4vw,56px)', width: '100%', justifyContent: 'center' }}>
+            <div className="mundo-hdr-el" style={{ opacity: 0, display: 'flex', gap: 'clamp(24px,4vw,56px)' }}>
               {[['3', 'Continentes'], ['8', 'Países'], ['23', 'Anos']].map(([n, l]) => (
                 <div key={l}>
                   <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(2rem,3.5vw,3.5rem)', color: '#fff', letterSpacing: '-0.04em', lineHeight: 1 }}>{n}</div>
