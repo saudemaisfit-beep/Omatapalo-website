@@ -145,14 +145,14 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      style={{ minHeight: '100vh', background: '#07101f', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+      style={{ minHeight: '100vh', background: '#1a396e', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
     >
       {/* ── Parallax BG ── */}
       <div ref={bgRef} style={{ position: 'absolute', inset: '-8% 0 0 0', willChange: 'transform' }}>
         <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.45 }}>
           <source src="/hero-construction.mp4" type="video/mp4" />
         </video>
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,16,31,0.5) 0%, rgba(7,16,31,0.2) 35%, rgba(7,16,31,0.65) 70%, rgba(7,16,31,0.98) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(26,57,110,0.5) 0%, rgba(26,57,110,0.2) 35%, rgba(26,57,110,0.65) 70%, rgba(26,57,110,0.98) 100%)' }} />
       </div>
 
       {/* ── Film grain ── */}
@@ -161,23 +161,6 @@ export default function Hero() {
         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
       }} />
 
-      {/* ── Floating squares ── */}
-      {SQUARES.map((sq, i) => (
-        <div
-          key={i}
-          ref={el => { if (el) squaresRef.current[i] = el; }}
-          style={{
-            position: 'absolute',
-            left: sq.x, top: sq.y,
-            width: sq.size, height: sq.size,
-            border: `1px solid rgba(255,255,255,${sq.opacity * 2})`,
-            background: `rgba(26,57,110,${sq.opacity})`,
-            transform: `rotate(${sq.rotate}deg)`,
-            zIndex: 2, pointerEvents: 'none',
-            willChange: 'transform',
-          }}
-        />
-      ))}
 
       {/* ── Top spacer (nav clearance) ── */}
       <div style={{ height: 'clamp(120px,16vh,180px)', zIndex: 3 }} />
