@@ -150,7 +150,7 @@ export default function Certificacoes() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="certificacoes" style={{ background: '#07101f', overflow: 'hidden' }}>
+    <section ref={sectionRef} id="certificacoes" style={{ background: '#1a396e', overflow: 'hidden' }}>
 
       {/* subtle grid texture */}
       <div style={{
