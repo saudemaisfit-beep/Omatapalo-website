@@ -11,7 +11,7 @@ export default function OmatapaloPage() {
     <>
       <Nav />
       <main>
-        <PageHero title="Grupo Omatapalo" imgSrc="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80" position="center" />
+        <PageHero title="Grupo Omatapalo" imgSrc="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80" position="center" imgOpacity={0.45} />
         <section style={{
           background: '#fff',
           paddingTop: 'clamp(100px,14vh,160px)',

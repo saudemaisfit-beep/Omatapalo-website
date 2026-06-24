@@ -8,6 +8,7 @@ type PageHeroProps = {
   eyebrow?: string;
   position?: string;
   outlineWord?: string;
+  imgOpacity?: number;
 };
 
 const SQUARES = [
@@ -16,7 +17,7 @@ const SQUARES = [
   { size: 36,  x: '60%', y: '72%', opacity: 0.09, rotate: 45,  speed: 0.5  },
 ];
 
-export default function PageHero({ title, imgSrc, eyebrow, position = 'center', outlineWord }: PageHeroProps) {
+export default function PageHero({ title, imgSrc, eyebrow, position = 'center', outlineWord, imgOpacity = 0.18 }: PageHeroProps) {
   const squaresRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function PageHero({ title, imgSrc, eyebrow, position = 'center', 
         style={{
           position: 'absolute', inset: 0, width: '100%', height: '100%',
           objectFit: 'cover', objectPosition: position,
-          opacity: 0.18,
+          opacity: imgOpacity,
         }}
       />
 
