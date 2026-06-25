@@ -17,6 +17,18 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
   const { slug } = use(params);
   const [project, setProject] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'ArrowRight') setLightbox(i => i! < images.length - 1 ? i! + 1 : 0);
+      if (e.key === 'ArrowLeft')  setLightbox(i => i! > 0 ? i! - 1 : images.length - 1);
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [lightbox]);
 
   useEffect(() => {
     createClient()
@@ -97,9 +109,49 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                     {images.map((url: string, i: number) => (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img key={i} src={url} alt={`${project.title} ${i + 1}`}
-                        style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', borderRadius: 4 }} />
+                        onClick={() => setLightbox(i)}
+                        style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', borderRadius: 4, cursor: 'zoom-in', transition: 'opacity 0.2s' }}
+                        onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+                        onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                      />
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* Lightbox */}
+              {lightbox !== null && (
+                <div
+                  onClick={() => setLightbox(null)}
+                  style={{ position: 'fixed', inset: 0, background: 'rgba(7,16,31,0.95)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  {/* Prev */}
+                  <button
+                    onClick={e => { e.stopPropagation(); setLightbox(i => i! > 0 ? i! - 1 : images.length - 1); }}
+                    style={{ position: 'absolute', left: 20, background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', fontSize: 28, width: 52, height: 52, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >‹</button>
+
+                  {/* Image */}
+                  <div onClick={e => e.stopPropagation()} style={{ maxWidth: '90vw', maxHeight: '90vh', position: 'relative' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={images[lightbox]} alt={`${project.title} ${lightbox + 1}`}
+                      style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain', display: 'block', borderRadius: 4 }} />
+                    <div style={{ textAlign: 'center', marginTop: 12, color: 'rgba(255,255,255,0.5)', fontSize: 12, letterSpacing: '0.1em' }}>
+                      {lightbox + 1} / {images.length}
+                    </div>
+                  </div>
+
+                  {/* Next */}
+                  <button
+                    onClick={e => { e.stopPropagation(); setLightbox(i => i! < images.length - 1 ? i! + 1 : 0); }}
+                    style={{ position: 'absolute', right: 20, background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', fontSize: 28, width: 52, height: 52, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >›</button>
+
+                  {/* Close */}
+                  <button
+                    onClick={() => setLightbox(null)}
+                    style={{ position: 'absolute', top: 20, right: 20, background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', fontSize: 20, width: 40, height: 40, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >✕</button>
                 </div>
               )}
             </div>
