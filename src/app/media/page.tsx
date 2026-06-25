@@ -104,7 +104,7 @@ export default function MediaPage() {
                       </div>
                       {post.excerpt && (
                         <p style={{ margin: '0 0 16px', fontSize: 13, color: '#475569', lineHeight: 1.6, flex: 1 }}>
-                          {post.excerpt}
+                          {post.excerpt.length > 131 ? post.excerpt.slice(0, 131).trimEnd() + '…' : post.excerpt}
                         </p>
                       )}
                       {post.slug ? (
