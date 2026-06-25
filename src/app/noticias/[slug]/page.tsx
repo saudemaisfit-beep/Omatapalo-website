@@ -117,7 +117,7 @@ export default function NoticiaPage({ params }: { params: Promise<{ slug: string
             </div>
 
             {/* Grid: sidebar esquerda · corpo · sidebar direita */}
-            <div className="post-grid" style={{ display: 'grid', gridTemplateColumns: '220px 1fr 240px', gap: 'clamp(24px,3vw,48px)', alignItems: 'start' }}>
+            <div className="post-grid" style={{ display: 'grid', gridTemplateColumns: '220px 1fr 180px', gap: 'clamp(24px,3vw,48px)', alignItems: 'start' }}>
 
               {/* Sidebar esquerda */}
               <aside style={{ display: 'flex', flexDirection: 'column', gap: 16, position: 'sticky', top: 100 }}>
@@ -197,7 +197,7 @@ export default function NoticiaPage({ params }: { params: Promise<{ slug: string
       <Footer />
 
       <style>{`
-        .post-grid { grid-template-columns: 220px 1fr 240px; }
+        .post-grid { grid-template-columns: 220px 1fr 180px; }
         @media (max-width: 1100px) { .post-grid { grid-template-columns: 200px 1fr !important; } }
         @media (max-width: 760px)  { .post-grid { grid-template-columns: 1fr !important; } }
         .latest-item:hover .latest-title { color: #1a396e; }
