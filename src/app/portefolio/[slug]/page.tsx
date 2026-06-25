@@ -108,10 +108,11 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             <div style={{ background: '#f6f8fb', borderRadius: 8, padding: 24, border: '1px solid #e2e8f0' }}>
               <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#1a396e', marginBottom: 16 }}>Ficha Técnica</div>
               {[
-                { label: 'Categoria', value: catLabel },
-                { label: 'Cliente',   value: project.client },
-                { label: 'Localização', value: project.location },
-                { label: 'Ano',       value: project.year },
+                { label: 'Categoria',     value: catLabel },
+                { label: 'Cliente',       value: project.client },
+                { label: 'Localização',   value: project.location },
+                { label: 'Fiscalização',  value: project.fiscalizacao },
+                { label: 'Ano',           value: project.year },
               ].filter(r => r.value).map(r => (
                 <div key={r.label} style={{ paddingBottom: 14, marginBottom: 14, borderBottom: '1px solid #e2e8f0' }}>
                   <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: 4 }}>{r.label}</div>

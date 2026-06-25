@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 type Project = {
   id?: string; title?: string; slug?: string; description?: string;
   category?: string; client?: string; location?: string; year?: number;
-  cover_image?: string; images?: string[]; featured?: boolean; published?: boolean;
+  fiscalizacao?: string; cover_image?: string; images?: string[]; featured?: boolean; published?: boolean;
 };
 
 const CATEGORIES = [
@@ -34,7 +34,7 @@ export default function ProjectEditor({ project }: { project?: Project }) {
   const [form, setForm] = useState({
     title: project?.title ?? '', slug: project?.slug ?? '', description: project?.description ?? '',
     category: project?.category ?? 'inst', client: project?.client ?? '',
-    location: project?.location ?? '', year: project?.year ?? new Date().getFullYear(),
+    location: project?.location ?? '', fiscalizacao: project?.fiscalizacao ?? '', year: project?.year ?? new Date().getFullYear(),
     cover_image: project?.cover_image ?? '', images: project?.images ?? [],
     featured: project?.featured ?? false, published: project?.published ?? false,
   });
@@ -172,6 +172,10 @@ export default function ProjectEditor({ project }: { project?: Project }) {
             <div>
               <label style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#64748b', display: 'block', marginBottom: 6 }}>Localização</label>
               <input style={inp} value={form.location} onChange={e => set('location', e.target.value)} placeholder="Luanda, Angola" />
+            </div>
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#64748b', display: 'block', marginBottom: 6 }}>Fiscalização</label>
+              <input style={inp} value={form.fiscalizacao} onChange={e => set('fiscalizacao', e.target.value)} placeholder="Entidade fiscalizadora" />
             </div>
             <div>
               <label style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#64748b', display: 'block', marginBottom: 6 }}>Ano</label>
