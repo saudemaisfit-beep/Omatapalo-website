@@ -4,14 +4,14 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 
 const CERTS = [
-  { src: '/ISO-9001-3.png',          label: 'ISO 9001',          sub: 'Sistemas de Gestão da Qualidade',   n: '01' },
-  { src: '/ISO-14001-3.png',         label: 'ISO 14001',         sub: 'Gestão Ambiental',                  n: '02' },
-  { src: '/ISO-45001-3.png',         label: 'ISO 45001',         sub: 'Saúde e Segurança no Trabalho',     n: '03' },
-  { src: '/UN-GLOBAL-COMPACT-3.png', label: 'UN Global Compact', sub: 'Pacto Global das Nações Unidas',   n: '04' },
+  { src: '/ISO-9001-3.png',          label: 'ISO 9001',          sub: 'Sistemas de Gestão da Qualidade',   n: '01', link: '' },
+  { src: '/ISO-14001-3.png',         label: 'ISO 14001',         sub: 'Gestão Ambiental',                  n: '02', link: '' },
+  { src: '/ISO-45001-3.png',         label: 'ISO 45001',         sub: 'Saúde e Segurança no Trabalho',     n: '03', link: '' },
+  { src: '/UN-GLOBAL-COMPACT-3.png', label: 'UN Global Compact', sub: 'Pacto Global das Nações Unidas',   n: '04', link: '' },
 ];
 
 function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
-  cert: typeof CERTS[0];
+  cert: (typeof CERTS)[0];
   index: number;
   hovered: number | null;
   onEnter: () => void;
@@ -99,7 +99,7 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
         </div>
       </div>
 
-      {/* label */}
+      {/* label + link */}
       <div style={{ transform: 'translateZ(12px)' }}>
         <div style={{
           fontFamily: 'var(--font-display)', fontWeight: 900,
@@ -112,7 +112,33 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
           letterSpacing: '0.16em', textTransform: 'uppercase',
           color: '#fff', lineHeight: 1.6, transition: 'color 0.3s',
           maxWidth: isHov ? 280 : 120, overflow: 'hidden',
+          marginBottom: cert.link ? 16 : 0,
         }}>{cert.sub}</div>
+
+        {cert.link && (
+          <a
+            href={cert.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={e => e.stopPropagation()}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '8px 16px',
+              border: '1px solid rgba(255,255,255,0.35)',
+              color: '#fff', fontSize: 10, fontFamily: 'var(--font-label)',
+              letterSpacing: '0.14em', textTransform: 'uppercase',
+              textDecoration: 'none',
+              opacity: isHov ? 1 : 0,
+              transform: isHov ? 'translateY(0)' : 'translateY(8px)',
+              transition: 'opacity 0.35s ease, transform 0.35s ease',
+              pointerEvents: isHov ? 'auto' : 'none',
+              background: 'rgba(255,255,255,0.08)',
+            }}
+          >
+            Ver Certificado
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        )}
       </div>
     </div>
   );
