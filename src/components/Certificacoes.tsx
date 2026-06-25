@@ -2,16 +2,19 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
+import { createClient } from '@/lib/supabase/client';
 
-const CERTS = [
-  { src: '/ISO-9001-3.png',          label: 'ISO 9001',          sub: 'Sistemas de Gestão da Qualidade',   n: '01', link: '' },
-  { src: '/ISO-14001-3.png',         label: 'ISO 14001',         sub: 'Gestão Ambiental',                  n: '02', link: '' },
-  { src: '/ISO-45001-3.png',         label: 'ISO 45001',         sub: 'Saúde e Segurança no Trabalho',     n: '03', link: '' },
-  { src: '/UN-GLOBAL-COMPACT-3.png', label: 'UN Global Compact', sub: 'Pacto Global das Nações Unidas',   n: '04', link: '' },
+const FALLBACK_CERTS = [
+  { id: 1, src: '/ISO-9001-3.png',          label: 'ISO 9001',          sub: 'Sistemas de Gestão da Qualidade',   sort_order: 1, link: '' },
+  { id: 2, src: '/ISO-14001-3.png',         label: 'ISO 14001',         sub: 'Gestão Ambiental',                  sort_order: 2, link: '' },
+  { id: 3, src: '/ISO-45001-3.png',         label: 'ISO 45001',         sub: 'Saúde e Segurança no Trabalho',     sort_order: 3, link: '' },
+  { id: 4, src: '/UN-GLOBAL-COMPACT-3.png', label: 'UN Global Compact', sub: 'Pacto Global das Nações Unidas',   sort_order: 4, link: '' },
 ];
 
+type Cert = { id: number; src: string; label: string; sub: string; sort_order: number; link: string };
+
 function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
-  cert: (typeof CERTS)[0];
+  cert: Cert;
   index: number;
   hovered: number | null;
   onEnter: () => void;
@@ -148,6 +151,15 @@ export default function Certificacoes() {
   const sectionRef  = useRef<HTMLElement>(null);
   const colsRef     = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState<number | null>(null);
+  const [CERTS, setCerts] = useState<Cert[]>(FALLBACK_CERTS);
+
+  useEffect(() => {
+    createClient()
+      .from('certifications')
+      .select('*')
+      .order('sort_order')
+      .then(({ data }) => { if (data && data.length > 0) setCerts(data); });
+  }, []);
 
   useEffect(() => {
     import('gsap').then(({ gsap }) => {
