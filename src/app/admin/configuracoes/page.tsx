@@ -153,12 +153,6 @@ export default function ConfiguracoesPage() {
           <p style={{ fontSize: 13, color: '#64748b', marginBottom: 12 }}>
             Adiciona, remove ou reordena os itens do menu. Cada item pode ter sub-itens (dropdown). Clica <strong>▾ 0</strong> para gerir sub-itens.
           </p>
-          <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 4, padding: '10px 14px', marginBottom: 20, fontSize: 12, color: '#92400e' }}>
-            <strong>Pré-requisito:</strong> cria esta tabela no Supabase (SQL Editor) se ainda não existir:
-            <code style={{ display: 'block', marginTop: 6, background: '#fff', padding: '6px 10px', borderRadius: 3, fontFamily: 'monospace', fontSize: 11 }}>
-              create table site_settings (key text primary key, value text);
-            </code>
-          </div>
 
           {navItems.map((item, i) => (
             <div key={i} style={card}>
