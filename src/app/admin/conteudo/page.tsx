@@ -21,7 +21,7 @@ const SCHEMAS: Record<string, PageSchema> = {
       { key: 'stat1_label',   label: 'Estatística 1 — rótulo', type: 'text',     default: 'Anos de Experiência' },
       { key: 'stat2_value',   label: 'Estatística 2 — valor',  type: 'text',     default: '+15.000' },
       { key: 'stat2_label',   label: 'Estatística 2 — rótulo', type: 'text',     default: 'Colaboradores' },
-      { key: 'stat3_value',   label: 'Estatística 3 — valor',  type: 'text',     default: '+1.5 M m²' },
+      { key: 'stat3_value',   label: 'Estatística 3 — valor',  type: 'text',     default: '+1.5M m²' },
       { key: 'stat3_label',   label: 'Estatística 3 — rótulo', type: 'text',     default: 'Área Construída' },
       { key: 'stat4_value',   label: 'Estatística 4 — valor',  type: 'text',     default: '+5.000 km' },
       { key: 'stat4_label',   label: 'Estatística 4 — rótulo', type: 'text',     default: 'de Estrada' },
