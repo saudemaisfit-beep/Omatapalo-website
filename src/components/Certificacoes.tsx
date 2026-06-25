@@ -60,7 +60,7 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
         flex: isHov ? '2.2' : '1',
         transition: 'flex 0.55s cubic-bezier(0.77,0,0.175,1)',
         background: isHov ? 'linear-gradient(135deg, #22479a 0%, #0e2554 100%)' : 'linear-gradient(135deg, #172d6e 0%, #0a1a45 100%)',
-        borderRight: index < CERTS.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+        borderRight: '1px solid rgba(255,255,255,0.07)',
         padding: 'clamp(32px,4vw,56px) clamp(20px,2.5vw,40px)',
         display: 'flex',
         flexDirection: 'column',
