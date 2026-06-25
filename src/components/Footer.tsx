@@ -10,7 +10,7 @@ const COLS = [
   { h: 'Atividade', links: [
     { t: 'Portefólio',       href: '/portefolio' },
     { t: 'Sustentabilidade', href: '/sustentabilidade' },
-    { t: 'Media',            href: '/#media' },
+    { t: 'Media',            href: '/media' },
     { t: 'Contactos',        href: '/contactos' },
   ]},
   { h: 'Pessoas', links: [
