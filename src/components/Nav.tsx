@@ -16,7 +16,7 @@ const NAV = [
     { t: 'Missão Fazer Sorrir', href: '/responsabilidade-social#missao' },
   ]},
   { t: 'CDH', href: '/cdh' },
-  { t: 'Media', href: '/media', sub: [
+  { t: 'Media', href: '#', sub: [
     { t: 'Notícias', href: '/noticias' },
   ]},
   { t: 'Id. Visual', href: '/identidade-visual' },
