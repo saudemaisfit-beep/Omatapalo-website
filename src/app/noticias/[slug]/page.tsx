@@ -86,7 +86,16 @@ export default function NoticiaPage({ params }: { params: Promise<{ slug: string
   return (
     <>
       <Nav />
-      <main style={{ paddingTop: 80, background: '#fff' }}>
+      <main style={{ background: '#fff' }}>
+
+        {/* Hero */}
+        {post.cover_image && (
+          <div style={{ position: 'relative', height: 'clamp(280px,42vh,520px)', overflow: 'hidden', background: '#0d1622' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={post.cover_image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.55 }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(7,16,31,0.6) 0%, transparent 60%)' }} />
+          </div>
+        )}
 
         {/* ── Layout C: título grande full width + corpo + sidebar ── */}
         <section style={{ paddingTop: 'clamp(48px,7vh,80px)', paddingBottom: 'clamp(64px,9vh,100px)' }}>
