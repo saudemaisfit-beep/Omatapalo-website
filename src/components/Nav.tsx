@@ -17,7 +17,7 @@ const NAV = [
     { t: 'CDH', href: '/cdh' },
   ]},
   { t: 'CDH', href: '/cdh' },
-  { t: 'Media', href: '#media' },
+  { t: 'Media', href: '/#media' },
   { t: 'Id. Visual', href: '/identidade-visual' },
 ];
 
@@ -29,7 +29,7 @@ const ALL_PAGES = [
   { t: 'Portefólio', href: '/portefolio' },
   { t: 'Pessoas', href: '/pessoas' },
   { t: 'CDH', href: '/cdh' },
-  { t: 'Media', href: '#media' },
+  { t: 'Media', href: '/#media' },
   { t: 'Identidade Visual', href: '/identidade-visual' },
   { t: 'Sustentabilidade', href: '/sustentabilidade' },
   { t: 'R.Social', href: '/responsabilidade-social' },
