@@ -10,7 +10,8 @@ const NAV = [
   { href: '/admin/portfolio',  label: 'Portfólio',  icon: '🏗️' },
   { href: '/admin/pages',      label: 'Páginas',    icon: '📄' },
   { href: '/admin/media',         label: 'Media',        icon: '🖼️' },
-  { href: '/admin/certificacoes', label: 'Certificações', icon: '🏅' },
+  { href: '/admin/certificacoes',    label: 'Certificações',    icon: '🏅' },
+  { href: '/admin/identidade-visual', label: 'Id. Visual',       icon: '🎨' },
   { href: '/admin/users',         label: 'Utilizadores',  icon: '👥' },
 ];
 
