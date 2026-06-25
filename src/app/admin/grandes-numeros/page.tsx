@@ -155,51 +155,72 @@ export default function GrandesNumerosAdmin() {
 
       {items.map((item, i) => (
         <div key={i} style={card}>
-          <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr 100px 1fr auto auto auto', gap: 8, alignItems: 'center' }}>
-
-            {/* preview imagem */}
-            <div style={{ width: 72, height: 56, background: '#f1f5f9', borderRadius: 4, overflow: 'hidden', flexShrink: 0 }}>
-              {item.img && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={item.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              )}
+          {/* Header do cartão */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#94a3b8' }}>Cartão {i + 1}</span>
+            <div style={{ display: 'flex', gap: 6 }}>
+              <button onClick={() => moveItem(i, -1)} style={{ ...btn(), padding: '4px 8px', fontSize: 12 }} title="Mover acima">↑</button>
+              <button onClick={() => moveItem(i, 1)}  style={{ ...btn(), padding: '4px 8px', fontSize: 12 }} title="Mover abaixo">↓</button>
+              <button onClick={() => removeItem(i)}   style={{ ...btn(), padding: '4px 8px', fontSize: 12, color: '#ef4444' }} title="Remover cartão">✕ Remover</button>
             </div>
+          </div>
 
-            {/* label */}
+          <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 16, alignItems: 'start' }}>
+            {/* Imagem */}
             <div>
-              <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#94a3b8', marginBottom: 3 }}>RÓTULO</label>
-              <input value={item.label} onChange={e => updateItem(i, 'label', e.target.value)}
-                style={{ width: '100%', padding: '6px 8px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 13, boxSizing: 'border-box' }} />
-            </div>
-
-            {/* value */}
-            <div>
-              <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#94a3b8', marginBottom: 3 }}>VALOR</label>
-              <input value={item.value} onChange={e => updateItem(i, 'value', e.target.value)}
-                style={{ width: '100%', padding: '6px 8px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 13, boxSizing: 'border-box' }} />
-            </div>
-
-            {/* img url + upload */}
-            <div>
-              <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#94a3b8', marginBottom: 3 }}>IMAGEM</label>
-              <div style={{ display: 'flex', gap: 4 }}>
-                <input value={item.img} onChange={e => updateItem(i, 'img', e.target.value)}
-                  placeholder="/caminho/imagem.jpg"
-                  style={{ flex: 1, padding: '6px 8px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, boxSizing: 'border-box', minWidth: 0 }} />
-                <button onClick={() => fileRefs.current[i]?.click()}
-                  disabled={uploading === i}
-                  style={{ ...btn(), padding: '6px 10px', fontSize: 11, whiteSpace: 'nowrap', flexShrink: 0 }}>
-                  {uploading === i ? '…' : '⬆'}
+              <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#374151', marginBottom: 6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Foto de fundo</label>
+              <div style={{ position: 'relative', width: '100%', height: 130, background: '#f1f5f9', borderRadius: 6, overflow: 'hidden', border: '1.5px dashed #cbd5e1', marginBottom: 8 }}>
+                {item.img ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={item.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#94a3b8', fontSize: 12 }}>Sem foto</div>
+                )}
+              </div>
+              <div style={{ display: 'flex', gap: 6 }}>
+                <button onClick={() => fileRefs.current[i]?.click()} disabled={uploading === i}
+                  style={{ ...btn(true), flex: 1, padding: '7px 0', fontSize: 11, opacity: uploading === i ? 0.6 : 1 }}>
+                  {uploading === i ? 'A carregar…' : '⬆ Carregar foto'}
                 </button>
-                <input type="file" accept="image/*" style={{ display: 'none' }}
-                  ref={el => { fileRefs.current[i] = el; }}
-                  onChange={e => { const f = e.target.files?.[0]; if (f) uploadImage(i, f); }} />
+                {item.img && (
+                  <button onClick={() => updateItem(i, 'img', '')}
+                    style={{ ...btn(), padding: '7px 10px', fontSize: 11, color: '#ef4444' }} title="Remover foto">
+                    🗑
+                  </button>
+                )}
+              </div>
+              <input type="file" accept="image/*" style={{ display: 'none' }}
+                ref={el => { fileRefs.current[i] = el; }}
+                onChange={e => { const f = e.target.files?.[0]; if (f) uploadImage(i, f); }} />
+            </div>
+
+            {/* Campos de texto */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div>
+                <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#374151', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Rótulo</label>
+                <input value={item.label} onChange={e => updateItem(i, 'label', e.target.value)}
+                  placeholder="ex: Hospitais"
+                  style={{ width: '100%', padding: '8px 10px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 13, boxSizing: 'border-box' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#374151', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Valor</label>
+                <input value={item.value} onChange={e => updateItem(i, 'value', e.target.value)}
+                  placeholder="ex: 14"
+                  style={{ width: '100%', padding: '8px 10px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 13, boxSizing: 'border-box' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#374151', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Sufixo (opcional)</label>
+                <input value={item.suffix} onChange={e => updateItem(i, 'suffix', e.target.value)}
+                  placeholder="ex: km"
+                  style={{ width: '100%', padding: '8px 10px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 13, boxSizing: 'border-box' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#94a3b8', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>URL da imagem (alternativa)</label>
+                <input value={item.img} onChange={e => updateItem(i, 'img', e.target.value)}
+                  placeholder="https://... ou /caminho/imagem.jpg"
+                  style={{ width: '100%', padding: '8px 10px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, color: '#64748b', boxSizing: 'border-box' }} />
               </div>
             </div>
-
-            <button onClick={() => moveItem(i, -1)} style={{ ...btn(), padding: '6px 8px' }}>↑</button>
-            <button onClick={() => moveItem(i, 1)}  style={{ ...btn(), padding: '6px 8px' }}>↓</button>
-            <button onClick={() => removeItem(i)}   style={{ ...btn(), padding: '6px 8px', color: '#ef4444' }}>✕</button>
           </div>
         </div>
       ))}
