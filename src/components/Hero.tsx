@@ -12,7 +12,7 @@ const HOME_DEFAULTS = {
   cta_secondary: 'Falar Connosco',
   stat1_value:   '23',    stat1_label: 'Anos de Experiência',
   stat2_value:   '+15.000', stat2_label: 'Colaboradores',
-  stat3_value:   '+1.5 Mm²', stat3_label: 'Área Construída',
+  stat3_value:   '+1.5 M m²', stat3_label: 'Área Construída',
   stat4_value:   '+5.000 km', stat4_label: 'de Estrada',
 };
 
