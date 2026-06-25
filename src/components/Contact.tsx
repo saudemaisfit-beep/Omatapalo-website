@@ -98,7 +98,7 @@ export default function Contact() {
               Construímos<span style={{ color: 'var(--navy-300)', display: 'block' }}>O Seu Futuro</span>
             </h2>
             <p style={{ color: 'var(--navy-100)', fontSize: 'var(--text-lg)', lineHeight: 1.6, maxWidth: '46ch', marginTop: 'var(--space-5)' }}>
-              Com mais de 30 anos de história e 15 000 profissionais dedicados, estamos prontos para o seu próximo grande projecto.
+              Para contactos com a OMATAPALO utilize, por favor, o formulário escolhendo o departamento que deseja contactar:
             </p>
             <div style={{ marginTop: 'var(--space-7)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
               {[
