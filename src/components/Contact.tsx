@@ -77,27 +77,16 @@ export default function Contact() {
   }, []);
 
   return (
-    <section id="contactos" className="section" ref={sectionRef} style={{ position: 'relative', overflow: 'hidden', background: 'var(--navy-950)' }}>
-      {/* Background */}
-      <div className="absolute inset-0">
-        <Image
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=72&auto=format&fit=crop"
-          alt=""
-          fill
-          className="object-cover"
-          style={{ opacity: 0.2 }}
-        />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(120deg, var(--navy-950) 32%, rgba(10,23,41,0.65))' }} />
-      </div>
+    <section id="contactos" className="section" ref={sectionRef} style={{ position: 'relative', overflow: 'hidden', background: '#f6f8fb' }}>
 
       <div className="wrap relative z-[2]">
         <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 'var(--space-9)', alignItems: 'start' }} className="cta-grid">
           <div className="reveal-ct" style={{ opacity: 0 }}>
             <div className="eyebrow eyebrow--dark">Próximo passo</div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', color: '#fff', fontSize: 'var(--text-display-lg)', lineHeight: '0.95', letterSpacing: '-0.03em', marginTop: '16px', marginBottom: 0 }}>
-              Construímos<span style={{ color: 'var(--navy-300)', display: 'block' }}>O Seu Futuro</span>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', color: '#1a396e', fontSize: 'var(--text-display-lg)', lineHeight: '0.95', letterSpacing: '-0.03em', marginTop: '16px', marginBottom: 0 }}>
+              Construímos<span style={{ color: 'transparent', WebkitTextStroke: '2px rgba(26,57,110,0.22)', display: 'block' }}>O Seu Futuro</span>
             </h2>
-            <p style={{ color: 'var(--navy-100)', fontSize: 'var(--text-lg)', lineHeight: 1.6, maxWidth: '46ch', marginTop: 'var(--space-5)' }}>
+            <p style={{ color: '#374151', fontSize: 'var(--text-lg)', lineHeight: 1.6, maxWidth: '46ch', marginTop: 'var(--space-5)' }}>
               Para contactos com a OMATAPALO utilize, por favor, o formulário escolhendo o departamento que deseja contactar:
             </p>
             <div style={{ marginTop: 'var(--space-7)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
@@ -109,14 +98,14 @@ export default function Contact() {
               ].map((c) => (
                 <div key={c.label} style={{ display: 'grid', gridTemplateColumns: '28px 1fr', gap: '14px', alignItems: 'start' }}>
                   {c.label === 'Email'
-                    ? <img src="/icons/004-message.svg" alt="" width={22} height={22} style={{ marginTop: '3px', filter: 'brightness(0) invert(1)' }} />
+                    ? <img src="/icons/004-message.svg" alt="" width={22} height={22} style={{ marginTop: '3px', filter: 'invert(21%) sepia(54%) saturate(500%) hue-rotate(190deg) brightness(80%)' }} />
                     : c.label === 'Telefone'
-                    ? <img src="/icons/telephone.svg" alt="" width={22} height={22} style={{ marginTop: '3px', filter: 'brightness(0) invert(1)' }} />
-                    : <img src="/placeholder.svg" alt="" width={22} height={22} style={{ marginTop: '3px', filter: 'brightness(0) invert(1)' }} />
+                    ? <img src="/icons/telephone.svg" alt="" width={22} height={22} style={{ marginTop: '3px', filter: 'invert(21%) sepia(54%) saturate(500%) hue-rotate(190deg) brightness(80%)' }} />
+                    : <img src="/placeholder.svg" alt="" width={22} height={22} style={{ marginTop: '3px', filter: 'invert(21%) sepia(54%) saturate(500%) hue-rotate(190deg) brightness(80%)' }} />
                   }
                   <div>
-                    <div style={{ fontFamily: 'var(--font-label)', fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--navy-300)', marginBottom: '3px' }}>{c.label}</div>
-                    <div style={{ color: '#fff', fontSize: 'var(--text-base)' }}>{c.value}</div>
+                    <div style={{ fontFamily: 'var(--font-label)', fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#1a396e', marginBottom: '3px' }}>{c.label}</div>
+                    <div style={{ color: '#1e293b', fontSize: 'var(--text-base)' }}>{c.value}</div>
                   </div>
                 </div>
               ))}
