@@ -115,7 +115,6 @@ export default function Media() {
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(7,16,31,0.92) 0%, rgba(7,16,31,0.3) 50%, transparent 100%)' }} />
                 <div style={{ position: 'absolute', inset: 0, padding: 'clamp(20px,3vw,36px)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-                    {featured.category && <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#fff', background: '#1a396e', padding: '4px 10px', borderRadius: 2 }}>{featured.category}</span>}
                     <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.1em', color: '#fff' }}>{fmtDate(featured.created_at)}</span>
                   </div>
                   <h3 style={{ margin: '0 0 12px', fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.1rem,2vw,1.9rem)', color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.1, textTransform: 'uppercase' }}>
@@ -157,8 +156,7 @@ export default function Media() {
                   </div>
                   <div style={{ padding: 'clamp(16px,2vw,22px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 8 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      {n.category && <span style={{ fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#fff', background: '#1a396e', padding: '3px 8px', borderRadius: 2 }}>{n.category}</span>}
-                      <span style={{ fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.1em', color: '#94a3b8' }}>{fmtDate(n.created_at)}</span>
+                        <span style={{ fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.1em', color: '#94a3b8' }}>{fmtDate(n.created_at)}</span>
                     </div>
                     <h3 style={{ margin: 0, fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(0.85rem,1.1vw,1rem)', color: '#0F1A2E', letterSpacing: '-0.01em', lineHeight: 1.2, textTransform: 'uppercase' }}>{n.title}</h3>
                     {n.excerpt && (

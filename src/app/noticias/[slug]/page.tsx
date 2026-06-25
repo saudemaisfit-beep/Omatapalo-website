@@ -108,11 +108,9 @@ export default function NoticiaPage({ params }: { params: Promise<{ slug: string
 
             {/* Topo: categoria + título */}
             <div style={{ marginBottom: 32, paddingBottom: 28, borderBottom: '1px solid #e8edf5' }}>
-              {post.category && (
-                <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#1a396e' }}>
-                  {post.category} · <time>{fmtDate(post.created_at)}</time>
-                </span>
-              )}
+              <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#1a396e' }}>
+                <time>{fmtDate(post.created_at)}</time>
+              </span>
               <h1 style={{ margin: '14px 0 0', fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.6rem,3.5vw,3rem)', color: '#0f1a2e', letterSpacing: '-0.02em', lineHeight: 1.1, textTransform: 'uppercase' }}>
                 {post.title}
               </h1>

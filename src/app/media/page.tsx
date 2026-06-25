@@ -96,11 +96,6 @@ export default function MediaPage() {
                         <time style={{ fontFamily: 'var(--font-label)', fontSize: 10, letterSpacing: '0.1em', color: '#64748b' }}>
                           {fmtDate(post.created_at)}
                         </time>
-                        {post.author && (
-                          <span style={{ fontFamily: 'var(--font-label)', fontSize: 10, letterSpacing: '0.1em', color: '#94a3b8' }}>
-                            {post.author}
-                          </span>
-                        )}
                       </div>
                       {post.excerpt && (
                         <p style={{ margin: '0 0 16px', fontSize: 13, color: '#475569', lineHeight: 1.6, flex: 1 }}>
