@@ -44,10 +44,16 @@ export default function ConfiguracoesPage() {
   const faviconRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    createClient().from('site_settings').select('key,value').then(({ data }) => {
+    createClient().from('site_settings').select('key,value').then(({ data, error }) => {
+      if (error) { flash('❌ Erro ao carregar definições: ' + error.message); return; }
       if (!data) return;
       for (const row of data) {
-        if (row.key === 'nav_items') { try { setNavItems(JSON.parse(row.value)); } catch {} }
+        if (row.key === 'nav_items') {
+          try {
+            const parsed = JSON.parse(row.value);
+            setNavItems(parsed);
+          } catch { flash('❌ Erro ao ler menu guardado.'); }
+        }
         if (row.key === 'logo_url') setLogoUrl(row.value);
         if (row.key === 'favicon_url') setFaviconUrl(row.value);
       }
