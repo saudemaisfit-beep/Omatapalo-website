@@ -1,6 +1,7 @@
 ﻿'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { createClient } from '@/lib/supabase/client';
 
 /* ─── Data ─── */
 const CATEGORIES = [
@@ -19,32 +20,32 @@ const CATEGORIES = [
   { id: 'energia',    label: 'Energia',                                   short: '12' },
 ];
 
-type Project = { id: number; title: string; location: string; year: string; area: string; cat: string; img: string };
+type Project = { id: string | number; title: string; location: string; year: string; area: string; cat: string; img: string };
 
-const PROJECTS: Project[] = [
-  { id: 21, title: 'Ministério das Finanças',             location: 'Luanda',        year: '2022', area: '35 000 m²', cat: 'inst',      img: 'photo-1486325212027-8081e485255e' },
-  { id: 22, title: 'Palácio de Justiça do Huambo',        location: 'Huambo',        year: '2021', area: '14 000 m²', cat: 'inst',      img: 'photo-1554435493-93422e8220c8' },
-  { id: 23, title: 'Quartel-General das FAA',             location: 'Luanda',        year: '2020', area: '28 000 m²', cat: 'inst',      img: 'photo-1464817739973-0128fe77aaa1' },
-  { id: 1,  title: 'Centro Hospitalar de Referência',     location: 'Luanda',        year: '2023', area: '48 000 m²', cat: 'saude',     img: 'photo-1487958449943-2429e8be8625' },
-  { id: 2,  title: 'Hospital Geral do Huambo',            location: 'Huambo',        year: '2021', area: '32 000 m²', cat: 'saude',     img: 'photo-1519494026892-80bbd2d6fd0d' },
-  { id: 3,  title: 'Escola Secundária do Lubango',        location: 'Lubango',       year: '2022', area: '12 000 m²', cat: 'ensino',    img: 'photo-1580582932707-520aed937b7b' },
-  { id: 4,  title: 'Universidade Politécnica',            location: 'Luanda',        year: '2020', area: '28 000 m²', cat: 'ensino',    img: 'photo-1562774053-701939374585' },
-  { id: 5,  title: 'Condomínio Talatona',                 location: 'Luanda',        year: '2023', area: '18 000 m²', cat: 'habitacao', img: 'photo-1545324418-cc1a3fa10c00' },
-  { id: 6,  title: 'Torre Empresarial Norte',             location: 'Luanda',        year: '2022', area: '22 000 m²', cat: 'habitacao', img: 'photo-1486325212027-8081e485255e' },
-  { id: 7,  title: 'Estádio Nacional de Luanda',          location: 'Luanda',        year: '2021', area: '65 000 m²', cat: 'recintos',  img: 'photo-1577223625816-7546f13df25d' },
-  { id: 8,  title: 'Centro Cultural do Huambo',           location: 'Huambo',        year: '2023', area: '8 500 m²',  cat: 'recintos',  img: 'photo-1518998053901-5348d3961a04' },
-  { id: 9,  title: 'Agro-Indústria do Malanje',           location: 'Malanje',       year: '2022', area: '40 000 m²', cat: 'agro',      img: 'photo-1625246333195-78d9c38ad449' },
-  { id: 10, title: 'Hotel Baía do Lobito',                location: 'Benguela',      year: '2023', area: '14 000 m²', cat: 'turismo',   img: 'photo-1551882547-ff40c63fe2e2' },
-  { id: 11, title: 'Resort de Cabo Ledo',                 location: 'Luanda Sul',    year: '2021', area: '9 000 m²',  cat: 'turismo',   img: 'photo-1571003123894-1f0594d2b5d9' },
-  { id: 12, title: 'Corredor Rodoviário Norte',           location: 'Uíge',          year: '2022', area: '320 km',    cat: 'vias',      img: 'photo-1545459720-aac8509eb02c' },
-  { id: 13, title: 'Estrada Nacional EN-230',             location: 'Bié',           year: '2020', area: '180 km',    cat: 'vias',      img: 'photo-1506521781263-d8422e82f27a' },
-  { id: 14, title: 'Ponte sobre o Rio Cuanza',            location: 'Malanje',       year: '2023', area: '420 m',     cat: 'pontes',    img: 'photo-1558618666-fcd25c85cd64' },
-  { id: 15, title: 'Viaduto da Via Rápida',               location: 'Luanda',        year: '2021', area: '280 m',     cat: 'pontes',    img: 'photo-1477959858617-67f85cf4f1df' },
-  { id: 16, title: 'Sistema de Abastecimento de Água',    location: 'Benguela',      year: '2022', area: '—',         cat: 'infra',     img: 'photo-1473341304170-971dccb5ac1e' },
-  { id: 17, title: 'Rede de Saneamento Urbano',           location: 'Huambo',        year: '2020', area: '—',         cat: 'infra',     img: 'photo-1504711434969-e33886168f5c' },
-  { id: 18, title: 'Terminal de Petróleo de Soyo',        location: 'Zaire',         year: '2021', area: '—',         cat: 'oilgas',    img: 'photo-1578662996442-48f60103fc96' },
-  { id: 19, title: 'Central Solar de Biópio',             location: 'Benguela',      year: '2023', area: '66 ha',     cat: 'energia',   img: 'photo-1509391366360-2e959784a276' },
-  { id: 20, title: 'Linha de Alta Tensão Luanda–Malanje', location: 'Luanda / Malanje', year: '2022', area: '420 km', cat: 'energia',   img: 'photo-1473341304170-971dccb5ac1e' },
+const FALLBACK_PROJECTS: Project[] = [
+  { id: 21, title: 'Ministério das Finanças',             location: 'Luanda',        year: '2022', area: '35 000 m²', cat: 'inst',      img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=75&auto=format&fit=crop' },
+  { id: 22, title: 'Palácio de Justiça do Huambo',        location: 'Huambo',        year: '2021', area: '14 000 m²', cat: 'inst',      img: 'https://images.unsplash.com/photo-1554435493-93422e8220c8?w=700&q=75&auto=format&fit=crop' },
+  { id: 23, title: 'Quartel-General das FAA',             location: 'Luanda',        year: '2020', area: '28 000 m²', cat: 'inst',      img: 'https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?w=700&q=75&auto=format&fit=crop' },
+  { id: 1,  title: 'Centro Hospitalar de Referência',     location: 'Luanda',        year: '2023', area: '48 000 m²', cat: 'saude',     img: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=700&q=75&auto=format&fit=crop' },
+  { id: 2,  title: 'Hospital Geral do Huambo',            location: 'Huambo',        year: '2021', area: '32 000 m²', cat: 'saude',     img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=700&q=75&auto=format&fit=crop' },
+  { id: 3,  title: 'Escola Secundária do Lubango',        location: 'Lubango',       year: '2022', area: '12 000 m²', cat: 'ensino',    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=700&q=75&auto=format&fit=crop' },
+  { id: 4,  title: 'Universidade Politécnica',            location: 'Luanda',        year: '2020', area: '28 000 m²', cat: 'ensino',    img: 'https://images.unsplash.com/photo-1562774053-701939374585?w=700&q=75&auto=format&fit=crop' },
+  { id: 5,  title: 'Condomínio Talatona',                 location: 'Luanda',        year: '2023', area: '18 000 m²', cat: 'habitacao', img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=700&q=75&auto=format&fit=crop' },
+  { id: 6,  title: 'Torre Empresarial Norte',             location: 'Luanda',        year: '2022', area: '22 000 m²', cat: 'habitacao', img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=75&auto=format&fit=crop' },
+  { id: 7,  title: 'Estádio Nacional de Luanda',          location: 'Luanda',        year: '2021', area: '65 000 m²', cat: 'recintos',  img: 'https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=700&q=75&auto=format&fit=crop' },
+  { id: 8,  title: 'Centro Cultural do Huambo',           location: 'Huambo',        year: '2023', area: '8 500 m²',  cat: 'recintos',  img: 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=700&q=75&auto=format&fit=crop' },
+  { id: 9,  title: 'Agro-Indústria do Malanje',           location: 'Malanje',       year: '2022', area: '40 000 m²', cat: 'agro',      img: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=700&q=75&auto=format&fit=crop' },
+  { id: 10, title: 'Hotel Baía do Lobito',                location: 'Benguela',      year: '2023', area: '14 000 m²', cat: 'turismo',   img: 'https://images.unsplash.com/photo-1551882547-ff40c63fe2e2?w=700&q=75&auto=format&fit=crop' },
+  { id: 11, title: 'Resort de Cabo Ledo',                 location: 'Luanda Sul',    year: '2021', area: '9 000 m²',  cat: 'turismo',   img: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=700&q=75&auto=format&fit=crop' },
+  { id: 12, title: 'Corredor Rodoviário Norte',           location: 'Uíge',          year: '2022', area: '320 km',    cat: 'vias',      img: 'https://images.unsplash.com/photo-1545459720-aac8509eb02c?w=700&q=75&auto=format&fit=crop' },
+  { id: 13, title: 'Estrada Nacional EN-230',             location: 'Bié',           year: '2020', area: '180 km',    cat: 'vias',      img: 'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=700&q=75&auto=format&fit=crop' },
+  { id: 14, title: 'Ponte sobre o Rio Cuanza',            location: 'Malanje',       year: '2023', area: '420 m',     cat: 'pontes',    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&auto=format&fit=crop' },
+  { id: 15, title: 'Viaduto da Via Rápida',               location: 'Luanda',        year: '2021', area: '280 m',     cat: 'pontes',    img: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=75&auto=format&fit=crop' },
+  { id: 16, title: 'Sistema de Abastecimento de Água',    location: 'Benguela',      year: '2022', area: '—',         cat: 'infra',     img: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=700&q=75&auto=format&fit=crop' },
+  { id: 17, title: 'Rede de Saneamento Urbano',           location: 'Huambo',        year: '2020', area: '—',         cat: 'infra',     img: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=75&auto=format&fit=crop' },
+  { id: 18, title: 'Terminal de Petróleo de Soyo',        location: 'Zaire',         year: '2021', area: '—',         cat: 'oilgas',    img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=700&q=75&auto=format&fit=crop' },
+  { id: 19, title: 'Central Solar de Biópio',             location: 'Benguela',      year: '2023', area: '66 ha',     cat: 'energia',   img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=700&q=75&auto=format&fit=crop' },
+  { id: 20, title: 'Linha de Alta Tensão Luanda–Malanje', location: 'Luanda / Malanje', year: '2022', area: '420 km', cat: 'energia',   img: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=700&q=75&auto=format&fit=crop' },
 ];
 
 /* ─── Project card ─── */
@@ -92,7 +93,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={imgRef}
-          src={`https://images.unsplash.com/${project.img}?w=700&q=75&auto=format&fit=crop`}
+          src={project.img || `https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=700&q=75&auto=format&fit=crop`}
           alt={project.title}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -145,10 +146,35 @@ export default function PortefolioDinamico() {
   const gridRef     = useRef<HTMLDivElement>(null);
   const bgNumRef    = useRef<HTMLDivElement>(null);
   const [active, setActive]   = useState('todos');
+  const [PROJECTS, setProjects] = useState<Project[]>([]);
   const isAnimating = useRef(false);
   const dirRef      = useRef<1 | -1>(1);
 
-  const filtered = active === 'todos' ? PROJECTS : PROJECTS.filter(p => p.cat === active);
+  useEffect(() => {
+    createClient()
+      .from('portfolio_projects')
+      .select('id, title, category, location, year, cover_image, description')
+      .eq('published', true)
+      .order('created_at', { ascending: false })
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setProjects(data.map((p: any) => ({
+            id: p.id,
+            title: p.title,
+            location: p.location ?? '',
+            year: p.year ? String(p.year) : '',
+            area: '—',
+            cat: p.category ?? 'inst',
+            img: p.cover_image ?? '',
+          })));
+        } else {
+          setProjects(FALLBACK_PROJECTS);
+        }
+      });
+  }, []);
+
+  const allProjects = PROJECTS.length > 0 ? PROJECTS : FALLBACK_PROJECTS;
+  const filtered = active === 'todos' ? allProjects : allProjects.filter(p => p.cat === active);
 
   /* entrance */
   useEffect(() => {
@@ -225,7 +251,7 @@ export default function PortefolioDinamico() {
             </h2>
             <div style={{ display: 'flex', gap: 'clamp(24px,4vw,48px)', paddingBottom: 4 }}>
               {[
-                { n: `${PROJECTS.length}`, l: 'Projectos' },
+                { n: `${allProjects.length}`, l: 'Projectos' },
                 { n: '12',                  l: 'Categorias' },
                 { n: '18',                  l: 'Províncias' },
               ].map(s => (
@@ -245,7 +271,7 @@ export default function PortefolioDinamico() {
           <div style={{ position: 'sticky', top: 'clamp(80px,10vh,120px)' }}>
             {CATEGORIES.map((cat, i) => {
               const isAct  = cat.id === active;
-              const count  = cat.id === 'todos' ? PROJECTS.length : PROJECTS.filter(p => p.cat === cat.id).length;
+              const count  = cat.id === 'todos' ? allProjects.length : allProjects.filter(p => p.cat === cat.id).length;
               return (
                 <button
                   key={cat.id}

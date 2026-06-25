@@ -1,37 +1,60 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
 
-const PROJECTS = [
-  { img: 'photo-1487958449943-2429e8be8625', cat: 'Edifícios', title: 'Centro Hospitalar de Referência', meta: ['Luanda', '2023', '48 000 m²'], feature: true },
-  { img: 'photo-1545459720-aac8509eb02c', cat: 'Infra-estruturas', title: 'Corredor Rodoviário Norte', meta: ['Uíge', '320 km'] },
-  { img: 'photo-1473341304170-971dccb5ac1e', cat: 'Energia', title: 'Parque Solar 66 ha', meta: ['Huíla', '2024'] },
-  { img: 'photo-1504307651254-35680f356dfd', cat: 'Edifícios', title: 'Complexo Habitacional', meta: ['Luanda', '2 000 Hab.'] },
-  { img: 'photo-1581094794329-c8112a89af12', cat: 'Água', title: 'Estação de Tratamento de Água', meta: ['Benguela', '2022'] },
-  { img: 'photo-1590674899484-d5640e854abe', cat: 'Infra-estruturas', title: 'Ponte Sobre o Kwanza', meta: ['Kwanza Sul', '280 m'] },
+const FALLBACK = [
+  { id: 'f1', cover_image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=72&auto=format&fit=crop', category: 'Saúde',           title: 'Centro Hospitalar de Referência',  location: 'Luanda',   year: 2023, description: '' },
+  { id: 'f2', cover_image: 'https://images.unsplash.com/photo-1545459720-aac8509eb02c?w=900&q=72&auto=format&fit=crop',  category: 'Vias de Comunicação', title: 'Corredor Rodoviário Norte',        location: 'Uíge',     year: 2022, description: '' },
+  { id: 'f3', cover_image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&q=72&auto=format&fit=crop', category: 'Energia',          title: 'Parque Solar 66 ha',               location: 'Huíla',    year: 2024, description: '' },
+  { id: 'f4', cover_image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=72&auto=format&fit=crop', category: 'Habitação',         title: 'Complexo Habitacional',            location: 'Luanda',   year: 2023, description: '' },
+  { id: 'f5', cover_image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=72&auto=format&fit=crop', category: 'Infra-estruturas', title: 'Estação de Tratamento de Água',    location: 'Benguela', year: 2022, description: '' },
+  { id: 'f6', cover_image: 'https://images.unsplash.com/photo-1590674899484-d5640e854abe?w=800&q=72&auto=format&fit=crop', category: 'Pontes e Viadutos', title: 'Ponte Sobre o Kwanza',            location: 'Kwanza Sul', year: 2021, description: '' },
 ];
+
+const CAT_LABELS: Record<string, string> = {
+  inst: 'Edifícios Institucionais', saude: 'Saúde', ensino: 'Ensino',
+  habitacao: 'Habitação', recintos: 'Recintos', agro: 'Agricultura e Indústria',
+  turismo: 'Turismo', vias: 'Vias de Comunicação', pontes: 'Pontes e Viadutos',
+  infra: 'Infra-estruturas', oilgas: 'Oil & Gas', energia: 'Energia',
+};
+
+function label(cat: string) { return CAT_LABELS[cat] ?? cat; }
 
 export default function Portfolio() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [projects, setProjects] = useState<any[]>([]);
+
+  useEffect(() => {
+    createClient()
+      .from('portfolio_projects')
+      .select('id, title, slug, category, location, year, cover_image, description')
+      .eq('published', true)
+      .order('featured', { ascending: false })
+      .order('created_at', { ascending: false })
+      .limit(6)
+      .then(({ data }) => setProjects(data && data.length >= 3 ? data : FALLBACK));
+  }, []);
 
   useEffect(() => {
     import('gsap').then(({ gsap }) => {
       import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
         gsap.registerPlugin(ScrollTrigger);
         if (!sectionRef.current) return;
-
         const elems = sectionRef.current.querySelectorAll('.reveal-pf');
         gsap.fromTo(Array.from(elems), { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out', stagger: 0.1,
             scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true } });
       });
     });
-  }, []);
+  }, [projects]);
 
-  const feature = PROJECTS[0];
-  const rest = PROJECTS.slice(1);
+  if (projects.length === 0) return null;
+
+  const feature = projects[0];
+  const rest = projects.slice(1);
 
   return (
     <section id="portefolio" className="section" ref={sectionRef}>
@@ -50,67 +73,57 @@ export default function Portfolio() {
 
         {/* Feature + grid */}
         <div className="pf-feature-grid reveal-pf" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 'var(--space-6)', marginTop: 'var(--space-8)', opacity: 0 }}>
-          {/* Feature card */}
           <Link href="/portefolio" className="pf-card" style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '4/5', background: 'var(--navy-900)', display: 'block', textDecoration: 'none' }}>
-            <Image src={`https://images.unsplash.com/${feature.img}?w=1200&q=72&auto=format&fit=crop`} alt={feature.title} fill className="object-cover pf-img" />
+            <Image src={feature.cover_image || FALLBACK[0].cover_image} alt={feature.title} fill className="object-cover pf-img" unoptimized />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(7,16,31,0) 35%,rgba(7,16,31,0.92) 100%)' }} />
             <div className="absolute left-0 right-0 bottom-0 z-[2] p-6">
-              <span className="tag tag--dark" style={{ marginBottom: 'var(--space-3)' }}>{feature.cat}</span>
+              <span className="tag tag--dark" style={{ marginBottom: 'var(--space-3)' }}>{label(feature.category)}</span>
               <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', fontSize: 'var(--text-h3)', color: '#fff', letterSpacing: '-0.015em', lineHeight: 1.05, margin: '0 0 6px' }}>{feature.title}</h3>
               <div style={{ fontSize: '13px', color: 'var(--navy-100)', display: 'flex', gap: '14px' }}>
-                {feature.meta.map(m => <span key={m}>{m}</span>)}
+                {feature.location && <span>{feature.location}</span>}
+                {feature.year && <span>{feature.year}</span>}
               </div>
             </div>
           </Link>
 
-          {/* Right: 2×2 grid */}
           <div style={{ display: 'grid', gridTemplateRows: 'repeat(2, 1fr)', gap: 'var(--space-6)' }}>
-            {/* Top: single wide */}
-            <Link href="/portefolio" className="pf-card" style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: 'var(--navy-900)', display: 'block', textDecoration: 'none' }}>
-              <Image src={`https://images.unsplash.com/${rest[0].img}?w=900&q=72&auto=format&fit=crop`} alt={rest[0].title} fill className="object-cover pf-img" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(7,16,31,0) 35%,rgba(7,16,31,0.88) 100%)' }} />
-              <div className="absolute left-0 right-0 bottom-0 z-[2] p-5">
-                <span className="tag tag--dark" style={{ marginBottom: 'var(--space-3)' }}>{rest[0].cat}</span>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', fontSize: 'var(--text-h4)', color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.05, margin: '0 0 6px' }}>{rest[0].title}</h3>
-                <div style={{ fontSize: '13px', color: 'var(--navy-100)', display: 'flex', gap: '14px' }}>
-                  {rest[0].meta.map(m => <span key={m}>{m}</span>)}
+            {rest.slice(0, 2).map((p) => (
+              <Link key={p.id} href="/portefolio" className="pf-card" style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: 'var(--navy-900)', display: 'block', textDecoration: 'none' }}>
+                <Image src={p.cover_image || FALLBACK[1].cover_image} alt={p.title} fill className="object-cover pf-img" unoptimized />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(7,16,31,0) 35%,rgba(7,16,31,0.88) 100%)' }} />
+                <div className="absolute left-0 right-0 bottom-0 z-[2] p-5">
+                  <span className="tag tag--dark" style={{ marginBottom: 'var(--space-3)' }}>{label(p.category)}</span>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', fontSize: 'var(--text-h4)', color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.05, margin: '0 0 6px' }}>{p.title}</h3>
+                  <div style={{ fontSize: '13px', color: 'var(--navy-100)', display: 'flex', gap: '14px' }}>
+                    {p.location && <span>{p.location}</span>}
+                    {p.year && <span>{p.year}</span>}
+                  </div>
                 </div>
-              </div>
-            </Link>
-
-            {/* Bottom: single */}
-            <Link href="/portefolio" className="pf-card" style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: 'var(--navy-900)', display: 'block', textDecoration: 'none' }}>
-              <Image src={`https://images.unsplash.com/${rest[1].img}?w=900&q=72&auto=format&fit=crop`} alt={rest[1].title} fill className="object-cover pf-img" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(7,16,31,0) 35%,rgba(7,16,31,0.88) 100%)' }} />
-              <div className="absolute left-0 right-0 bottom-0 z-[2] p-5">
-                <span className="tag tag--dark" style={{ marginBottom: 'var(--space-3)' }}>{rest[1].cat}</span>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', fontSize: 'var(--text-h4)', color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.05, margin: '0 0 6px' }}>{rest[1].title}</h3>
-                <div style={{ fontSize: '13px', color: 'var(--navy-100)', display: 'flex', gap: '14px' }}>
-                  {rest[1].meta.map(m => <span key={m}>{m}</span>)}
-                </div>
-              </div>
-            </Link>
+              </Link>
+            ))}
           </div>
         </div>
 
-        {/* Bottom row: 3 cards */}
-        <div className="reveal-pf" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-6)', marginTop: 'var(--space-6)', opacity: 0 }}>
-          {rest.slice(2).map(p => (
-            <Link key={p.img} href="/portefolio" className="pf-card" style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '4/3', background: 'var(--navy-900)', display: 'block', textDecoration: 'none' }}>
-              <Image src={`https://images.unsplash.com/${p.img}?w=800&q=72&auto=format&fit=crop`} alt={p.title} fill className="object-cover pf-img" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(7,16,31,0) 40%,rgba(7,16,31,0.88) 100%)' }} />
-              <div className="absolute left-0 right-0 bottom-0 z-[2] p-4">
-                <span className="tag tag--dark" style={{ marginBottom: '8px' }}>{p.cat}</span>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', fontSize: 'var(--text-sm)', color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.1, margin: '0 0 4px' }}>{p.title}</h3>
-                <div style={{ fontSize: '12px', color: 'var(--navy-100)', display: 'flex', gap: '10px' }}>
-                  {p.meta.map(m => <span key={m}>{m}</span>)}
+        {/* Bottom row */}
+        {rest.length > 2 && (
+          <div className="reveal-pf" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-6)', marginTop: 'var(--space-6)', opacity: 0 }}>
+            {rest.slice(2).map(p => (
+              <Link key={p.id} href="/portefolio" className="pf-card" style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '4/3', background: 'var(--navy-900)', display: 'block', textDecoration: 'none' }}>
+                <Image src={p.cover_image || FALLBACK[3].cover_image} alt={p.title} fill className="object-cover pf-img" unoptimized />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(7,16,31,0) 40%,rgba(7,16,31,0.88) 100%)' }} />
+                <div className="absolute left-0 right-0 bottom-0 z-[2] p-4">
+                  <span className="tag tag--dark" style={{ marginBottom: '8px' }}>{label(p.category)}</span>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, textTransform: 'uppercase', fontSize: 'var(--text-sm)', color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.1, margin: '0 0 4px' }}>{p.title}</h3>
+                  <div style={{ fontSize: '12px', color: 'var(--navy-100)', display: 'flex', gap: '10px' }}>
+                    {p.location && <span>{p.location}</span>}
+                    {p.year && <span>{p.year}</span>}
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
 
-        {/* CTA bottom */}
         <div className="reveal-pf" style={{ textAlign: 'center', marginTop: 'var(--space-9)', opacity: 0 }}>
           <Link href="/portefolio" className="btn btn-primary">
             Ver todos os projectos

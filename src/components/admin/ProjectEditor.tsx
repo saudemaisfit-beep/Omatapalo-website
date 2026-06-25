@@ -9,7 +9,20 @@ type Project = {
   cover_image?: string; images?: string[]; featured?: boolean; published?: boolean;
 };
 
-const CATEGORIES = ['Construção', 'Engenharia', 'Infra-estruturas', 'Energia', 'Mineração', 'Habitação', 'Saúde', 'Educação', 'Hotelaria'];
+const CATEGORIES = [
+  { id: 'inst',      label: 'Edifícios Institucionais' },
+  { id: 'saude',     label: 'Saúde' },
+  { id: 'ensino',    label: 'Ensino' },
+  { id: 'habitacao', label: 'Habitação e Escritórios' },
+  { id: 'recintos',  label: 'Recintos Desportivos, Culturais e Comerciais' },
+  { id: 'agro',      label: 'Agricultura e Indústria' },
+  { id: 'turismo',   label: 'Turismo e Lazer' },
+  { id: 'vias',      label: 'Vias de Comunicação' },
+  { id: 'pontes',    label: 'Pontes e Viadutos' },
+  { id: 'infra',     label: 'Infra-estruturas' },
+  { id: 'oilgas',    label: 'Oil & Gas' },
+  { id: 'energia',   label: 'Energia' },
+];
 
 function slugify(str: string) {
   return str.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
@@ -20,7 +33,7 @@ export default function ProjectEditor({ project }: { project?: Project }) {
   const supabase = createClient();
   const [form, setForm] = useState({
     title: project?.title ?? '', slug: project?.slug ?? '', description: project?.description ?? '',
-    category: project?.category ?? 'Construção', client: project?.client ?? '',
+    category: project?.category ?? 'inst', client: project?.client ?? '',
     location: project?.location ?? '', year: project?.year ?? new Date().getFullYear(),
     cover_image: project?.cover_image ?? '', images: project?.images ?? [],
     featured: project?.featured ?? false, published: project?.published ?? false,
@@ -147,7 +160,7 @@ export default function ProjectEditor({ project }: { project?: Project }) {
           <div style={{ background: '#fff', borderRadius: 12, padding: 20, border: '1px solid #e2e8f0' }}>
             <label style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#64748b', display: 'block', marginBottom: 8 }}>Categoria</label>
             <select style={inp} value={form.category} onChange={e => set('category', e.target.value)}>
-              {CATEGORIES.map(c => <option key={c}>{c}</option>)}
+              {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
             </select>
           </div>
 
