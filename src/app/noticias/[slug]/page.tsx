@@ -18,6 +18,19 @@ type Post = {
   author?: string;
 };
 
+function formatContent(html: string) {
+  // If content has no block-level HTML tags, treat as plain text and wrap paragraphs
+  if (!/<(p|h[1-6]|ul|ol|blockquote|div)[^>]*>/i.test(html)) {
+    return html
+      .split(/\n{2,}/)
+      .map(p => p.trim())
+      .filter(Boolean)
+      .map(p => `<p>${p.replace(/\n/g, '<br />')}</p>`)
+      .join('');
+  }
+  return html;
+}
+
 function fmtDate(iso: string) {
   return new Date(iso).toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' });
 }
@@ -117,7 +130,7 @@ export default function NoticiaPage({ params }: { params: Promise<{ slug: string
             {post.content && (
               <div
                 className="post-content"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
               />
             )}
 
