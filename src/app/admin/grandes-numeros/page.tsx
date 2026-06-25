@@ -48,9 +48,6 @@ export default function GrandesNumerosAdmin() {
     createClient().from('site_content').select('field,value').eq('page', 'grandes-numeros').then(({ data }) => {
       if (!data) return;
       for (const row of data) {
-        if (row.key === 'items') {
-          try { setItems(JSON.parse(row.value)); } catch {}
-        }
         if (row.field === 'items') {
           try { setItems(JSON.parse(row.value)); } catch {}
         }
