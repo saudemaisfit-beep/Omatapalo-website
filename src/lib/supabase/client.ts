@@ -7,11 +7,9 @@ let _instance: SupabaseClient<any> | null = null;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function createClient(): SupabaseClient<any> {
   if (!_instance) {
-    _instance = _createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      { auth: { persistSession: true, storageKey: 'omt-admin-session' } }
-    );
+    const url = 'https://rsbzgeqgfseyeogexkwk.supabase.co';
+    const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzYnpnZXFnZnNleWVvZ2V4a3drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNTkxOTYsImV4cCI6MjA5NzkzNTE5Nn0.QsQjaOPnUj5GyEk5Qb_l0vLFOZQ96hO_QrQI382wZaE';
+    _instance = _createClient(url, key, { auth: { persistSession: true, storageKey: 'omt-admin-session' } });
   }
   return _instance;
 }
