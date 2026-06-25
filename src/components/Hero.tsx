@@ -276,8 +276,8 @@ export default function Hero() {
                 {dynStats.map(s => (
                   <div key={s.label} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 14, textAlign: 'center' }}>
                     <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.5rem,2.8vw,2.4rem)', color: '#fff', letterSpacing: '-0.03em', lineHeight: 1, display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 2 }}>
-                      {s.value.includes('m²')
-                        ? <span>{s.value.replace('m²', '')}<sup style={{ fontSize: '0.5em' }}>m²</sup></span>
+                      {s.value.includes('m²') || s.value.includes('m2')
+                        ? <span>{s.value.replace('m²', '').replace('m2', '')}m<sup style={{ fontSize: '0.5em', verticalAlign: 'super' }}>2</sup></span>
                         : <span>{s.value}</span>
                       }
                     </div>
