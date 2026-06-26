@@ -59,7 +59,9 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
       style={{
         flex: isHov ? '2.2' : '1',
         transition: 'flex 0.55s cubic-bezier(0.77,0,0.175,1)',
-        background: isHov ? 'linear-gradient(135deg, #22479a 0%, #0e2554 100%)' : 'linear-gradient(135deg, #172d6e 0%, #0a1a45 100%)',
+        background: index === 0
+          ? `linear-gradient(135deg, ${isHov ? 'rgba(34,71,154,0.82)' : 'rgba(23,45,110,0.82)'} 0%, ${isHov ? 'rgba(14,37,84,0.88)' : 'rgba(10,26,69,0.88)'} 100%), url('/omatapalo%20home%20azul.jpg') center/cover no-repeat`
+          : isHov ? 'linear-gradient(135deg, #22479a 0%, #0e2554 100%)' : 'linear-gradient(135deg, #172d6e 0%, #0a1a45 100%)',
         borderRight: '1px solid rgba(255,255,255,0.07)',
         padding: 'clamp(32px,4vw,56px) clamp(20px,2.5vw,40px)',
         display: 'flex',
