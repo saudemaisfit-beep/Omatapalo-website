@@ -40,7 +40,7 @@ const SECTORS: Sector[] = [
       { logo: '/Venture Vanguard.jpg',      name: 'Venture Vanguard', year: '2024', area: 'Trading',             desc: 'Consultoria e trading de commodities e serviços.' },
       { logo: '/SOTRANS-Logo.jpg',          name: 'Sotrans',          year: '2014', area: 'Transportes',         desc: 'Transporte de passageiros e logística.' },
       { logo: '/EMADEL-LAR.png',             name: 'EmadelLar',        year: '',     area: '',                    desc: '' },
-      { logo: '',                            name: 'Okuajuluka',       year: '',     area: '',                    desc: '' },
+      { logo: '/Okuanjuluka.png',            name: 'Okuajuluka',       year: '',     area: '',                    desc: '' },
     ],
   },
 ];
