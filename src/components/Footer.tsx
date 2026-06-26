@@ -105,7 +105,8 @@ export default function Footer() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-4)', flexWrap: 'wrap', marginTop: 'var(--space-9)', paddingTop: 'var(--space-5)', borderTop: '1px solid var(--border-dark)', fontSize: 'var(--text-xs)', color: '#fff' }}>
           <span>© 2026 Grupo Omatapalo · Todos os direitos reservados</span>
           <div style={{ display: 'flex', gap: 'var(--space-5)' }}>
-            {['Política do Sistema de Gestão Integrado', 'Termos de Uso', 'Cookies'].map((l) => (
+            <a href="https://rsbzgeqgfseyeogexkwk.supabase.co/storage/v1/object/public/cms-media/uploads/1782502445398-Politica-Gestao_2023-10-27.pdf" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', opacity: 0.6, textDecoration: 'none' }} className="ftr-link">Política do Sistema de Gestão Integrado</a>
+            {['Termos de Uso', 'Cookies'].map((l) => (
               <span key={l} style={{ color: '#fff', opacity: 0.6 }} className="ftr-link">{l}</span>
             ))}
           </div>
