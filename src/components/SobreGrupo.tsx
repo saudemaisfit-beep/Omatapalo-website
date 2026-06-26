@@ -229,7 +229,7 @@ export default function SobreGrupo() {
               position: 'absolute', bottom: 28, right: 28, zIndex: 10,
               width: 44, height: 44, borderRadius: '50%',
               border: '1.5px solid rgba(255,255,255,0.35)',
-              background: 'rgba(26,57,110,0.55)',
+              background: '#1a396e',
               backdropFilter: 'blur(6px)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               pointerEvents: 'none',
