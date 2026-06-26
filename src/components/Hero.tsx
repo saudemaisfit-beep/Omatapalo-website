@@ -1,7 +1,8 @@
 ﻿'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useContent } from '@/lib/useContent';
+import { createClient } from '@/lib/supabase/client';
 
 const HOME_DEFAULTS = {
   eyebrow:       'Grupo Omatapalo · Desde 2003',
@@ -28,7 +29,7 @@ const STATS = [
   { value: 5000, prefix: '+', suffix: ' km',  label: 'de Estrada', thousands: true },
 ];
 
-const TICKER = ['Engenharia', 'Construção', 'Infra-estruturas', 'Mineração', 'Energia', 'Gestão Hoteleira', 'Agro-negócio', 'Imobiliário', 'Transporte', 'Pescas', 'Indústria'];
+const DEFAULT_TICKER = ['Engenharia', 'Construção', 'Infra-estruturas', 'Mineração', 'Energia', 'Gestão Hoteleira', 'Agro-negócio', 'Imobiliário', 'Transporte', 'Pescas', 'Indústria'];
 
 const SQUARES = [
   { size: 180, x: '72%',  y: '12%', opacity: 0.045, speed: -18, rotate: 22  },
@@ -41,6 +42,7 @@ const SQUARES = [
 
 export default function Hero() {
   const c             = useContent('home', HOME_DEFAULTS);
+  const [ticker, setTicker] = useState<string[]>(DEFAULT_TICKER);
   const heroRef       = useRef<HTMLElement>(null);
   const bgRef         = useRef<HTMLDivElement>(null);
   const titleRef      = useRef<HTMLDivElement>(null);
@@ -50,6 +52,12 @@ export default function Hero() {
   const transitionRef = useRef<HTMLDivElement>(null);
   const squaresRef    = useRef<HTMLDivElement[]>([]);
   const tickerRef     = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'ticker_items').single().then(({ data }) => {
+      if (data?.value) { try { setTicker(JSON.parse(data.value)); } catch {} }
+    });
+  }, []);
 
   useEffect(() => {
     let cleanup: (() => void) | null = null;
@@ -293,7 +301,7 @@ export default function Hero() {
       {/* ── Ticker strip ── */}
       <div ref={tickerRef} style={{ position: 'relative', zIndex: 3, opacity: 0, borderTop: '1px solid rgba(255,255,255,0.07)', overflow: 'hidden', marginTop: 'clamp(24px,4vh,48px)' }}>
         <div style={{ display: 'flex', animation: 'hero-ticker 28s linear infinite', whiteSpace: 'nowrap', width: 'max-content' }}>
-          {[...TICKER, ...TICKER, ...TICKER].map((t, i) => (
+          {[...ticker, ...ticker, ...ticker].map((t, i) => (
             <span key={i} style={{
               fontFamily: 'var(--font-display)', fontWeight: 900,
               fontSize: 'clamp(0.65rem,0.9vw,0.85rem)', textTransform: 'uppercase',

@@ -31,11 +31,15 @@ const btn = (active = false) => ({
   background: active ? '#1a396e' : '#f1f5f9', color: active ? '#fff' : '#374151',
 });
 
+const DEFAULT_TICKER = ['Engenharia', 'Construção', 'Infra-estruturas', 'Mineração', 'Energia', 'Gestão Hoteleira', 'Agro-negócio', 'Imobiliário', 'Transporte', 'Pescas', 'Indústria'];
+
 export default function ConfiguracoesPage() {
-  const [tab, setTab] = useState<'menu' | 'logo' | 'favicon'>('menu');
+  const [tab, setTab] = useState<'menu' | 'logo' | 'favicon' | 'ticker'>('menu');
   const [navItems, setNavItems] = useState<NavItem[]>(DEFAULT_NAV);
   const [logoUrl, setLogoUrl] = useState('/logo/LOGO OMT 1.png');
   const [faviconUrl, setFaviconUrl] = useState('/favicon.ico');
+  const [tickerItems, setTickerItems] = useState<string[]>(DEFAULT_TICKER);
+  const [newTickerItem, setNewTickerItem] = useState('');
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [msg, setMsg] = useState('');
@@ -56,6 +60,9 @@ export default function ConfiguracoesPage() {
         }
         if (row.key === 'logo_url') setLogoUrl(row.value);
         if (row.key === 'favicon_url') setFaviconUrl(row.value);
+        if (row.key === 'ticker_items') {
+          try { setTickerItems(JSON.parse(row.value)); } catch {}
+        }
       }
     });
   }, []);
@@ -71,6 +78,13 @@ export default function ConfiguracoesPage() {
     } else {
       flash('✅ Menu guardado com sucesso!');
     }
+  }
+
+  async function saveTicker() {
+    setSaving(true);
+    const { error } = await createClient().from('site_settings').upsert({ key: 'ticker_items', value: JSON.stringify(tickerItems) });
+    setSaving(false);
+    flash(error ? '❌ Erro: ' + error.message : '✅ Ticker guardado!');
   }
 
   async function uploadAsset(file: File, key: 'logo_url' | 'favicon_url') {
@@ -139,10 +153,10 @@ export default function ConfiguracoesPage() {
       )}
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 28 }}>
-        {(['menu', 'logo', 'favicon'] as const).map(t => (
+      <div style={{ display: 'flex', gap: 8, marginBottom: 28, flexWrap: 'wrap' }}>
+        {(['menu', 'logo', 'favicon', 'ticker'] as const).map(t => (
           <button key={t} onClick={() => setTab(t)} style={btn(tab === t)}>
-            {t === 'menu' ? 'Menu' : t === 'logo' ? 'Logotipo' : 'Favicon'}
+            {t === 'menu' ? 'Menu' : t === 'logo' ? 'Logotipo' : t === 'favicon' ? 'Favicon' : 'Ticker'}
           </button>
         ))}
       </div>
@@ -302,6 +316,55 @@ export default function ConfiguracoesPage() {
               </button>
             )}
           </div>
+        </div>
+      )}
+
+      {/* ── TICKER ── */}
+      {tab === 'ticker' && (
+        <div style={{ background: '#fff', borderRadius: 8, padding: 28, border: '1px solid #e2e8f0' }}>
+          <div style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#64748b', marginBottom: 6 }}>Faixa de texto animada (Hero)</div>
+          <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 20 }}>Palavras que aparecem na faixa rolante no topo da página inicial.</div>
+
+          {/* Lista de itens */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
+            {tickerItems.map((item, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#f8fafc', borderRadius: 6, padding: '10px 14px', border: '1px solid #e2e8f0' }}>
+                <span style={{ flex: 1, fontSize: 14, color: '#0f172a', fontWeight: 500 }}>{item}</span>
+                <button
+                  onClick={() => setTickerItems(prev => prev.filter((_, idx) => idx !== i))}
+                  style={{ background: 'none', border: 'none', color: '#dc2626', fontSize: 18, cursor: 'pointer', lineHeight: 1, padding: '0 4px' }}
+                  title="Remover"
+                >×</button>
+              </div>
+            ))}
+          </div>
+
+          {/* Adicionar novo item */}
+          <div style={{ display: 'flex', gap: 10, marginBottom: 24 }}>
+            <input
+              type="text"
+              placeholder="Novo item (ex: Logística)"
+              value={newTickerItem}
+              onChange={e => setNewTickerItem(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && newTickerItem.trim()) {
+                  setTickerItems(prev => [...prev, newTickerItem.trim()]);
+                  setNewTickerItem('');
+                }
+              }}
+              style={{ flex: 1, padding: '10px 14px', border: '1px solid #e2e8f0', borderRadius: 6, fontSize: 14, outline: 'none' }}
+            />
+            <button
+              onClick={() => { if (newTickerItem.trim()) { setTickerItems(prev => [...prev, newTickerItem.trim()]); setNewTickerItem(''); } }}
+              style={{ padding: '10px 20px', background: '#1a396e', color: '#fff', border: 'none', borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}
+            >+ Adicionar</button>
+          </div>
+
+          <button
+            onClick={saveTicker}
+            disabled={saving}
+            style={{ padding: '12px 28px', background: '#1a396e', color: '#fff', border: 'none', borderRadius: 6, fontSize: 13, fontWeight: 700, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}
+          >{saving ? 'A guardar…' : 'Guardar Ticker'}</button>
         </div>
       )}
     </div>
