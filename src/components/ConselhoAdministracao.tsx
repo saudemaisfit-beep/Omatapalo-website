@@ -21,7 +21,7 @@ const TIERS: { id: string; short: string; label: string; members: Member[] }[] =
       { name: 'Pedro Vieira Santos', role: 'Chief Executive Officer',    initials: 'PVS', featured: true },
       { name: 'Marques Antunes',     role: 'Chief Operating Officer',    initials: 'MA' },
       { name: 'Pedro Vieira Santos', role: 'Chief Financial Officer',    initials: 'PV' },
-      { name: 'Almeida e Silva',     role: 'Dir. Exec. Construção Civil',       initials: 'AS' },
+      { name: 'Almeida e Silva',     role: 'Director Executivo de Produção de Construção Civil',       initials: 'AS' },
       { name: 'Pedro Martins',       role: 'Dir. Exec. Financeiro',             initials: 'PM' },
       { name: 'Cláudio Barbosa',     role: 'Dir. Exec. Comercial',              initials: 'CB' },
       { name: 'José Malafaia',       role: 'Dir. Exec. Vias e Infraestruturas', initials: 'JM' },
