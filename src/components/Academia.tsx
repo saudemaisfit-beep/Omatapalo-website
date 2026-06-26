@@ -11,7 +11,7 @@ const GALLERY = [
 ];
 
 const STATS = [
-  { value: 45590, label: 'Horas de Formação', prefix: '+ ', suffix: '' },
+  { value: 76000, label: 'Horas de Formação', prefix: '+ ', suffix: '' },
   { value: 2021, label: 'Ano de Inauguração', prefix: '', suffix: '' },
   { value: 3200, label: 'Colaboradores Formados', prefix: '+ ', suffix: '' },
 ];
@@ -204,3 +204,4 @@ export default function Academia() {
     </section>
   );
 }
+
