@@ -39,7 +39,7 @@ const SECTORS: Sector[] = [
       { logo: '/ONTOUR.png',                name: 'OnTour',           year: '2022', area: 'Turismo',             desc: 'Serviços de turismo e hospitalidade em Angola.' },
       { logo: '/Venture Vanguard.jpg',      name: 'Venture Vanguard', year: '2024', area: 'Trading',             desc: 'Consultoria e trading de commodities e serviços.' },
       { logo: '/SOTRANS-Logo.jpg',          name: 'Sotrans',          year: '2014', area: 'Transportes',         desc: 'Transporte de passageiros e logística.' },
-      { logo: '',                            name: 'EmadelLar',        year: '',     area: '',                    desc: '' },
+      { logo: '/EMADEL LAR.png',             name: 'EmadelLar',        year: '',     area: '',                    desc: '' },
       { logo: '',                            name: 'Okuajuluka',       year: '',     area: '',                    desc: '' },
     ],
   },
