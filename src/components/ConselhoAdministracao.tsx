@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { createClient } from '@/lib/supabase/client';
 
 /* ─── Data ─── */
 type Member = { name: string; role: string; initials: string; featured?: boolean };
 
-const TIERS: { id: string; short: string; label: string; members: Member[] }[] = [
+const DEFAULT_TIERS: { id: string; short: string; label: string; members: Member[] }[] = [
   {
     id: 'conselho', short: '01', label: 'Conselho de Administração',
     members: [
@@ -133,8 +134,15 @@ export default function ConselhoAdministracao() {
   const gridRef     = useRef<HTMLDivElement>(null);
   const bgRef       = useRef<HTMLDivElement>(null);
   const [active, setActive]   = useState(0);
+  const [TIERS, setTIERS]     = useState(DEFAULT_TIERS);
   const isAnimating = useRef(false);
   const dirRef      = useRef<1 | -1>(1);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'conselho_tiers').single().then(({ data }) => {
+      if (data?.value) { try { setTIERS(JSON.parse(data.value)); } catch {} }
+    });
+  }, []);
 
   /* entrance */
   useEffect(() => {
