@@ -223,7 +223,7 @@ export default function Hero() {
           {/* lead + buttons */}
           <div>
             <p ref={leadRef} style={{
-              maxWidth: 460, fontSize: 'clamp(15px,1.3vw,18px)', lineHeight: 1.75,
+              maxWidth: 600, fontSize: 'clamp(15px,1.3vw,18px)', lineHeight: 1.75,
               color: '#fff', marginBottom: 'clamp(24px,3vh,36px)', opacity: 0,
               fontFamily: 'var(--font-sans)',
             }}>
