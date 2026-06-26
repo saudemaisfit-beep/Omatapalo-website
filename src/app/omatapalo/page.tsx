@@ -9,7 +9,7 @@ import Mundo from '@/components/Mundo';
 import Historia from '@/components/Historia';
 import ConselhoAdministracao from '@/components/ConselhoAdministracao';
 
-const DEFAULT_INTRO = 'A OMATAPALO é uma empresa nacional que gere um portefólio diversificado de negócios nas áreas de Engenharia e Construção, Obras Públicas, Agroindústria, Imobiliário, Minas, Pesca e Gestão Hoteleira.';
+const DEFAULT_INTRO = 'O GRUPO OMATAPALO é uma empresa nacional que gere um portefólio diversificado de negócios nas áreas de Engenharia e Construção, Obras Públicas, Agroindústria, Imobiliário, Minas, Pesca e Gestão Hoteleira.';
 
 export default function OmatapaloPage() {
   const [intro, setIntro] = useState(DEFAULT_INTRO);
