@@ -10,7 +10,7 @@ const SECTORS: Sector[] = [
     id: 'primario', label: 'Sector Primário', short: '01',
     companies: [
       { logo: '/Mumba-logo.png',  name: 'Fazenda Mumba', year: '2015', area: 'Agro-negócio',          desc: 'Produção agrícola e pecuária. Detentora de 99,8% do capital social.' },
-      { logo: '/OCTOSEA.png',     name: 'Octosea',       year: '2010', area: 'Pescas',                desc: 'Exploração de recursos haliêuticos nas águas angolanas.' },
+      { logo: '/OCTOSEA (1).png', name: 'Octosea',       year: '2010', area: 'Pescas',                desc: 'Exploração de recursos haliêuticos nas águas angolanas.' },
       { logo: '/ANIMOPER.png',    name: 'Animoper',      year: '2022', area: 'Mineração – Ouro',      desc: 'Mineração e tratamento de metais preciosos em Angola.' },
       { logo: '/MAOMA.png',       name: 'Maoma',         year: '2019', area: 'Mineração – Diamantes', desc: 'Exploração e comercialização de diamantes.' },
     ],
