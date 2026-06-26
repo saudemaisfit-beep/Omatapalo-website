@@ -332,7 +332,7 @@ export default function Hero() {
         textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)',
         display: 'flex', alignItems: 'center', gap: 12,
       }}>
-        Scroll
+        Omatapalo
         <span style={{ width: 1, height: 54, background: 'linear-gradient(rgba(255,255,255,0.3), transparent)', animation: 'scrollPulse 2s ease-in-out infinite' }} />
       </div>
 
