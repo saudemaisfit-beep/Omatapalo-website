@@ -73,6 +73,16 @@ export default function FooterAdminPage() {
   function removeLink(ci: number, li: number) {
     setCols(prev => prev.map((c, i) => i === ci ? { ...c, links: c.links.filter((_, j) => j !== li) } : c));
   }
+  function moveLink(ci: number, li: number, dir: -1 | 1) {
+    setCols(prev => prev.map((c, i) => {
+      if (i !== ci) return c;
+      const arr = [...c.links];
+      const j = li + dir;
+      if (j < 0 || j >= arr.length) return c;
+      [arr[li], arr[j]] = [arr[j], arr[li]];
+      return { ...c, links: arr };
+    }));
+  }
 
   return (
     <div style={{ padding: 'clamp(24px,3vw,40px)', maxWidth: 900, margin: '0 auto' }}>
@@ -123,6 +133,10 @@ export default function FooterAdminPage() {
                     placeholder="URL"
                     style={{ ...inp, fontSize: 12, color: '#64748b' }}
                   />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2, flexShrink: 0 }}>
+                  <button onClick={() => moveLink(ci, li, -1)} style={{ padding: '4px 7px', background: '#f1f5f9', border: '1px solid #e2e8f0', borderRadius: 4, cursor: 'pointer', fontSize: 11 }}>↑</button>
+                  <button onClick={() => moveLink(ci, li,  1)} style={{ padding: '4px 7px', background: '#f1f5f9', border: '1px solid #e2e8f0', borderRadius: 4, cursor: 'pointer', fontSize: 11 }}>↓</button>
                 </div>
                 <button
                   onClick={() => removeLink(ci, li)}
