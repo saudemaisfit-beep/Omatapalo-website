@@ -10,13 +10,13 @@ const COUNTRIES = [
   { name: 'Portugal',    code: 'PT', continent: 'Europa',   sub: 'Representação e parcerias europeias',  x: 45,   y: 31,  labelLeft: true },
   { name: 'Espanha',     code: 'ES', continent: 'Europa',   sub: 'Parcerias comerciais e técnicas',      x: 47,   y: 31  },
   { name: 'Reino Unido', code: 'GB', continent: 'Europa',   sub: 'Parcerias estratégicas e financeiras', x: 47,   y: 19  },
-  { name: 'EUA',         code: 'US', continent: 'América do Norte', sub: 'Parcerias estratégicas e de investimento', x: 28, y: 31 },
+  { name: 'EUA',         code: 'US', continent: 'América do Norte', sub: 'Parcerias estratégicas e de investimento', x: 20, y: 31 },
 ];
 
 export default function Mundo() {
   const wrapperRef  = useRef<HTMLDivElement>(null);
   const stickyRef   = useRef<HTMLDivElement>(null);
-  const [visibleCount, setVisibleCount] = useState(COUNTRIES.length);
+  const [visibleCount, setVisibleCount] = useState(0);
   const [hoveredPin, setHoveredPin]     = useState<number | null>(null);
 
   useEffect(() => {
@@ -32,13 +32,16 @@ export default function Mundo() {
             scrollTrigger: { trigger: wrapperRef.current, start: 'top 80%', once: true } }
         );
 
-        /* reveal all pins at once when section enters viewport */
+        /* reveal pins one-by-one as user scrolls through the wrapper */
+        const total = COUNTRIES.length;
         ScrollTrigger.create({
           trigger: wrapperRef.current,
-          start: 'top 80%',
-          once: true,
-          onEnter() {
-            setVisibleCount(COUNTRIES.length);
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: false,
+          onUpdate(self) {
+            const count = Math.ceil(self.progress * (total + 1));
+            setVisibleCount(Math.min(count, total));
           },
         });
 
@@ -53,8 +56,9 @@ export default function Mundo() {
   }, []);
 
   return (
-    <div ref={wrapperRef} id="mundo" style={{ position: 'relative' }}>
-      <div ref={stickyRef} style={{ height: '100vh', overflow: 'hidden', background: '#1a396e' }}>
+    /* tall wrapper gives scroll room for pin reveals */
+    <div ref={wrapperRef} id="mundo" style={{ height: `${100 + COUNTRIES.length * 18}vh`, position: 'relative' }}>
+      <div ref={stickyRef} style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', background: '#1a396e' }}>
 
         {/* grid texture */}
         <div style={{
@@ -64,36 +68,34 @@ export default function Mundo() {
         }} />
 
         {/* ── World map SVG background ── */}
-        {/* map + pins share the same aspect-ratio box so coords stay aligned */}
-        <div className="mundo-map-bg" style={{
-          position: 'absolute', inset: 0, zIndex: 1,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          {/* fixed-ratio container: world map is ~2:1 */}
-          <div style={{ position: 'relative', width: '100%', maxHeight: '100%', aspectRatio: '2/1', margin: 'auto' }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
-              alt=""
-              style={{ width: '100%', height: '100%', objectFit: 'fill', opacity: 0.07, filter: 'invert(1)', display: 'block' }}
-            />
+        <div className="mundo-map-bg" style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
+            alt=""
+            style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.07, filter: 'invert(1)' }}
+          />
+          {/* vignette overlay */}
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 30%, #1a396e 85%)' }} />
+        </div>
 
-            {/* ── Pins on map ── */}
-            {COUNTRIES.map((c, i) => {
-              const visible = i < visibleCount;
-              const isHov   = hoveredPin === i;
-              return (
-                <div
-                  key={c.code}
-                  onMouseEnter={() => setHoveredPin(i)}
-                  onMouseLeave={() => setHoveredPin(null)}
-                  style={{
-                    position: 'absolute',
-                    left: `${c.x}%`,
-                    top:  `${c.y}%`,
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: isHov ? 10 : 3,
-                  }}
+        {/* ── Pins on map ── */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
+          {COUNTRIES.map((c, i) => {
+            const visible = i < visibleCount;
+            const isHov   = hoveredPin === i;
+            return (
+              <div
+                key={c.code}
+                onMouseEnter={() => setHoveredPin(i)}
+                onMouseLeave={() => setHoveredPin(null)}
+                style={{
+                  position: 'absolute',
+                  left: `${c.x}%`,
+                  top:  `${c.y}%`,
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: isHov ? 10 : 3,
+                }}
               >
                 {/* pulse ring */}
                 {visible && (
@@ -151,11 +153,7 @@ export default function Mundo() {
               </div>
             );
           })}
-
-            {/* vignette overlay */}
-            <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 30%, #1a396e 85%)', pointerEvents: 'none' }} />
-          </div>{/* end aspect-ratio container */}
-        </div>{/* end mundo-map-bg */}
+        </div>
 
         {/* ── UI overlay ── */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 4, pointerEvents: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 'clamp(32px,5vw,64px)' }}>
@@ -184,9 +182,18 @@ export default function Mundo() {
               ))}
             </div>
 
-            <div className="mundo-hdr-el" style={{ opacity: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect width="10" height="10" fill="#fff" /></svg>
-              <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff' }}>{COUNTRIES.length} países</span>
+            {/* scroll progress indicator */}
+            <div className="mundo-hdr-el" style={{ opacity: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+              <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff' }}>
+                {visibleCount}/{COUNTRIES.length} países
+              </div>
+              <div style={{ width: 80, height: 1, background: 'rgba(255,255,255,0.3)', borderRadius: 1, overflow: 'hidden' }}>
+                <div style={{ height: '100%', background: '#fff', width: `${(visibleCount / COUNTRIES.length) * 100}%`, transition: 'width .3s ease' }} />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect width="10" height="10" fill="#fff" /></svg>
+                <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff' }}>Deslize para explorar</span>
+              </div>
             </div>
           </div>
         </div>
