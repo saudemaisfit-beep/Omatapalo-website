@@ -10,7 +10,7 @@ const COUNTRIES = [
   { name: 'Portugal',    code: 'PT', continent: 'Europa',   sub: 'Representação e parcerias europeias',  x: 45,   y: 31,  labelLeft: true },
   { name: 'Espanha',     code: 'ES', continent: 'Europa',   sub: 'Parcerias comerciais e técnicas',      x: 47,   y: 31  },
   { name: 'Reino Unido', code: 'GB', continent: 'Europa',   sub: 'Parcerias estratégicas e financeiras', x: 47,   y: 19  },
-  { name: 'EUA',         code: 'US', continent: 'América do Norte', sub: 'Parcerias estratégicas e de investimento', x: 24, y: 31 },
+  { name: 'EUA',         code: 'US', continent: 'América do Norte', sub: 'Parcerias estratégicas e de investimento', x: 28, y: 31 },
 ];
 
 export default function Mundo() {
