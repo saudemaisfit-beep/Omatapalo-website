@@ -26,7 +26,7 @@ const SECTORS: Sector[] = [
       { logo: '/Planasul.png',            name: 'Planasul',   year: '2003', area: 'Engenharia e Construção',  desc: 'Construção civil e obras públicas em Angola.' },
       { logo: '/SelaGrup-Logotipo.png',   name: 'Selagrup',   year: '2020', area: 'Captação de Água',         desc: 'Furos e redes de distribuição de água.' },
       { logo: '/Emadel.png',              name: 'Emadel',     year: '2010', area: 'Carpintaria',              desc: 'Soluções em madeira para construção e decoração.' },
-      { logo: '/EMADEL LAR.png',          name: 'Emadellar',  year: '2012', area: 'Mobiliário',               desc: 'Design e produção de mobiliário de interiores.' },
+
       { logo: '/Enerline.png',            name: 'Enerline',   year: '2014', area: 'Energia',                  desc: 'Soluções energéticas e energias renováveis.' },
     ],
   },
