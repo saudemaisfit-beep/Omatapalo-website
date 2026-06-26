@@ -1,16 +1,33 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { createClient } from '@/lib/supabase/client';
 
-const FEATURES = [
-  { n: '01', t: 'Academia Omatapalo', d: 'Formação técnica e desenvolvimento de carreira para os nossos quadros.' },
-  { n: '02', t: 'Segurança em primeiro lugar', d: 'Cultura de prevenção certificada ISO 45001 em todas as frentes de obra.' },
-  { n: '03', t: 'Saúde e bem-estar', d: 'Programas de saúde e apoio às famílias dos colaboradores.' },
-];
+const DEFAULTS = {
+  body_p1: 'Contando com mais de 15.000 colaboradores directos, a OMATAPALO possui no seu quadro técnico áreas de conhecimento relacionadas com a sua actividade.',
+  body_p2: 'A empresa assenta a sua actuação em níveis de empenho, diligência na execução, responsabilidade na sua conduta, formando uma equipa pluridisciplinar capaz de conduzir processos, produzir resultados e garantir padrões de qualidade, cumprimento de prazos rigorosos, para uma sociedade que, cada vez mais, exige soluções mais céleres.',
+  section_img: '/COLABORADORES OMTP.png',
+};
 
 export default function Pessoas() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [content, setContent] = useState(DEFAULTS);
+
+  useEffect(() => {
+    createClient()
+      .from('site_content')
+      .select('field,value')
+      .eq('page', 'pessoas')
+      .in('field', ['body_p1', 'body_p2', 'section_img'])
+      .then(({ data }) => {
+        if (data?.length) {
+          const map: Record<string, string> = {};
+          data.forEach(({ field, value }) => { map[field] = value; });
+          setContent(prev => ({ ...prev, ...map }));
+        }
+      });
+  }, []);
 
   useEffect(() => {
     import('gsap').then(({ gsap }) => {
@@ -42,9 +59,9 @@ export default function Pessoas() {
               <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(26,57,110,0.22)' }}>Pessoas</span>
             </h2>
             <p className="shead__lead" style={{ marginTop: 'var(--space-4)', color: '#1a1a1a' }}>
-              Contando com mais de 15.000 colaboradores directos, a OMATAPALO possui no seu quadro técnico áreas de conhecimento relacionadas com a sua actividade.
+              {content.body_p1}
               <br /><br />
-              A empresa assenta a sua actuação em níveis de empenho, diligência na execução, responsabilidade na sua conduta, formando uma equipa pluridisciplinar capaz de conduzir processos, produzir resultados e garantir padrões de qualidade, cumprimento de prazos rigorosos, para uma sociedade que, cada vez mais, exige soluções mais céleres.
+              {content.body_p2}
             </p>
             <div style={{ marginTop: 'var(--space-6)' }}>
               <a href="#contactos" className="btn btn-ghost">
@@ -56,7 +73,7 @@ export default function Pessoas() {
 
           <div className="reveal-p" style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '4/3', background: 'var(--gray-100)', opacity: 0 }}>
             <Image
-              src="/COLABORADORES OMTP.png"
+              src={content.section_img}
               alt="Equipa Omatapalo"
               fill
               className="object-cover"

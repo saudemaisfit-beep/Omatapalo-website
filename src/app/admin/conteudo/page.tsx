@@ -56,10 +56,13 @@ const SCHEMAS: Record<string, PageSchema> = {
   pessoas: {
     label: 'Pessoas',
     fields: [
-      { key: 'hero_img',      label: 'Imagem do Hero',         type: 'image',    default: '/Academia-barra.jpg' },
-      { key: 'hero_eyebrow',  label: 'Eyebrow hero',           type: 'text',     default: 'Grupo Omatapalo · Pessoas' },
-      { key: 'hero_title',    label: 'Título hero',            type: 'text',     default: 'Pessoas' },
-      { key: 'intro',         label: 'Texto introdutório',     type: 'textarea', default: 'As pessoas são o coração do Grupo Omatapalo.' },
+      { key: 'hero_img',      label: 'Imagem do Hero',                   type: 'image',    default: '/Academia-barra.jpg' },
+      { key: 'hero_eyebrow',  label: 'Eyebrow hero',                     type: 'text',     default: 'Grupo Omatapalo · +15 000 Colaboradores' },
+      { key: 'hero_title',    label: 'Título hero',                      type: 'text',     default: 'As nossas Pessoas' },
+      { key: 'section_title', label: 'Título secção',                    type: 'text',     default: 'A nossa maior obra são as Pessoas' },
+      { key: 'body_p1',       label: 'Parágrafo 1',                      type: 'textarea', default: 'Contando com mais de 15.000 colaboradores directos, a OMATAPALO possui no seu quadro técnico áreas de conhecimento relacionadas com a sua actividade.' },
+      { key: 'body_p2',       label: 'Parágrafo 2',                      type: 'textarea', default: 'A empresa assenta a sua actuação em níveis de empenho, diligência na execução, responsabilidade na sua conduta, formando uma equipa pluridisciplinar capaz de conduzir processos, produzir resultados e garantir padrões de qualidade, cumprimento de prazos rigorosos, para uma sociedade que, cada vez mais, exige soluções mais céleres.' },
+      { key: 'section_img',   label: 'Imagem da secção (ao lado do texto)', type: 'image', default: '/COLABORADORES OMTP.png' },
     ],
   },
   sustentabilidade: {
