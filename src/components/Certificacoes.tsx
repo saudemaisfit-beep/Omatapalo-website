@@ -62,7 +62,7 @@ function CertColumn({ cert, index, hovered, onEnter, onLeave }: {
         background: index === 0
           ? `linear-gradient(135deg, ${isHov ? 'rgba(34,71,154,0.82)' : 'rgba(23,45,110,0.82)'} 0%, ${isHov ? 'rgba(14,37,84,0.88)' : 'rgba(10,26,69,0.88)'} 100%), url('/omatapalo%20home%20azul.jpg') center/cover no-repeat`
           : index === 1
-          ? `linear-gradient(135deg, ${isHov ? 'rgba(34,71,154,0.82)' : 'rgba(23,45,110,0.82)'} 0%, ${isHov ? 'rgba(14,37,84,0.88)' : 'rgba(10,26,69,0.88)'} 100%), url('/omatapalo-09.jpg') center/cover no-repeat`
+          ? `linear-gradient(135deg, ${isHov ? 'rgba(34,71,154,0.82)' : 'rgba(23,45,110,0.82)'} 0%, ${isHov ? 'rgba(14,37,84,0.88)' : 'rgba(10,26,69,0.88)'} 100%), url('/omatapalo%20KILAMBA.png') center/cover no-repeat`
           : index === 2
           ? `linear-gradient(135deg, ${isHov ? 'rgba(34,71,154,0.82)' : 'rgba(23,45,110,0.82)'} 0%, ${isHov ? 'rgba(14,37,84,0.88)' : 'rgba(10,26,69,0.88)'} 100%), url('/omatapalo.4.png') center/cover no-repeat`
           : `linear-gradient(135deg, ${isHov ? 'rgba(34,71,154,0.82)' : 'rgba(23,45,110,0.82)'} 0%, ${isHov ? 'rgba(14,37,84,0.88)' : 'rgba(10,26,69,0.88)'} 100%), url('/ods%20un%20global.png') center/cover no-repeat`,
