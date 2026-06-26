@@ -218,7 +218,7 @@ export default function Hero() {
 
       {/* ── Bottom block: lead + CTAs + stats ── */}
       <div style={{ position: 'relative', zIndex: 3, paddingInline: 'var(--gutter)', paddingBottom: 'clamp(0px,2vh,24px)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 'clamp(24px,4vw,64px)', alignItems: 'flex-end', flexWrap: 'wrap' }} className="hero-bottom">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(20px,3vh,32px)' }} className="hero-bottom">
 
           {/* lead + buttons */}
           <div>
