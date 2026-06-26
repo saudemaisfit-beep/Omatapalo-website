@@ -328,7 +328,28 @@ export default function ConfiguracoesPage() {
           {/* Lista de itens */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
             {tickerItems.map((item, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#f8fafc', borderRadius: 6, padding: '10px 14px', border: '1px solid #e2e8f0' }}>
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#f8fafc', borderRadius: 6, padding: '10px 14px', border: '1px solid #e2e8f0' }}>
+                {/* Ordem */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <button
+                    onClick={() => {
+                      if (i === 0) return;
+                      setTickerItems(prev => { const a = [...prev]; [a[i-1], a[i]] = [a[i], a[i-1]]; return a; });
+                    }}
+                    disabled={i === 0}
+                    style={{ background: 'none', border: '1px solid #e2e8f0', borderRadius: 3, width: 22, height: 18, cursor: i === 0 ? 'default' : 'pointer', fontSize: 10, color: i === 0 ? '#cbd5e1' : '#475569', lineHeight: 1 }}
+                    title="Mover para cima"
+                  >▲</button>
+                  <button
+                    onClick={() => {
+                      if (i === tickerItems.length - 1) return;
+                      setTickerItems(prev => { const a = [...prev]; [a[i], a[i+1]] = [a[i+1], a[i]]; return a; });
+                    }}
+                    disabled={i === tickerItems.length - 1}
+                    style={{ background: 'none', border: '1px solid #e2e8f0', borderRadius: 3, width: 22, height: 18, cursor: i === tickerItems.length - 1 ? 'default' : 'pointer', fontSize: 10, color: i === tickerItems.length - 1 ? '#cbd5e1' : '#475569', lineHeight: 1 }}
+                    title="Mover para baixo"
+                  >▼</button>
+                </div>
                 <span style={{ flex: 1, fontSize: 14, color: '#0f172a', fontWeight: 500 }}>{item}</span>
                 <button
                   onClick={() => setTickerItems(prev => prev.filter((_, idx) => idx !== i))}
