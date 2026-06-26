@@ -27,7 +27,7 @@ const TIERS: { id: string; short: string; label: string; members: Member[] }[] =
       { name: 'José Malafaia',       role: 'Director Executivo de Produção de Vias e Infraestruturas', initials: 'JM' },
       { name: 'Arménio Lopes',       role: 'Director Executivo de Produção de Instalações Especiais',  initials: 'AL' },
       { name: 'Joana Guedes',        role: 'Directora Executiva Jurídica',          initials: 'JG' },
-      { name: 'Manuel Mamboza',      role: 'Dir. Exec. Central de Compras',     initials: 'MM' },
+      { name: 'Manuel Mamboza',      role: 'Director Executivo de Central de Compras',     initials: 'MM' },
       { name: 'Luís Marques',        role: 'Assessor da Administração',         initials: 'LM' },
     ],
   },
