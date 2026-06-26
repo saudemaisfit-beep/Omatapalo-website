@@ -22,7 +22,7 @@ const TIERS: { id: string; short: string; label: string; members: Member[] }[] =
       { name: 'Marques Antunes',     role: 'Chief Operating Officer',    initials: 'MA' },
       { name: 'Pedro Vieira Santos', role: 'Chief Financial Officer',    initials: 'PV' },
       { name: 'Almeida e Silva',     role: 'Director Executivo de Produção de Construção Civil',       initials: 'AS' },
-      { name: 'Pedro Martins',       role: 'Dir. Exec. Financeiro',             initials: 'PM' },
+      { name: 'Pedro Martins',       role: 'Director Executivo Financeiro',             initials: 'PM' },
       { name: 'Cláudio Barbosa',     role: 'Dir. Exec. Comercial',              initials: 'CB' },
       { name: 'José Malafaia',       role: 'Dir. Exec. Vias e Infraestruturas', initials: 'JM' },
       { name: 'Arménio Lopes',       role: 'Dir. Exec. Instalações Especiais',  initials: 'AL' },
