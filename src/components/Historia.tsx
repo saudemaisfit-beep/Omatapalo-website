@@ -20,7 +20,7 @@ const DEFAULT_eventos: Evento[] = [
   { year: '2018', title: 'Obras Públicas', desc: 'Nova Circular do Lubango, Hospital Militar Principal em Luanda, Nova Sede do Lubango, Hospital Central e subestações do Projecto de Laúca.' },
   { year: '2019', title: 'Novos Projectos', desc: 'Construção da subestação da Bita, Barragem Calucuve no Cunene e Topside Namibe.' },
   { year: '2020', title: 'Grandes Obras', desc: 'Estrada Nacional 230 — EN230 (Malanje/Saurimo), Cefojor Huambo fase 2 e Reabilitação da Maternidade Irene Neto no Lubango.' },
-  { year: '2021', title: 'Infraestruturas e Cultura', desc: 'EMADEL e METALOSUL em Luanda, Cash-Center BNA, Centro Cultural do Huambo e Novo Hospital dos Queimados no Kilamba.' },
+  { year: '2021', title: 'Infraestruturas e Cultura', desc: 'EMADEL e METALOSUL em Luanda, Casa do Kwanza.' },
   { year: '2022', title: 'Energias Renováveis', desc: 'Hospital Pediátrico do Huambo, Nova Sede da Africell e Aproveitamento Hidroeléctrico Caculo Cabaça.' },
   { year: '2023', title: '20.º Aniversário', desc: 'Electrificação Rural do Sul de Angola, Parques Solares e Infraestruturas de acesso ao novo Aeroporto Internacional de Luanda.' },
   { year: '2024', title: 'Expansão e Sustentabilidade', desc: 'Adesão ao Pacto Global das Nações Unidas, inauguração do Flow Hotel em Benguela e Prémio FIB 2024 pelo segundo ano consecutivo.' },
