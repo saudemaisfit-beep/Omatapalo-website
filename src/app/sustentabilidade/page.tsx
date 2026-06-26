@@ -10,7 +10,7 @@ export default function SustentabilidadePage() {
       <main>
         <PageHero page="sustentabilidade"
           title="Sustentabilidade"
-          imgSrc="/HABITACAO-CAMBAMBE.jpg"
+          imgSrc="/Ativo 21.png"
           position="center"
           imgOpacity={0.45}
         />
