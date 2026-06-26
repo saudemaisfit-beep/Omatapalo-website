@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
-const COLS = [
+const DEFAULT_COLS = [
   { h: 'O Grupo', links: [
     { t: 'O Grupo e os Negócios',     href: '/omatapalo' },
     { t: 'Omatapalo no Mundo',        href: '/omatapalo#mundo' },
@@ -24,6 +24,8 @@ const COLS = [
   ]},
 ];
 
+const DEFAULT_DESC = 'Engenharia, Construção e Infra-estruturas a transformar Angola e o continente africano desde 2003. Fazemos acontecer.';
+
 const SOCIAL_ICONS: Record<string, JSX.Element> = {
   linkedin:  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>,
   facebook:  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>,
@@ -40,10 +42,17 @@ const DEFAULT_SOCIALS = {
 
 export default function Footer() {
   const [socials, setSocials] = useState(DEFAULT_SOCIALS);
+  const [cols, setCols]       = useState(DEFAULT_COLS);
+  const [desc, setDesc]       = useState(DEFAULT_DESC);
 
   useEffect(() => {
-    createClient().from('site_settings').select('value').eq('key', 'social_links').single().then(({ data }) => {
-      if (data?.value) { try { setSocials(JSON.parse(data.value)); } catch {} }
+    createClient().from('site_settings').select('key,value').in('key', ['social_links', 'footer_cols', 'footer_desc']).then(({ data }) => {
+      if (!data) return;
+      for (const row of data) {
+        if (row.key === 'social_links') { try { setSocials(JSON.parse(row.value)); } catch {} }
+        if (row.key === 'footer_cols')  { try { setCols(JSON.parse(row.value)); } catch {} }
+        if (row.key === 'footer_desc')  setDesc(row.value);
+      }
     });
   }, []);
 
@@ -61,7 +70,7 @@ export default function Footer() {
               style={{ marginBottom: 'var(--space-3)', filter: 'brightness(0) invert(1)' }}
             />
             <p style={{ fontSize: 'var(--text-sm)', lineHeight: 1.65, color: '#fff', maxWidth: '320px' }}>
-              Engenharia, Construção e Infra-estruturas a transformar Angola e o continente africano desde 2003. Fazemos acontecer.
+              {desc}
             </p>
             <div style={{ display: 'flex', gap: '10px', marginTop: 'var(--space-5)' }}>
               {(Object.entries(socials) as [string, string][]).map(([key, href]) => (
@@ -79,7 +88,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {COLS.map((c) => (
+          {cols.map((c) => (
             <div key={c.h}>
               <h4 style={{ fontFamily: 'var(--font-label)', fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff', marginBottom: 'var(--space-4)' }}>{c.h}</h4>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '11px' }}>
