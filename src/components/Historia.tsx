@@ -25,6 +25,7 @@ const DEFAULT_eventos: Evento[] = [
   { year: '2023', title: '20.º Aniversário', desc: 'Electrificação Rural do Sul de Angola, Parques Solares e Infraestruturas de acesso ao novo Aeroporto Internacional de Luanda.' },
   { year: '2024', title: 'Expansão e Sustentabilidade', desc: 'Adesão ao Pacto Global das Nações Unidas, inauguração do Flow Hotel em Benguela e Prémio FIB 2024 pelo segundo ano consecutivo.' },
   { year: '2025', title: 'Reconhecimento', desc: 'Inauguração da Casa do Kwanza pelo Presidente da República, abertura do Mumba Lodge e inauguração da Segunda Circular A3 que liga o novo Aeroporto ao Zango 8000, Complexo Hospitalar Pedro Maria Tonha "Pedalé", Estrada Nacional 230.' },
+  { year: '2026', title: 'Infraestruturas para o Futuro', desc: 'Inauguração Hospital dos Queimados e a Barragem do Calucuve.' },
 ];
 
 const VISIBLE = 3;
