@@ -25,7 +25,7 @@ const TIERS: { id: string; short: string; label: string; members: Member[] }[] =
       { name: 'Pedro Martins',       role: 'Director Executivo Financeiro',             initials: 'PM' },
       { name: 'Cláudio Barbosa',     role: 'Director Executivo Comercial',              initials: 'CB' },
       { name: 'José Malafaia',       role: 'Director Executivo de Produção de Vias e Infraestruturas', initials: 'JM' },
-      { name: 'Arménio Lopes',       role: 'Dir. Exec. Instalações Especiais',  initials: 'AL' },
+      { name: 'Arménio Lopes',       role: 'Director Executivo de Produção de Instalações Especiais',  initials: 'AL' },
       { name: 'Joana Guedes',        role: 'Directora Exec. Jurídica',          initials: 'JG' },
       { name: 'Manuel Mamboza',      role: 'Dir. Exec. Central de Compras',     initials: 'MM' },
       { name: 'Luís Marques',        role: 'Assessor da Administração',         initials: 'LM' },
