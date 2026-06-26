@@ -60,7 +60,22 @@ export default function NegociosAdminPage() {
   const [intro, setIntro] = useState('Um ecossistema empresarial diversificado que actua nos principais sectores da economia angolana.');
   const [activeSector, setActiveSector] = useState('primario');
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState<string | null>(null);
   const [msg, setMsg] = useState('');
+
+  async function uploadLogo(sectorId: string, compIdx: number, file: File) {
+    const key = `${sectorId}-${compIdx}`;
+    setUploading(key);
+    const db = createClient();
+    const ext = file.name.split('.').pop();
+    const path = `logos/${sectorId}-${compIdx}-${Date.now()}.${ext}`;
+    const { data, error } = await db.storage.from('media').upload(path, file, { upsert: true });
+    if (error) { flash('❌ Erro: ' + error.message); setUploading(null); return; }
+    const { data: urlData } = db.storage.from('media').getPublicUrl(data.path);
+    updateCompany(sectorId, compIdx, 'logo', urlData.publicUrl);
+    setUploading(null);
+    flash('✅ Logo carregado!');
+  }
 
   useEffect(() => {
     createClient().from('site_content').select('field,value').eq('page', 'negocios').then(({ data }) => {
@@ -173,8 +188,18 @@ export default function NegociosAdminPage() {
                 <input style={inp()} value={company.year} onChange={e => updateCompany(sector.id, i, 'year', e.target.value)} />
               </div>
               <div>
-                <label style={{ fontSize: 11, fontWeight: 600, color: '#64748b', display: 'block', marginBottom: 4 }}>LOGO (caminho)</label>
-                <input style={inp()} value={company.logo ?? ''} onChange={e => updateCompany(sector.id, i, 'logo', e.target.value)} />
+                <label style={{ fontSize: 11, fontWeight: 600, color: '#64748b', display: 'block', marginBottom: 8 }}>LOGO</label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  {company.logo && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={company.logo} alt={company.name} style={{ height: 40, maxWidth: 90, objectFit: 'contain', border: '1px solid #e2e8f0', borderRadius: 4, padding: 4, background: '#f8fafc' }} />
+                  )}
+                  <label style={{ padding: '7px 14px', background: uploading === `${sector.id}-${i}` ? '#94a3b8' : '#1a396e', color: '#fff', borderRadius: 5, fontSize: 12, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                    {uploading === `${sector.id}-${i}` ? 'A carregar…' : '+ Trocar logo'}
+                    <input type="file" accept="image/*" style={{ display: 'none' }}
+                      onChange={e => { const f = e.target.files?.[0]; if (f) uploadLogo(sector.id, i, f); }} />
+                  </label>
+                </div>
               </div>
               <div style={{ gridColumn: '1/-1' }}>
                 <label style={{ fontSize: 11, fontWeight: 600, color: '#64748b', display: 'block', marginBottom: 4 }}>DESCRIÇÃO</label>
