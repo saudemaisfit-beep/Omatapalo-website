@@ -78,9 +78,13 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
     setHovered(false);
   }, []);
 
+  const Tag = company.link ? 'a' : 'div';
+  const linkProps = company.link ? { href: company.link, target: '_blank', rel: 'noopener noreferrer' } : {};
+
   return (
-    <div
-      ref={cardRef}
+    <Tag
+      {...(linkProps as any)}
+      ref={cardRef as any}
       className="neg-card"
       onMouseMove={onMove}
       onMouseEnter={() => setHovered(true)}
@@ -96,10 +100,11 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
         boxShadow: hovered
           ? '0 24px 56px rgba(26,57,110,0.18), 0 4px 16px rgba(26,57,110,0.10)'
           : '0 2px 8px rgba(26,57,110,0.04)',
-        cursor: 'default',
+        cursor: company.link ? 'pointer' : 'default',
         willChange: 'transform',
         transformStyle: 'preserve-3d',
         minHeight: 220,
+        textDecoration: 'none',
       }}
     >
       {/* glow overlay */}
@@ -150,14 +155,12 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
           {company.area}
         </span>
         {company.link && (
-          <a href={company.link} target="_blank" rel="noopener noreferrer"
-            onClick={e => e.stopPropagation()}
-            style={{ fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1a396e', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1a396e' }}>
             Ver site →
-          </a>
+          </span>
         )}
       </div>
-    </div>
+    </Tag>
   );
 }
 
