@@ -319,7 +319,7 @@ export default function ResponsabilidadeSocialContent() {
             </div>
             <div>
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1.05vw,16px)', color: '#fff', lineHeight: 1.9, margin: '0 0 clamp(20px,3vw,32px)', maxWidth: '44ch' }}>
-                Através do apoio ao Clube Desportivo da Huíla, a Omatapalo reafirma o seu compromisso com o desenvolvimento do desporto angolano, investindo na formação de talentos, na promoção de valores positivos e na criação de oportunidades para as futuras gerações. Acreditamos que o desporto é uma poderosa ferramenta de inclusão social, educação e transformação das comunidades.
+                Através do apoio ao Clube Desportivo da Huíla, Grupo Omatapalo reafirma o seu compromisso com o desenvolvimento do desporto angolano, investindo na formação de talentos, na promoção de valores positivos e na criação de oportunidades para as futuras gerações. Acreditamos que o desporto é uma poderosa ferramenta de inclusão social, educação e transformação das comunidades.
               </p>
             </div>
           </div>
