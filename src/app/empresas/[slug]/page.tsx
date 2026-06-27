@@ -1,8 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getCompany, ALL_COMPANIES } from '@/data/empresas';
-import { createAdminClient } from '@/lib/supabase/server';
-
 export async function generateStaticParams() {
   return ALL_COMPANIES.map(c => ({ slug: c.slug }));
 }
@@ -14,15 +12,22 @@ export default async function EmpresaPage({ params }: { params: Promise<{ slug: 
   const company = getCompany(slug);
   if (!company) notFound();
 
-  const supabase = await createAdminClient();
-  const { data: extra } = await supabase
-    .from('empresas')
-    .select('full_description, gallery')
-    .eq('slug', slug)
-    .single();
+  const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+  let description = company.desc || '';
+  let gallery: string[] = [];
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/empresas?select=full_description,gallery&slug=eq.${slug}`,
+      { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }, next: { revalidate: 60 } }
+    );
+    const rows = await res.json();
+    if (rows?.[0]) {
+      if (rows[0].full_description) description = rows[0].full_description;
+      if (rows[0].gallery) gallery = rows[0].gallery;
+    }
+  } catch {}
 
-  const description = extra?.full_description || company.desc || '';
-  const gallery: string[] = extra?.gallery || [];
   const paragraphs = description.split('\n').filter((p: string) => p.trim());
 
   return (
