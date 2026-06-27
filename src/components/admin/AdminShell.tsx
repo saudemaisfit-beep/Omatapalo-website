@@ -11,7 +11,7 @@ const NAV = [
   { href: '/admin/pages',      label: 'Páginas',    icon: '📄' },
   { href: '/admin/media',         label: 'Media',        icon: '🖼️' },
   { href: '/admin/certificacoes',    label: 'Certificações',    icon: '🏅' },
-  { href: '/admin/identidade-visual', label: 'Id. Visual',       icon: '🎨' },
+  { href: '/admin/press-kit', label: 'Press Kit',       icon: '🎨' },
   { href: '/admin/users',         label: 'Utilizadores',  icon: '👥' },
   { href: '/admin/conteudo',        label: 'Conteúdo',       icon: '✏️' },
   { href: '/admin/grandes-numeros', label: 'Grandes Números', icon: '📊' },

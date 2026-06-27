@@ -24,7 +24,7 @@ const DEFAULT_NAV: NavItem[] = [
   { label: 'Media', href: '#', sub: [
     { label: 'Notícias', href: '/noticias' },
   ]},
-  { label: 'Press Kit', href: '/identidade-visual' },
+  { label: 'Press Kit', href: '/press-kit' },
 ];
 
 const btn = (active = false) => ({

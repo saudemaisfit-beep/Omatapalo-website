@@ -95,7 +95,7 @@ const SCHEMAS: Record<string, PageSchema> = {
       { key: 'hours',         label: 'Horário',                type: 'text',     default: 'Seg – Sex: 08h – 17h' },
     ],
   },
-  'identidade-visual': {
+  'press-kit': {
     label: 'Press Kit',
     fields: [
       { key: 'hero_img',      label: 'Imagem do Hero',         type: 'image',    default: '/COMPLEXO HOSPITALAR DOENÇAS CARDIO-PULMONARES CARDEAL D. ALEXANDRE DO NASCIMENTO (2).JPG' },
