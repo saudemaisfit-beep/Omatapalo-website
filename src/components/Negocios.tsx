@@ -150,7 +150,7 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
       </div>
 
       {/* Footer */}
-      <div style={{ marginTop: 'auto', paddingTop: 12, borderTop: '1px solid #F1F5F9', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transform: 'translateZ(8px)' }}>
+      <div style={{ marginTop: 'auto', paddingTop: 20, borderTop: '1px solid #F1F5F9', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', transform: 'translateZ(8px)' }}>
         <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', color: hovered ? '#1a396e' : '#94a3b8', transition: 'color .25s' }}>
           {company.area}
         </span>
