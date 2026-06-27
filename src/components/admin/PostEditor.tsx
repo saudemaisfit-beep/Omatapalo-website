@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import MediaPicker from './MediaPicker';
 
 type Post = {
   id?: string;
@@ -35,6 +36,7 @@ export default function PostEditor({ post }: { post?: Post }) {
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [mediaPicker, setMediaPicker] = useState(false);
 
   function set(field: string, value: string | boolean) {
     setForm(f => ({ ...f, [field]: value }));
@@ -83,6 +85,7 @@ export default function PostEditor({ post }: { post?: Post }) {
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto' }}>
+      {mediaPicker && <MediaPicker onSelect={url => set('cover_image', url)} onClose={() => setMediaPicker(false)} />}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32 }}>
         <div>
           <a href="/admin/posts" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>← Notícias</a>
@@ -140,12 +143,21 @@ export default function PostEditor({ post }: { post?: Post }) {
 
           <div style={{ background: '#fff', borderRadius: 12, padding: 20, border: '1px solid #e2e8f0' }}>
             <label style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#64748b', display: 'block', marginBottom: 12 }}>Imagem de capa</label>
-            {form.cover_image && <img src={form.cover_image} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', borderRadius: 6, marginBottom: 10 }} />}
-            <input type="file" accept="image/*" onChange={uploadCover} style={{ fontSize: 12, color: '#64748b' }} />
-            {uploading && <div style={{ fontSize: 12, color: '#1a396e', marginTop: 6 }}>A fazer upload...</div>}
-            <div style={{ marginTop: 10 }}>
-              <input style={{ ...inp, fontSize: 12 }} value={form.cover_image} onChange={e => set('cover_image', e.target.value)} placeholder="ou URL directo" />
-            </div>
+            {form.cover_image
+              ? <div style={{ position: 'relative', marginBottom: 10 }}>
+                  <img src={form.cover_image} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', borderRadius: 6 }} />
+                  <button onClick={() => set('cover_image', '')} style={{ position: 'absolute', top: 6, right: 6, background: 'rgba(0,0,0,0.55)', border: 'none', borderRadius: '50%', width: 26, height: 26, color: '#fff', cursor: 'pointer', fontSize: 14, lineHeight: 1 }}>✕</button>
+                </div>
+              : <div onClick={() => setMediaPicker(true)} style={{ width: '100%', aspectRatio: '16/9', background: '#f1f5f9', borderRadius: 6, marginBottom: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: '2px dashed #cbd5e1', gap: 8 }}>
+                  <span style={{ fontSize: 28 }}>🖼</span>
+                  <span style={{ fontSize: 12, color: '#64748b', fontWeight: 600 }}>Escolher imagem</span>
+                </div>
+            }
+            <button onClick={() => setMediaPicker(true)} style={{ width: '100%', padding: '9px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, fontSize: 13, fontWeight: 600, color: '#1a396e', cursor: 'pointer', marginBottom: 8 }}>
+              📁 {form.cover_image ? 'Alterar imagem' : 'Seleccionar da biblioteca'}
+            </button>
+            {uploading && <div style={{ fontSize: 12, color: '#1a396e', marginBottom: 6 }}>A fazer upload...</div>}
+            <input style={{ ...inp, fontSize: 12 }} value={form.cover_image} onChange={e => set('cover_image', e.target.value)} placeholder="ou colar URL directo" />
           </div>
         </div>
       </div>
