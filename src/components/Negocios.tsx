@@ -38,7 +38,9 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
 
   return (
     <Link
-      href={`/empresas/${company.slug}`}
+      href={company.link || '#'}
+      target={company.link ? '_blank' : undefined}
+      rel="noopener noreferrer"
       className="neg-card"
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
