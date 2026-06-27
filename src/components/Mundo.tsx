@@ -9,7 +9,7 @@ const COUNTRIES = [
   { name: 'RDC',         code: 'CD', continent: 'África',   sub: 'República Democrática do Congo',       x: 54,   y: 56  },
   { name: 'Portugal',    code: 'PT', continent: 'Europa',   sub: 'Representação e parcerias europeias',  x: 45,   y: 34,  labelLeft: true },
   { name: 'Espanha',     code: 'ES', continent: 'Europa',   sub: 'Parcerias comerciais e técnicas',      x: 47,   y: 34  },
-  { name: 'Reino Unido', code: 'GB', continent: 'Europa',   sub: 'Parcerias estratégicas e financeiras', x: 46,   y: 23  },
+  { name: 'Reino Unido', code: 'GB', continent: 'Europa',   sub: 'Parcerias estratégicas e financeiras', x: 46,   y: 27  },
   { name: 'EUA',         code: 'US', continent: 'América do Norte', sub: 'Parcerias estratégicas e de investimento', x: 20, y: 31, labelLeft: false },
 ];
 
