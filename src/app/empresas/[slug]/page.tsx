@@ -12,8 +12,8 @@ export default async function EmpresaPage({ params }: { params: Promise<{ slug: 
   const company = getCompany(slug);
   if (!company) notFound();
 
-  const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://rsbzgeqgfseyeogexkwk.supabase.co';
+  const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzYnpnZXFnZnNleWVvZ2V4a3drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNTkxOTYsImV4cCI6MjA5NzkzNTE5Nn0.QsQjaOPnUj5GyEk5Qb_l0vLFOZQ96hO_QrQI382wZaE';
   let description = company.desc || '';
   let gallery: string[] = [];
   try {
