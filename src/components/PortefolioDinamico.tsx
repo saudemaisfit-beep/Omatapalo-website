@@ -132,8 +132,7 @@ function ProjectCard({ project, index, slug }: { project: Project; index: number
           <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#94a3b8' }}>
             {project.location}
           </span>
-          <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#dde3ed', flexShrink: 0 }} />
-          <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.12em', color: '#94a3b8' }}>{project.year}</span>
+
           {project.area !== '—' && <>
             <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#dde3ed', flexShrink: 0 }} />
             <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.12em', color: '#94a3b8' }}>{project.area}</span>
