@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 /* ─── Data ─── */
 const CATEGORIES = [
-  { id: 'todos',      label: 'Todos os Projectos',                        short: '00' },
   { id: 'inst',       label: 'Edifícios Institucionais',                  short: '01' },
   { id: 'saude',      label: 'Saúde',                                     short: '02' },
   { id: 'ensino',     label: 'Ensino',                                    short: '03' },
@@ -150,7 +149,7 @@ export default function PortefolioDinamico() {
   const sectionRef  = useRef<HTMLElement>(null);
   const gridRef     = useRef<HTMLDivElement>(null);
   const bgNumRef    = useRef<HTMLDivElement>(null);
-  const [active, setActive]   = useState('todos');
+  const [active, setActive]   = useState('inst');
   const [PROJECTS, setProjects] = useState<Project[]>([]);
   const isAnimating = useRef(false);
   const dirRef      = useRef<1 | -1>(1);
@@ -180,7 +179,7 @@ export default function PortefolioDinamico() {
   }, []);
 
   const allProjects = PROJECTS.length > 0 ? PROJECTS : FALLBACK_PROJECTS;
-  const filtered = active === 'todos' ? allProjects : allProjects.filter(p => p.cat === active);
+  const filtered = allProjects.filter(p => p.cat === active);
 
   /* entrance */
   useEffect(() => {
@@ -277,7 +276,7 @@ export default function PortefolioDinamico() {
           <div style={{ position: 'sticky', top: 'clamp(80px,10vh,120px)' }}>
             {CATEGORIES.map((cat, i) => {
               const isAct  = cat.id === active;
-              const count  = cat.id === 'todos' ? allProjects.length : allProjects.filter(p => p.cat === cat.id).length;
+              const count  = allProjects.filter(p => p.cat === cat.id).length;
               return (
                 <button
                   key={cat.id}
