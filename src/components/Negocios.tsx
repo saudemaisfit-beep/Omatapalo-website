@@ -219,7 +219,7 @@ export default function Negocios() {
                   className="neg-left-item"
                   style={{ all: 'unset', cursor: 'pointer', display: 'block', width: '100%', padding: 'clamp(18px,2.2vw,26px) 0', borderTop: '1px solid #DDE3ED', opacity: 0 }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 24 }}>
                     <span style={{
                       fontFamily: 'var(--font-display)', fontWeight: 900,
                       fontSize: 'clamp(2.8rem,4.5vw,5rem)', lineHeight: 1, letterSpacing: '-0.06em',
