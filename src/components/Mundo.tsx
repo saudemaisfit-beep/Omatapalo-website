@@ -7,7 +7,7 @@ const COUNTRIES = [
   { name: 'Moçambique',  code: 'MZ', continent: 'África',   sub: 'Infraestrutura e construção civil',    x: 59,   y: 66  },
   { name: 'Namíbia',     code: 'NA', continent: 'África',   sub: 'Mineração e obras públicas',           x: 53,   y: 69  },
   { name: 'RDC',         code: 'CD', continent: 'África',   sub: 'República Democrática do Congo',       x: 54,   y: 56  },
-  { name: 'Portugal',    code: 'PT', continent: 'Europa',   sub: 'Representação e parcerias europeias',  x: 45,   y: 31,  labelLeft: true },
+  { name: 'Portugal',    code: 'PT', continent: 'Europa',   sub: 'Representação e parcerias europeias',  x: 45,   y: 34,  labelLeft: true },
   { name: 'Espanha',     code: 'ES', continent: 'Europa',   sub: 'Parcerias comerciais e técnicas',      x: 47,   y: 31  },
   { name: 'Reino Unido', code: 'GB', continent: 'Europa',   sub: 'Parcerias estratégicas e financeiras', x: 46,   y: 19  },
   { name: 'EUA',         code: 'US', continent: 'América do Norte', sub: 'Parcerias estratégicas e de investimento', x: 20, y: 31 },
