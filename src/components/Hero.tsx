@@ -202,7 +202,7 @@ export default function Hero() {
         <div style={{ overflow: 'hidden' }}>
           <div className="hero-fazemos" style={{
             fontFamily: 'var(--font-display)', fontWeight: 900,
-            fontSize: 'clamp(72px,12.5vw,190px)', lineHeight: 0.88,
+            fontSize: 'clamp(52px,10vw,190px)', lineHeight: 0.88,
             letterSpacing: '-0.03em', textTransform: 'uppercase',
             color: '#fff', opacity: 0,
           }}>{c.title_line1}</div>
@@ -212,10 +212,10 @@ export default function Hero() {
         <div style={{ overflow: 'hidden', perspective: '600px' }}>
           <div style={{
             fontFamily: 'var(--font-display)', fontWeight: 900,
-            fontSize: 'clamp(72px,12.5vw,190px)', lineHeight: 0.88,
+            fontSize: 'clamp(52px,10vw,190px)', lineHeight: 0.88,
             letterSpacing: '-0.03em', textTransform: 'uppercase',
             color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.22)',
-            marginTop: '0.06em',
+            marginTop: '0.06em', whiteSpace: 'nowrap',
           }}>
             {c.title_line2.split('').map((l, i) => (
               <span key={i} className="hero-anim-letter" style={{ display: 'inline-block', opacity: 0, willChange: 'transform' }}>{l}</span>
