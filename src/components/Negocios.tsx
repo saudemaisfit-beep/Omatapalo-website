@@ -86,18 +86,17 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
         textDecoration: 'none',
       }}
     >
-      {/* Image area — navy bg with centred logo */}
-      <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', background: '#0d1d35', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {/* Image area — white bg with coloured logo */}
+      <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', background: '#F6F8FB', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={imgRef}
           src={company.logo ?? ''}
           alt={company.name}
-          style={{ maxHeight: '55%', maxWidth: '65%', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.9 }}
+          style={{ maxHeight: '60%', maxWidth: '65%', objectFit: 'contain' }}
           onError={e => { e.currentTarget.style.display = 'none'; }}
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 40%, rgba(7,16,31,0.45) 100%)' }} />
-        <div style={{ position: 'absolute', top: 12, right: 12, fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.5)' }}>
+        <div style={{ position: 'absolute', top: 12, right: 12, fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', color: 'rgba(26,57,110,0.25)' }}>
           {String(index + 1).padStart(2, '0')}
         </div>
       </div>
