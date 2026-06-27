@@ -14,6 +14,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default function NoticiaPage({ params }: { params: { slug: string } }) {
-  return <NoticiaContent slug={params.slug} />;
+export default async function NoticiaPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  return <NoticiaContent slug={slug} />;
 }
