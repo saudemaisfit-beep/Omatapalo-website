@@ -2,49 +2,8 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { createClient } from '@/lib/supabase/client';
-
-type Company = { logo?: string; name: string; year: string; area: string; desc: string; link?: string };
-type Sector  = { id: string; label: string; short: string; companies: Company[] };
-
-const SECTORS: Sector[] = [
-  {
-    id: 'primario', label: 'Sector Primário', short: '01',
-    companies: [
-      { logo: '/Mumba-logo.png',  name: 'Fazenda Mumba', year: '2015', area: 'Agro-negócio',          desc: 'Produção agrícola e pecuária. Detentora de 99,8% do capital social.' },
-      { logo: '/OCTOSEA (1).png', name: 'Octosea',       year: '2010', area: 'Pescas',                desc: 'Exploração de recursos haliêuticos nas águas angolanas.' },
-      { logo: '/ANIMOPER.png',    name: 'Animoper',      year: '2022', area: 'Mineração – Ouro',      desc: 'Mineração e tratamento de metais preciosos em Angola.' },
-      { logo: '/logo-MAOMA.png',  name: 'Maoma',         year: '2019', area: 'Mineração – Diamantes', desc: 'Exploração e comercialização de diamantes.' },
-    ],
-  },
-  {
-    id: 'secundario', label: 'Sector Secundário', short: '02',
-    companies: [
-      { logo: '/Omatapalo-Engenharia-e-Construcao.png', name: 'Omatapalo',  year: '2003', area: 'Engenharia e Construção',  desc: 'Empresa-mãe do grupo. Líder nacional em engenharia e infraestrutura.' },
-      { logo: '/METALOSUL. (1).png',       name: 'Metalosul',  year: '2009', area: 'Metalomecânica',           desc: 'Fabrico e montagem de estruturas metálicas.' },
-      { logo: '/GraniSul-Logotipo.png',   name: 'Granisul',   year: '2010', area: 'Extracção de Granito',     desc: 'Extracção e transformação de granito para construção.' },
-      { logo: '/DRILL-GO.png',            name: 'DrillGo',    year: '2019', area: 'Geotecnia',                desc: 'Obras subterrâneas e geotecnia de precisão.' },
-      { logo: '/SIEMA-1.png',             name: 'Siema',      year: '2012', area: 'Instalações Especiais',    desc: 'Sistemas eléctricos, AVAC e infraestruturas técnicas.' },
-      { logo: '/Planasul (1).png',        name: 'Planasul',   year: '2003', area: 'Engenharia e Construção',  desc: 'Construção civil e obras públicas em Angola.' },
-      { logo: '/SelaGrup-Logotipo.png',   name: 'Selagrup',   year: '2020', area: 'Captação de Água',         desc: 'Furos e redes de distribuição de água.' },
-      { logo: '/Emadel.png',              name: 'Emadel',     year: '2010', area: 'Carpintaria',              desc: 'Soluções em madeira para construção e decoração.' },
-
-      { logo: '/Enerline.png',            name: 'Enerline',   year: '2014', area: 'Energia',                  desc: 'Soluções energéticas e energias renováveis.' },
-    ],
-  },
-  {
-    id: 'terciario', label: 'Sector Terciário', short: '03',
-    companies: [
-      { logo: '/Investimo Ge.png',          name: 'Investimo GE',     year: '2025', area: 'Gestão de Edifícios', desc: 'Gestão técnica e operacional de edifícios.' },
-      { logo: '/investimo.png',             name: 'Investimo',        year: '2014', area: 'Imobiliário',         desc: 'Investimento e promoção imobiliária em Angola.' },
-      { logo: '/Logo-Prime-Properties.png', name: 'Prime Properties', year: '2024', area: 'Imobiliário',         desc: 'Gestão e comercialização de activos imobiliários premium.' },
-      { logo: '/ONTOUR.png',                name: 'OnTour',           year: '2022', area: 'Turismo',             desc: 'Serviços de turismo e hospitalidade em Angola.' },
-      { logo: '/Venture Vanguard.png',      name: 'Venture Vanguard', year: '2024', area: 'Trading',             desc: 'Consultoria e trading de commodities e serviços.' },
-      { logo: '/SOTRANS-Logo.png',          name: 'Sotrans',          year: '2014', area: 'Transportes',         desc: 'Transporte de passageiros e logística.' },
-      { logo: '/EMADEL-LAR.png',             name: 'EmadelLar',        year: '',     area: '',                    desc: '' },
-      { logo: '/Okuanjuluka.png',            name: 'Okuajuluka',       year: '',     area: 'Arquitectura de Interiores', desc: '' },
-    ],
-  },
-];
+import Link from 'next/link';
+import { SECTORS, type Company, type Sector } from '@/data/empresas';
 
 /* ── Company card ──────────────────────────────────────────── */
 function TiltCard({ company, index }: { company: Company; index: number }) {
@@ -65,26 +24,25 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
     });
   }, []);
 
-  const Tag = company.link ? 'a' : 'div';
-  const linkProps = company.link ? { href: company.link, target: '_blank', rel: 'noopener noreferrer' } : {};
+  const cardStyle: React.CSSProperties = {
+    background: '#fff',
+    border: `1.5px solid ${hovered ? '#1a396e' : '#E8EDF5'}`,
+    borderRadius: 6,
+    overflow: 'hidden',
+    display: 'flex', flexDirection: 'column',
+    transition: 'border-color .25s, box-shadow .3s',
+    boxShadow: hovered ? '0 20px 56px rgba(26,57,110,0.14)' : '0 2px 8px rgba(26,57,110,0.04)',
+    cursor: 'pointer',
+    textDecoration: 'none',
+  };
 
   return (
-    <Tag
-      {...(linkProps as any)}
+    <Link
+      href={`/empresas/${company.slug}`}
       className="neg-card"
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      style={{
-        background: '#fff',
-        border: `1.5px solid ${hovered ? '#1a396e' : '#E8EDF5'}`,
-        borderRadius: 6,
-        overflow: 'hidden',
-        display: 'flex', flexDirection: 'column',
-        transition: 'border-color .25s, box-shadow .3s',
-        boxShadow: hovered ? '0 20px 56px rgba(26,57,110,0.14)' : '0 2px 8px rgba(26,57,110,0.04)',
-        cursor: company.link ? 'pointer' : 'default',
-        textDecoration: 'none',
-      }}
+      style={cardStyle}
     >
       {/* Image area — white bg with coloured logo */}
       <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', background: '#F6F8FB', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -115,16 +73,14 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
           <span style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#94a3b8' }}>
             {company.area}
           </span>
-          {company.link && (
-            <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1a396e' }}>
-              Ver site →
-            </span>
-          )}
+          <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-label)', fontSize: 8, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1a396e' }}>
+            Ver mais →
+          </span>
         </div>
 
         <div style={{ height: 2, width: hovered ? 28 : 0, background: '#1a396e', transition: 'width 0.35s ease' }} />
       </div>
-    </Tag>
+    </Link>
   );
 }
 
