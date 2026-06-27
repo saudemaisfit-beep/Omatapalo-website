@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const COUNTRIES = [
   { name: 'Angola',      code: 'AO', continent: 'África',   sub: 'Sede · Lubango — todas as províncias', x: 52,   y: 60,  anchor: true, labelLeft: true },
-  { name: 'Moçambique',  code: 'MZ', continent: 'África',   sub: 'Infraestrutura e construção civil',    x: 56,   y: 60  },
+  { name: 'Moçambique',  code: 'MZ', continent: 'África',   sub: 'Infraestrutura e construção civil',    x: 59,   y: 60  },
   { name: 'Namíbia',     code: 'NA', continent: 'África',   sub: 'Mineração e obras públicas',           x: 52,   y: 66,  labelLeft: true },
   { name: 'RDC',         code: 'CD', continent: 'África',   sub: 'República Democrática do Congo',       x: 54,   y: 56  },
   { name: 'Portugal',    code: 'PT', continent: 'Europa',   sub: 'Representação e parcerias europeias',  x: 45,   y: 35,  labelLeft: true },
