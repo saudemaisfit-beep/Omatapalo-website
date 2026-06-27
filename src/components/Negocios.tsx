@@ -95,7 +95,7 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
         border: `1.5px solid ${hovered ? '#1a396e' : '#E8EDF5'}`,
         borderRadius: 6,
         padding: 'clamp(18px,2vw,26px)',
-        display: 'flex', flexDirection: 'column', gap: 14,
+        display: 'flex', flexDirection: 'column', gap: 14, minHeight: 260,
         transition: 'border-color .25s, box-shadow .3s',
         boxShadow: hovered
           ? '0 24px 56px rgba(26,57,110,0.18), 0 4px 16px rgba(26,57,110,0.10)'
@@ -103,7 +103,6 @@ function TiltCard({ company, index }: { company: Company; index: number }) {
         cursor: company.link ? 'pointer' : 'default',
         willChange: 'transform',
         transformStyle: 'preserve-3d',
-        minHeight: 220,
         textDecoration: 'none',
       }}
     >
