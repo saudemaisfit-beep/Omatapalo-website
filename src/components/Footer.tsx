@@ -57,7 +57,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer style={{ background: '#1a396e', color: '#fff', paddingBlock: 'var(--space-10) var(--space-6)' }}>
+    <footer style={{ background: '#1a396e', color: '#fff', paddingBlock: 'var(--space-14) var(--space-6)' }}>
       <div className="wrap">
         <div style={{ display: 'grid', gridTemplateColumns: '1.7fr 1fr 1fr 1fr', gap: 'var(--space-7)' }} className="ftr-grid">
           <div>
