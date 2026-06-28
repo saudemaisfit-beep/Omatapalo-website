@@ -26,7 +26,7 @@ const DEFAULT_NAV = [
 type NavEntry = { t: string; href: string; sub?: { t: string; href: string }[] };
 
 const ALL_PAGES = [
-  { t: 'O Grupo', href: '#top' },
+  { t: 'O Grupo', href: '/omatapalo' },
   { t: 'Omatapalo no Mundo', href: '/omatapalo#mundo' },
   { t: 'História', href: '/omatapalo' },
   { t: 'Conselho de Administração', href: '/omatapalo#conselho' },
