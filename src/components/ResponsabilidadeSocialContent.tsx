@@ -460,6 +460,7 @@ export default function ResponsabilidadeSocialContent() {
       <style>{`
         @media (max-width:900px) {
           .rsa-hero-grid,.rsa-cdh-grid { grid-template-columns:1fr !important; }
+          .rsa-hero-mid { grid-template-columns:1fr !important; }
           .rsa-cta-grid { grid-template-columns:1fr !important; }
           .rsa-stats { grid-template-columns:repeat(3,1fr) !important; }
           .rsa-tiles { grid-template-columns:1fr !important; }
