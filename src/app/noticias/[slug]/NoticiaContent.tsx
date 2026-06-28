@@ -164,7 +164,7 @@ export default function NoticiaContent({ slug }: { slug: string }) {
       <style>{`
         .post-grid { grid-template-columns: 220px 1fr 180px; }
         @media (max-width: 1100px) { .post-grid { grid-template-columns: 200px 1fr !important; } }
-        @media (max-width: 760px)  { .post-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 760px)  { .post-grid { grid-template-columns: 1fr !important; } .post-grid aside { position: static !important; } }
         .latest-item:hover .latest-title { color: #1a396e; }
         .share-btn:hover { opacity: 0.75; }
         .back-btn:hover { background: #1a396e !important; color: #fff !important; }
