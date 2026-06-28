@@ -33,10 +33,10 @@ export default function OmatapaloPage() {
           <div className="wrap">
             <p style={{
               fontFamily: 'var(--font-sans)',
-              fontSize: 'clamp(16px,1.5vw,20px)',
+              fontSize: 'clamp(13px,1.1vw,16px)',
               color: '#0a2d74',
               lineHeight: 1.7,
-              fontWeight: 700,
+              fontWeight: 600,
               maxWidth: '800px',
             }}>
               {intro}
