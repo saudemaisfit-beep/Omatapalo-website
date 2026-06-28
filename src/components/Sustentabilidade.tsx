@@ -1,9 +1,10 @@
 ﻿'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type React from 'react';
+import { createClient } from '@/lib/supabase/client';
 
-const CERT_LOGOS = [
+const DEFAULT_CERT_LOGOS = [
   { src: '/ISO-9001-2.png',          alt: 'ISO 9001',         label: 'Qualidade',        href: '#' },
   { src: '/ISO-14001-2.png',         alt: 'ISO 14001',        label: 'Gestão Ambiental', href: '#' },
   { src: '/ISO-45001-2.png',         alt: 'ISO 45001',        label: 'Segurança e Saúde',href: '#' },
@@ -17,22 +18,10 @@ const ODS = [
   { src: '/responsabilidade-4.png', alt: 'ODS 13' },
 ];
 
-const ESG = [
-  {
-    n: '01', t: 'Ambiental',
-    d: 'Energias renováveis, gestão de resíduos e compensação de carbono em todos os projectos.',
-    img: 'https://omatapalo.com/wp-content/uploads/WhatsApp-Image-2025-06-02-at-19.38.03-1.jpeg',
-  },
-  {
-    n: '02', t: 'Social',
-    d: 'Contribuição para a melhoria da qualidade de vida dos colaboradores, das pessoas e das comunidades.',
-    img: 'https://omatapalo.com/wp-content/uploads/OMT-missao-fazer-sorrir-entrega-brinquedos-natal-2023-2-1-e1758177645954.jpg',
-  },
-  {
-    n: '03', t: 'Governança',
-    d: 'Transparência e responsabilidade em todas as operações, alinhadas com o Pacto Global das Nações Unidas.',
-    img: 'https://omatapalo.com/wp-content/uploads/imagem-home.jpg',
-  },
+const DEFAULT_ESG = [
+  { n: '01', t: 'Ambiental',  d: 'Energias renováveis, gestão de resíduos e compensação de carbono em todos os projectos.', img: 'https://omatapalo.com/wp-content/uploads/WhatsApp-Image-2025-06-02-at-19.38.03-1.jpeg' },
+  { n: '02', t: 'Social',     d: 'Contribuição para a melhoria da qualidade de vida dos colaboradores, das pessoas e das comunidades.', img: 'https://omatapalo.com/wp-content/uploads/OMT-missao-fazer-sorrir-entrega-brinquedos-natal-2023-2-1-e1758177645954.jpg' },
+  { n: '03', t: 'Governança', d: 'Transparência e responsabilidade em todas as operações, alinhadas com o Pacto Global das Nações Unidas.', img: 'https://omatapalo.com/wp-content/uploads/imagem-home.jpg' },
 ];
 
 const gridTexture: React.CSSProperties = {
@@ -47,6 +36,30 @@ export default function Sustentabilidade() {
   const s4Ref = useRef<HTMLElement>(null);
   const s5Ref = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+
+  const [introP1, setIntroP1]       = useState('O Grupo Omatapalo caminha rumo a um futuro que redefine os limites da Engenharia e Construção, com um claro foco no investimento em energias renováveis e inovação.');
+  const [introP2, setIntroP2]       = useState('O contributo para a melhoria da qualidade de vida das pessoas e comunidades é desenvolvido através da promoção e apoio de iniciativas de natureza social e ambiental.');
+  const [esg, setEsg]               = useState(DEFAULT_ESG);
+  const [certLogos, setCertLogos]   = useState(DEFAULT_CERT_LOGOS);
+  const [relTitulo, setRelTitulo]   = useState('Relatório de Sustentabilidade 2024');
+  const [relDesc, setRelDesc]       = useState('Consulte o nosso Relatório e Contas consolidadas e acompanhe os compromissos e resultados em matéria de sustentabilidade, governação e impacto social.');
+  const [relPdf, setRelPdf]         = useState('#');
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'sustentabilidade_cfg').single().then(({ data }) => {
+      if (!data?.value) return;
+      try {
+        const cfg = JSON.parse(data.value);
+        if (cfg.intro_p1) setIntroP1(cfg.intro_p1);
+        if (cfg.intro_p2) setIntroP2(cfg.intro_p2);
+        if (cfg.esg)      setEsg(cfg.esg);
+        if (cfg.certs)    setCertLogos(cfg.certs);
+        if (cfg.relatorio_titulo) setRelTitulo(cfg.relatorio_titulo);
+        if (cfg.relatorio_desc)   setRelDesc(cfg.relatorio_desc);
+        if (cfg.relatorio_pdf)    setRelPdf(cfg.relatorio_pdf);
+      } catch {}
+    });
+  }, []);
 
   useEffect(() => {
     import('gsap').then(({ gsap }) => {
@@ -95,10 +108,10 @@ export default function Sustentabilidade() {
                 <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(26,57,110,0.22)' }}>Propósito</span>
               </h2>
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(14px,1.2vw,17px)', color: '#475569', lineHeight: 1.8, margin: '0 0 clamp(16px,2vw,24px)', maxWidth: 480 }}>
-                O Grupo Omatapalo caminha rumo a um futuro que redefine os limites da Engenharia e Construção, com um claro foco no investimento em energias renováveis e inovação.
+                {introP1}
               </p>
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(14px,1.2vw,17px)', color: '#475569', lineHeight: 1.8, margin: 0, maxWidth: 480 }}>
-                O contributo para a melhoria da qualidade de vida das pessoas e comunidades é desenvolvido através da promoção e apoio de iniciativas de natureza social e ambiental.
+                {introP2}
               </p>
             </div>
 
@@ -140,7 +153,7 @@ export default function Sustentabilidade() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(12px,1.5vw,20px)' }} className="sus-esg-grid">
-            {ESG.map(p => (
+            {esg.map(p => (
               <div key={p.n} className="sus-esg-card" style={{ opacity: 0 }}>
                 <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 3, height: 'clamp(280px,28vw,380px)' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -231,7 +244,7 @@ export default function Sustentabilidade() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 'clamp(12px,1.5vw,20px)' }} className="sus-cert-grid">
-            {CERT_LOGOS.map(c => (
+            {certLogos.map(c => (
               <a key={c.alt} href={c.href} target="_blank" rel="noopener noreferrer" className="sus-cert" style={{
                 opacity: 0, textDecoration: 'none',
                 background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
@@ -270,7 +283,7 @@ export default function Sustentabilidade() {
                 <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.18)' }}>Sustentabilidade</span>
               </h2>
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(14px,1.2vw,16px)', color: '#fff', lineHeight: 1.8, margin: 0, maxWidth: 440 }}>
-                Consulte o nosso Relatório e Contas consolidadas e acompanhe os compromissos e resultados em matéria de sustentabilidade, governação e impacto social.
+                {relDesc}
               </p>
             </div>
 
@@ -286,11 +299,11 @@ export default function Sustentabilidade() {
                 </div>
                 <div>
                   <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 4 }}>Documento PDF</div>
-                  <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(0.9rem,1.2vw,1.1rem)', color: '#fff', letterSpacing: '-0.01em' }}>Relatório de Sustentabilidade 2024</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(0.9rem,1.2vw,1.1rem)', color: '#fff', letterSpacing: '-0.01em' }}>{relTitulo}</div>
                 </div>
               </div>
               <div style={{ height: 1, background: 'rgba(255,255,255,0.07)' }} />
-              <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-label)', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#fff', textDecoration: 'none', background: '#1a396e', padding: '14px 24px', borderRadius: 2, alignSelf: 'flex-start' }}>
+              <a href={relPdf} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-label)', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#fff', textDecoration: 'none', background: '#1a396e', padding: '14px 24px', borderRadius: 2, alignSelf: 'flex-start' }}>
                 Descarregar PDF
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>

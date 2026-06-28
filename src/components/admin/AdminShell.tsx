@@ -18,7 +18,8 @@ const NAV = [
   { href: '/admin/quem-somos',      label: 'Quem Somos',      icon: '🏢' },
   { href: '/admin/negocios',        label: 'Negócios',        icon: '🏭' },
   { href: '/admin/conselho',      label: 'Conselho',       icon: '👔' },
-  { href: '/admin/historia',      label: 'História',       icon: '📅' },
+  { href: '/admin/historia',         label: 'História',          icon: '📅' },
+  { href: '/admin/sustentabilidade', label: 'Sustentabilidade',  icon: '🌿' },
   { href: '/admin/footer',        label: 'Footer',         icon: '🔻' },
   { href: '/admin/configuracoes', label: 'Configurações', icon: '⚙️' },
 ];
