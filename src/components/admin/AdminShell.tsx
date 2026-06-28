@@ -62,7 +62,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: '#64748b', textTransform: 'uppercase', marginBottom: 4 }}>Grupo Omatapalo</div>
           <div style={{ fontSize: 16, fontWeight: 800, color: '#fff' }}>CMS Admin</div>
         </div>
-        <nav style={{ flex: 1, padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <nav style={{ flex: 1, padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: 2, overflowY: 'auto' }}>
           {NAV.map(item => {
             const active = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href));
             return (
