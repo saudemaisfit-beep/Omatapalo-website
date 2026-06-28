@@ -74,7 +74,7 @@ export default function PageHero({ title, imgSrc, eyebrow, position = 'center', 
           opacity: 0,
           fontFamily: 'var(--font-display)', fontWeight: 900,
           textTransform: 'uppercase', letterSpacing: '-0.035em',
-          fontSize: 'clamp(2.4rem,5.5vw,6rem)', lineHeight: 0.92,
+          fontSize: 'clamp(1.5rem,5.5vw,6rem)', lineHeight: 0.92,
           color: '#fff', margin: 0,
         }}>
           {firstWords && <>{firstWords}<br /></>}
