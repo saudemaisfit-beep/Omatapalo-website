@@ -2,13 +2,28 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import type React from 'react';
+import { createClient } from '@/lib/supabase/client';
 
 /* ── DATA ──────────────────────────────────────────────────────── */
 
-const ODS = [
+const DEF_STATS = [
+  { v: '720k+', l: 'Vidas Tocadas' },
+  { v: '500k+', l: 'Sopas Distribuídas' },
+  { v: '500k+', l: 'Merendas Escolares' },
+  { v: '11',    l: 'Iniciativas Activas' },
+];
+
+const DEF_TEXTS = {
+  citacao: 'Para nós, a responsabilidade social começa na nossa casa e nas condições que damos aos nossos Colaboradores. É nesta matriz e nesta filosofia que assenta a nossa capacidade de fazer acontecer.',
+  p1: 'Num país onde existe pobreza e desigualdade, a OMATAPALO considera a responsabilidade social de extrema importância. A contribuição para a melhoria da qualidade de vida das pessoas e comunidades é desenvolvida através da promoção e apoio em iniciativas de natureza social nos domínios da beneficência e solidariedade social.',
+  p2: 'Nesse sentido, a OMATAPALO abraça 4 dos 17 objectivos fixados pela ONU na Agenda 2030, como vectores para a sua participação activa nas perspetivas económicas, social e ambiental.',
+};
+
+const ODS_DEF = [
   {
     num: 1, key: 'ods1', color: '#E5243B',
-    label: 'Erradicação da Pobreza', logo: '/responsabilidade-1.png',
+    label: 'Erradicação da Pobreza',
+    logo: '/responsabilidade-1.png',
     totalDirecta: 25234, totalIndirecta: 494962,
     desc: 'Apoio directo a famílias e crianças em situação de vulnerabilidade, através de infraestrutura social, educação e solidariedade.',
     projects: [
@@ -67,8 +82,23 @@ export default function ResponsabilidadeSocialContent() {
   const [active, setActive]       = useState<string | null>(null);
   const [videoOpen, setVideoOpen] = useState(false);
   const [lbIdx, setLbIdx]         = useState<number | null>(null);
+  const [stats, setStats]         = useState(DEF_STATS);
+  const [texts, setTexts]         = useState(DEF_TEXTS);
+  const [odsData, setOdsData]     = useState(ODS_DEF);
   const projectsRef               = useRef<HTMLDivElement>(null);
-  const activeOds = ODS.find(o => o.key === active) ?? null;
+  const activeOds = odsData.find(o => o.key === active) ?? null;
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'responsabilidade_cfg').single().then(({ data }) => {
+      if (!data?.value) return;
+      try {
+        const cfg = JSON.parse(data.value);
+        if (cfg.stats) setStats(cfg.stats);
+        if (cfg.texts) setTexts(cfg.texts);
+        if (cfg.ods) setOdsData(prev => prev.map((o, i) => cfg.ods[i] ? { ...o, ...cfg.ods[i], logo: o.logo } : o));
+      } catch {}
+    });
+  }, []);
 
   const selectOds = useCallback((key: string) => {
     setActive(prev => {
@@ -141,15 +171,15 @@ export default function ResponsabilidadeSocialContent() {
               <div>
                 <div style={{ fontSize: 'clamp(2rem,3vw,3.5rem)', color: 'rgba(26,57,110,0.2)', fontFamily: 'Georgia, serif', lineHeight: 0.8, marginBottom: 10 }}>"</div>
                 <blockquote style={{ margin: 0, padding: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(14px,1.15vw,18px)', color: '#07101f', lineHeight: 1.75, fontStyle: 'italic' }}>
-                  Para nós, a responsabilidade social começa na nossa casa e nas condições que damos aos nossos Colaboradores. É nesta matriz e nesta filosofia que assenta a nossa capacidade de fazer acontecer.
+                  {texts.citacao}
                 </blockquote>
               </div>
               <div style={{ borderTop: '1px solid rgba(7,16,31,0.1)', paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <p style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.9vw,14px)', color: '#222936', lineHeight: 1.8 }}>
-                  Num país onde existe pobreza e desigualdade, a OMATAPALO considera a responsabilidade social de extrema importância. A contribuição para a melhoria da qualidade de vida das pessoas e comunidades é desenvolvida através da promoção e apoio em iniciativas de natureza social nos domínios da beneficência e solidariedade social.
+                  {texts.p1}
                 </p>
                 <p style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.9vw,14px)', color: '#222936', lineHeight: 1.8 }}>
-                  Nesse sentido, a OMATAPALO abraça 4 dos 17 objectivos fixados pela ONU na Agenda 2030, como vectores para a sua participação activa nas perspetivas económicas, social e ambiental.
+                  {texts.p2}
                 </p>
               </div>
             </div>
@@ -157,14 +187,9 @@ export default function ResponsabilidadeSocialContent() {
 
           {/* Faixa de 4 stats com cores ODS */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', borderTop: '1px solid rgba(7,16,31,0.1)', paddingTop: 'clamp(16px,2.5vw,24px)' }}>
-            {[
-              { v: '720k+', l: 'Vidas Tocadas',      c: '#07101f', bc: 'rgba(26,57,110,0.5)'  },
-              { v: '500k+', l: 'Sopas Distribuídas', c: '#DDA63A', bc: 'rgba(221,166,58,0.25)' },
-              { v: '500k+', l: 'Merendas Escolares', c: '#4C9F38', bc: 'rgba(76,159,56,0.25)'  },
-              { v: '11',    l: 'Iniciativas Activas',c: '#C5192D', bc: 'rgba(197,25,45,0.25)'  },
-            ].map((s, i) => (
+            {stats.map((s, i) => (
               <div key={i} style={{ paddingLeft: i > 0 ? 'clamp(16px,2.5vw,32px)' : 0, borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.4rem,2.5vw,2.8rem)', color: s.c, letterSpacing: '-0.05em', lineHeight: 1, marginBottom: 5 }}>{s.v}</div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.4rem,2.5vw,2.8rem)', color: '#07101f', letterSpacing: '-0.05em', lineHeight: 1, marginBottom: 5 }}>{s.v}</div>
                 <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#07101f' }}>{s.l}</div>
               </div>
             ))}
@@ -182,7 +207,7 @@ export default function ResponsabilidadeSocialContent() {
           </div>
 
           <div className="rsa-tiles" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(12px,2vw,20px)', marginBottom: active ? 'clamp(8px,1vw,16px)' : 0 }}>
-            {ODS.map(o => {
+            {odsData.map(o => {
               const isActive = active === o.key;
               return (
                 <button

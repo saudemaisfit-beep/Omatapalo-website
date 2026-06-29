@@ -31,6 +31,7 @@ const NAV = [
   { href: '/admin/cdh',               label: 'CDH',                icon: '⚽' },
   { href: '/admin/missao-sorrir',     label: 'Missão Sorrir',      icon: '😊' },
   { href: '/admin/pessoas',           label: 'Pessoas',            icon: '👥' },
+  { href: '/admin/responsabilidade',  label: 'Resp. Social',       icon: '🤝' },
   { href: '/admin/footer',            label: 'Footer',             icon: '🔻' },
   { href: '/admin/configuracoes',     label: 'Configurações',      icon: '⚙️' },
 ];
