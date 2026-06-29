@@ -9,8 +9,8 @@ const DEF_CFG = {
   p2: 'Um dos marcos desta parceria foi o apoio à construção do Complexo de Treino General de Exército Francisco Pereira Furtado, uma infra-estrutura moderna concebida para proporcionar melhores condições de preparação aos atletas, promover a excelência desportiva e contribuir para o crescimento sustentável do clube e da modalidade na província da Huíla.',
   p3: 'Este investimento reflecte a visão da Omatapalo de gerar impacto positivo duradouro, apoiando iniciativas que promovem o desenvolvimento humano, social e desportivo das comunidades angolanas.',
   video_id: 'uRaHfR5toNs',
-  facebook_url: '',
-  instagram_url: '',
+  facebook_url: 'https://www.facebook.com/CDhuila',
+  instagram_url: 'https://www.instagram.com/clubedesportivodahuila_/',
   metrics: [
     { v: '180', label: 'Atletas federados', desc: 'Atletas registados e em competição federada', accent: '#C8102E' },
     { v: '125', label: 'Em formação', desc: 'Jovens talentos nas camadas de formação do clube', accent: '#006633' },
