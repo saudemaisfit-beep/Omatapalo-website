@@ -14,6 +14,9 @@ const DEF = {
   p1: 'Enquanto patrocinadora do Clube Desportivo da Huíla, a Omatapalo desempenha um papel activo na valorização do desporto nacional e no fortalecimento do futebol na Região Sul de Angola.',
   p2: 'Um dos marcos desta parceria foi o apoio à construção do Complexo de Treino General de Exército Francisco Pereira Furtado, uma infra-estrutura moderna concebida para proporcionar melhores condições de preparação aos atletas, promover a excelência desportiva e contribuir para o crescimento sustentável do clube e da modalidade na província da Huíla.',
   p3: 'Este investimento reflecte a visão da Omatapalo de gerar impacto positivo duradouro, apoiando iniciativas que promovem o desenvolvimento humano, social e desportivo das comunidades angolanas.',
+  video_id: 'uRaHfR5toNs',
+  facebook_url: '',
+  instagram_url: '',
   metrics: [
     { v: '180', label: 'Atletas federados', desc: 'Atletas registados e em competição federada', accent: '#C8102E' },
     { v: '125', label: 'Em formação', desc: 'Jovens talentos nas camadas de formação do clube', accent: '#006633' },
@@ -80,6 +83,25 @@ export default function CDHAdminPage() {
               <textarea value={data[k]} onChange={e => setData(p => ({ ...p, [k]: e.target.value }))} rows={3} style={ta} />
             </div>
           ))}
+        </div>
+
+        <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 8, padding: 20 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 12 }}>Vídeo & Redes Sociais</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 600, color: '#475569', display: 'block', marginBottom: 4 }}>ID do vídeo YouTube</label>
+              <input value={(data as any).video_id ?? ''} onChange={e => setData(p => ({ ...p, video_id: e.target.value }))} style={inp} placeholder="ex: uRaHfR5toNs" />
+              <p style={{ margin: '4px 0 0', fontSize: 11, color: '#94a3b8' }}>O código no fim do link youtube.com/watch?v=<strong>XXXX</strong></p>
+            </div>
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 600, color: '#475569', display: 'block', marginBottom: 4 }}>Facebook URL</label>
+              <input value={(data as any).facebook_url ?? ''} onChange={e => setData(p => ({ ...p, facebook_url: e.target.value }))} style={inp} placeholder="https://facebook.com/..." />
+            </div>
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 600, color: '#475569', display: 'block', marginBottom: 4 }}>Instagram URL</label>
+              <input value={(data as any).instagram_url ?? ''} onChange={e => setData(p => ({ ...p, instagram_url: e.target.value }))} style={inp} placeholder="https://instagram.com/..." />
+            </div>
+          </div>
         </div>
 
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 8, padding: 20 }}>

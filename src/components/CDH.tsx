@@ -8,6 +8,9 @@ const DEF_CFG = {
   p1: 'Enquanto patrocinadora do Clube Desportivo da Huíla, a Omatapalo desempenha um papel activo na valorização do desporto nacional e no fortalecimento do futebol na Região Sul de Angola.',
   p2: 'Um dos marcos desta parceria foi o apoio à construção do Complexo de Treino General de Exército Francisco Pereira Furtado, uma infra-estrutura moderna concebida para proporcionar melhores condições de preparação aos atletas, promover a excelência desportiva e contribuir para o crescimento sustentável do clube e da modalidade na província da Huíla.',
   p3: 'Este investimento reflecte a visão da Omatapalo de gerar impacto positivo duradouro, apoiando iniciativas que promovem o desenvolvimento humano, social e desportivo das comunidades angolanas.',
+  video_id: 'uRaHfR5toNs',
+  facebook_url: '',
+  instagram_url: '',
   metrics: [
     { v: '180', label: 'Atletas federados', desc: 'Atletas registados e em competição federada', accent: '#C8102E' },
     { v: '125', label: 'Em formação', desc: 'Jovens talentos nas camadas de formação do clube', accent: '#006633' },
@@ -25,6 +28,7 @@ const DEF_CFG = {
 
 export default function CDH() {
   const [lbIdx, setLbIdx] = useState<number | null>(null);
+  const [videoOpen, setVideoOpen] = useState(false);
   const [cfg, setCfg] = useState(DEF_CFG);
 
   useEffect(() => {
@@ -164,6 +168,90 @@ export default function CDH() {
         ))}
       </div>
 
+      {/* ── CTA Vídeo ── */}
+      {cfg.video_id && (
+        <div style={{ background: '#0a1a0a', borderTop: '1px solid rgba(255,255,255,0.06)', padding: 'clamp(48px,7vw,88px) 0' }}>
+          <div className="wrap cdh-video-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px,5vw,72px)', alignItems: 'center' }}>
+            {/* Thumbnail clicável */}
+            <div
+              onClick={() => setVideoOpen(true)}
+              style={{ position: 'relative', borderRadius: 3, overflow: 'hidden', aspectRatio: '16/9', cursor: 'pointer', background: '#07101f' }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://i.ytimg.com/vi/${cfg.video_id}/maxresdefault.jpg`}
+                alt="Ver vídeo CDH"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.55, transition: 'opacity 0.3s' }}
+                className="cdh-yt-thumb"
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(7,16,31,0.1) 0%,rgba(7,16,31,0.6) 100%)' }} />
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 64, height: 64, background: '#C8102E', borderRadius: 3, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 32px rgba(200,16,46,0.4)', transition: 'transform 0.25s' }} className="cdh-play-btn">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" style={{ marginLeft: 4 }}><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                </div>
+              </div>
+            </div>
+            {/* Texto */}
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+                <div style={{ width: 28, height: 3, background: '#C8102E' }} />
+                <span style={{ fontFamily: 'var(--font-label)', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>CDH · Vídeo oficial</span>
+              </div>
+              <h3 style={{ margin: '0 0 clamp(14px,2vw,22px)', fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.6rem,3vw,3rem)', color: '#fff', letterSpacing: '-0.04em', lineHeight: 0.9, textTransform: 'uppercase' }}>
+                Vê a nossa<br />
+                <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.25)' }}>história</span>
+              </h3>
+              <p style={{ margin: '0 0 clamp(24px,3vw,36px)', fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8 }}>
+                Fica a conhecer o impacto do Clube Desportivo da Huíla e a parceria com o Grupo Omatapalo no desenvolvimento do desporto angolano.
+              </p>
+              <button
+                onClick={() => setVideoOpen(true)}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '14px 28px', background: '#C8102E', border: 'none', borderRadius: 3, cursor: 'pointer', fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#fff', fontWeight: 700 }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" style={{ marginLeft: 2 }}><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                Assistir ao vídeo
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Redes Sociais ── */}
+      {(cfg.facebook_url || cfg.instagram_url) && (
+        <div style={{ background: '#07101f', borderTop: '1px solid rgba(255,255,255,0.06)', padding: 'clamp(36px,5vw,56px) 0' }}>
+          <div className="wrap" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, textAlign: 'center' }}>
+            <div>
+              <div style={{ fontFamily: 'var(--font-label)', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 8 }}>Segue o CDH</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.2rem,2vw,1.8rem)', color: '#fff', letterSpacing: '-0.03em', textTransform: 'uppercase' }}>Clube Desportivo da Huíla</div>
+            </div>
+            <div style={{ display: 'flex', gap: 16 }}>
+              {cfg.facebook_url && (
+                <a href={cfg.facebook_url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 24px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 3, color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', transition: 'background 0.2s' }} className="cdh-social-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  Facebook
+                </a>
+              )}
+              {cfg.instagram_url && (
+                <a href={cfg.instagram_url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 24px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 3, color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-label)', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', transition: 'background 0.2s' }} className="cdh-social-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  Instagram
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Lightbox Vídeo ── */}
+      {videoOpen && (
+        <div onClick={() => setVideoOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,0.92)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+          <button onClick={() => setVideoOpen(false)} style={{ position: 'absolute', top: 20, right: 24, background: 'none', border: 'none', color: '#fff', fontSize: 28, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+          <div onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: 900, aspectRatio: '16/9', borderRadius: 3, overflow: 'hidden' }}>
+            <iframe style={{ width: '100%', height: '100%', border: 'none' }} src={`https://www.youtube.com/embed/${cfg.video_id}?autoplay=1&rel=0&modestbranding=1`} title="CDH Vídeo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+          </div>
+        </div>
+      )}
+
       <style>{`
         @media (max-width:900px) {
           .rsa-cdh-mosaic { grid-template-columns:1fr 1fr !important; }
@@ -176,6 +264,10 @@ export default function CDH() {
         .cdh-photo-cell:hover .cdh-photo-overlay { opacity: 0.6; }
         .cdh-photo-cell:hover .cdh-photo-plus { transform: translate(-50%,-50%) scale(1) !important; }
         .cdh-photo-cell:hover .cdh-photo-label { opacity: 1 !important; }
+        .cdh-yt-thumb:hover { opacity: 0.7; }
+        .cdh-play-btn:hover { transform: scale(1.08); }
+        .cdh-social-btn:hover { background: rgba(255,255,255,0.1) !important; }
+        @media (max-width:760px) { .cdh-video-grid { grid-template-columns:1fr !important; } }
       `}</style>
     </section>
   );
