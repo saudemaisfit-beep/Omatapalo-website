@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { createClient } from '@/lib/supabase/server';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export const metadata: Metadata = {
@@ -14,14 +13,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  let gaId = '';
+async function getGaId(): Promise<string> {
   try {
-    const db = await createClient();
-    const { data } = await db.from('site_settings').select('value').eq('key', 'ga_tracking_id').single();
-    if (data?.value) gaId = data.value;
-  } catch {}
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!url || !key) return '';
+    const res = await fetch(`${url}/rest/v1/site_settings?key=eq.ga_tracking_id&select=value&limit=1`, {
+      headers: { apikey: key, Authorization: `Bearer ${key}` },
+      next: { revalidate: 3600 },
+    });
+    const data = await res.json();
+    return data?.[0]?.value ?? '';
+  } catch { return ''; }
+}
 
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const gaId = await getGaId();
   return (
     <html lang="pt" className="h-full">
       <body className="min-h-full">
