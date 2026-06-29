@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { createClient } from '@/lib/supabase/server';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export const metadata: Metadata = {
   title: "Grupo Omatapalo — Fazemos Acontecer",
@@ -12,10 +14,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  let gaId = '';
+  try {
+    const db = await createClient();
+    const { data } = await db.from('site_settings').select('value').eq('key', 'ga_tracking_id').single();
+    if (data?.value) gaId = data.value;
+  } catch {}
+
   return (
     <html lang="pt" className="h-full">
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        {children}
+        <GoogleAnalytics gaId={gaId} />
+      </body>
     </html>
   );
 }
