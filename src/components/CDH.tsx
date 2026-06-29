@@ -50,7 +50,7 @@ export default function CDH() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo-cdh.png" alt="" aria-hidden style={{ position: 'absolute', right: '-2%', top: '50%', transform: 'translateY(-50%)', height: 'clamp(260px,42vw,520px)', width: 'auto', opacity: 0.07, pointerEvents: 'none', userSelect: 'none' }} />
 
-        <div className="wrap" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px,5vw,80px)', alignItems: 'center', paddingTop: 'clamp(48px,6vw,80px)', paddingBottom: 'clamp(48px,6vw,80px)' }}>
+        <div className="wrap cdh-hero-grid" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px,5vw,80px)', alignItems: 'center', paddingTop: 'clamp(48px,6vw,80px)', paddingBottom: 'clamp(48px,6vw,80px)' }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 'clamp(20px,2.8vw,32px)', background: 'rgba(200,16,46,0.18)', border: '1px solid rgba(200,16,46,0.35)', borderRadius: 2, padding: '7px 16px' }}>
               <div style={{ width: 7, height: 7, background: '#C8102E', borderRadius: '50%' }} />
@@ -76,7 +76,7 @@ export default function CDH() {
 
       {/* ── Conteúdo parceria CDH ── */}
       <div style={{ background: '#0d1a0d', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <div className="wrap" style={{ paddingTop: 'clamp(40px,6vw,72px)', paddingBottom: 'clamp(40px,6vw,72px)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px,5vw,80px)', alignItems: 'start' }}>
+        <div className="wrap cdh-hero-grid" style={{ paddingTop: 'clamp(40px,6vw,72px)', paddingBottom: 'clamp(40px,6vw,72px)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px,5vw,80px)', alignItems: 'start' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
               <svg width="10" height="10" viewBox="0 0 10 10"><rect width="10" height="10" fill="rgba(255,255,255,0.3)" /></svg>
@@ -252,6 +252,8 @@ export default function CDH() {
         @media (max-width:900px) {
           .rsa-cdh-mosaic { grid-template-columns:1fr 1fr !important; }
           .rsa-cdh-cards { grid-template-columns:1fr 1fr !important; }
+          .cdh-hero-grid { grid-template-columns:1fr !important; }
+          .cdh-video-grid { grid-template-columns:1fr !important; }
         }
         @media (max-width:560px) {
           .rsa-cdh-mosaic { grid-template-columns:1fr !important; }
