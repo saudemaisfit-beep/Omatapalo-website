@@ -68,12 +68,6 @@ export default function IdentidadeVisual() {
           </p>
         </div>
 
-        {/* Imagem de destaque */}
-        <div style={{ marginBottom: 'clamp(32px,5vw,56px)', borderRadius: 10, overflow: 'hidden', maxHeight: 480 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/EXPO-HUAMBO-2.jpg" alt="Expo Huambo — Grupo Omatapalo" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-        </div>
-
         {/* Grid */}
         <div className="iv-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
           {assets.map(asset => (

@@ -12,7 +12,7 @@ export default function IdentidadeVisualPage() {
           title="Press Kit"
           eyebrow="Grupo Omatapalo · Marca"
           outlineWord="Kit"
-          imgSrc="/COMPLEXO HOSPITALAR DOENÃ‡AS CARDIO-PULMONARES CARDEAL D. ALEXANDRE DO NASCIMENTO (2).JPG"
+          imgSrc="/EXPO-HUAMBO-2.jpg"
           imgOpacity={0.3}
           position="center"
         />
