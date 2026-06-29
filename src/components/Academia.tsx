@@ -59,13 +59,6 @@ export default function Academia() {
       if (data?.value) try { setCfg(c => ({ ...c, ...JSON.parse(data.value) })); } catch {}
     });
   }, []);
-  const [cfg, setCfg] = useState(DEF);
-
-  useEffect(() => {
-    createClient().from('site_settings').select('value').eq('key', 'academia_cfg').single().then(({ data }) => {
-      if (data?.value) try { setCfg(d => ({ ...d, ...JSON.parse(data.value) })); } catch {}
-    });
-  }, []);
 
   useEffect(() => {
     import('gsap').then(({ gsap }) => {
