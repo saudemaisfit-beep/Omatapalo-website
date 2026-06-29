@@ -8,6 +8,7 @@ const DEFAULTS = {
   body_p1: 'Contando com mais de 15.000 colaboradores directos, a OMATAPALO possui no seu quadro técnico áreas de conhecimento relacionadas com a sua actividade.',
   body_p2: 'A empresa assenta a sua actuação em níveis de empenho, diligência na execução, responsabilidade na sua conduta, formando uma equipa pluridisciplinar capaz de conduzir processos, produzir resultados e garantir padrões de qualidade, cumprimento de prazos rigorosos, para uma sociedade que, cada vez mais, exige soluções mais céleres.',
   section_img: '/COLABORADORES ARMAZÉM (53) 1 (1).JPG',
+  cta_link: '#contactos',
 };
 
 export default function Pessoas() {
@@ -19,7 +20,7 @@ export default function Pessoas() {
       .from('site_content')
       .select('field,value')
       .eq('page', 'pessoas')
-      .in('field', ['body_p1', 'body_p2', 'section_img'])
+      .in('field', ['body_p1', 'body_p2', 'section_img', 'cta_link'])
       .then(({ data }) => {
         if (data?.length) {
           const map: Record<string, string> = {};
@@ -64,7 +65,7 @@ export default function Pessoas() {
               {content.body_p2}
             </p>
             <div style={{ marginTop: 'var(--space-6)' }}>
-              <a href="#contactos" className="btn btn-ghost">
+              <a href={content.cta_link} className="btn btn-ghost">
                 Trabalhar connosco
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>

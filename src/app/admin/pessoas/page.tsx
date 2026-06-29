@@ -10,6 +10,7 @@ const DEF = {
   body_p1: 'Contando com mais de 15.000 colaboradores directos, a OMATAPALO possui no seu quadro técnico áreas de conhecimento relacionadas com a sua actividade.',
   body_p2: 'A empresa assenta a sua actuação em níveis de empenho, diligência na execução, responsabilidade na sua conduta, formando uma equipa pluridisciplinar capaz de conduzir processos, produzir resultados e garantir padrões de qualidade, cumprimento de prazos rigorosos, para uma sociedade que, cada vez mais, exige soluções mais céleres.',
   section_img: '/COLABORADORES OMTP.png',
+  cta_link: '#contactos',
 };
 
 export default function PessoasAdminPage() {
@@ -20,7 +21,7 @@ export default function PessoasAdminPage() {
 
   useEffect(() => {
     const db = createClient();
-    db.from('site_content').select('field,value').eq('page', 'pessoas').in('field', ['body_p1', 'body_p2', 'section_img']).then(({ data: rows }) => {
+    db.from('site_content').select('field,value').eq('page', 'pessoas').in('field', ['body_p1', 'body_p2', 'section_img', 'cta_link']).then(({ data: rows }) => {
       if (rows?.length) {
         const map: Record<string, string> = {};
         rows.forEach(({ field, value }: { field: string; value: string }) => { map[field] = value; });
@@ -73,6 +74,11 @@ export default function PessoasAdminPage() {
             <button onClick={() => setPicker(true)} style={{ padding: '9px 14px', background: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: 'pointer', color: '#475569', whiteSpace: 'nowrap' }}>🖼 Escolher</button>
           </div>
           {data.section_img && <img src={data.section_img} alt="" style={{ marginTop: 8, height: 80, objectFit: 'cover', borderRadius: 4, maxWidth: '100%' }} />}
+        </div>
+        <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 8, padding: 20 }}>
+          <label style={{ fontSize: 12, fontWeight: 600, color: '#475569', display: 'block', marginBottom: 6 }}>Link do botão "Trabalhar connosco"</label>
+          <input value={data.cta_link} onChange={e => setData(p => ({ ...p, cta_link: e.target.value }))} style={inp} placeholder="https://... ou #contactos" />
+          <p style={{ margin: '6px 0 0', fontSize: 11, color: '#94a3b8' }}>Pode ser um URL externo (https://...) ou uma âncora interna (#contactos)</p>
         </div>
       </div>
 
