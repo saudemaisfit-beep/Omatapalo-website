@@ -44,6 +44,7 @@ export default function Sustentabilidade() {
   const [relTitulo, setRelTitulo]   = useState('Relatório de Sustentabilidade 2024');
   const [relDesc, setRelDesc]       = useState('Consulte o nosso Relatório e Contas consolidadas e acompanhe os compromissos e resultados em matéria de sustentabilidade, governação e impacto social.');
   const [relPdf, setRelPdf]         = useState('#');
+  const [heroImg, setHeroImg]       = useState('https://omatapalo.com/wp-content/uploads/HABITACAO-CAMBAMBE_08042025-5.jpg');
 
   useEffect(() => {
     createClient().from('site_settings').select('value').eq('key', 'sustentabilidade_cfg').single().then(({ data }) => {
@@ -57,6 +58,7 @@ export default function Sustentabilidade() {
         if (cfg.relatorio_titulo) setRelTitulo(cfg.relatorio_titulo);
         if (cfg.relatorio_desc)   setRelDesc(cfg.relatorio_desc);
         if (cfg.relatorio_pdf)    setRelPdf(cfg.relatorio_pdf);
+        if (cfg.hero_img)         setHeroImg(cfg.hero_img);
       } catch {}
     });
   }, []);
@@ -119,7 +121,7 @@ export default function Sustentabilidade() {
               <div aria-hidden style={{ position: 'absolute', top: -20, right: -12, zIndex: 0, fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(80px,12vw,160px)', lineHeight: 1, color: 'rgba(26,57,110,0.05)', letterSpacing: '-0.05em', pointerEvents: 'none', userSelect: 'none' }}>ESG</div>
               <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 4, overflow: 'hidden', background: '#0d1d35', zIndex: 1 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://omatapalo.com/wp-content/uploads/HABITACAO-CAMBAMBE_08042025-5.jpg" alt="Sustentabilidade Omatapalo" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={heroImg} alt="Sustentabilidade Omatapalo" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 50%, rgba(7,16,31,0.65) 100%)' }} />
                 <div style={{ position: 'absolute', bottom: 24, left: 24, background: '#1a396e', padding: '6px 14px', fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.9)' }}>
                   Grupo Omatapalo · ESG

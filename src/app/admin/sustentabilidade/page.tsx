@@ -1,12 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import MediaPicker from '@/components/admin/MediaPicker';
 
 const inp = { padding: '9px 12px', border: '1.5px solid #e2e8f0', borderRadius: 6, fontSize: 13, outline: 'none', width: '100%', boxSizing: 'border-box' as const };
 
 type Cfg = {
   intro_p1: string;
   intro_p2: string;
+  hero_img: string;
   esg: { n: string; t: string; d: string; img: string }[];
   certs: { alt: string; label: string; src: string; href: string }[];
   relatorio_titulo: string;
@@ -17,6 +19,7 @@ type Cfg = {
 const DEFAULT: Cfg = {
   intro_p1: 'O Grupo Omatapalo caminha rumo a um futuro que redefine os limites da Engenharia e Construção, com um claro foco no investimento em energias renováveis e inovação.',
   intro_p2: 'O contributo para a melhoria da qualidade de vida das pessoas e comunidades é desenvolvido através da promoção e apoio de iniciativas de natureza social e ambiental.',
+  hero_img: 'https://omatapalo.com/wp-content/uploads/HABITACAO-CAMBAMBE_08042025-5.jpg',
   esg: [
     { n: '01', t: 'Ambiental',  d: 'Energias renováveis, gestão de resíduos e compensação de carbono em todos os projectos.', img: 'https://omatapalo.com/wp-content/uploads/WhatsApp-Image-2025-06-02-at-19.38.03-1.jpeg' },
     { n: '02', t: 'Social',     d: 'Contribuição para a melhoria da qualidade de vida dos colaboradores, das pessoas e das comunidades.', img: 'https://omatapalo.com/wp-content/uploads/OMT-missao-fazer-sorrir-entrega-brinquedos-natal-2023-2-1-e1758177645954.jpg' },
@@ -86,6 +89,16 @@ export default function SustentabilidadeAdmin() {
           {msg}
         </div>
       )}
+
+      {/* Foto hero */}
+      {section('Foto de Destaque')}
+      <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 8, padding: 20 }}>
+        {cfg.hero_img && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={cfg.hero_img} alt="Foto de destaque" style={{ width: '100%', maxHeight: 220, objectFit: 'cover', borderRadius: 6, marginBottom: 12 }} />
+        )}
+        <MediaPicker value={cfg.hero_img} onChange={url => set('hero_img', url)} label="Trocar foto" />
+      </div>
 
       {/* Intro */}
       {section('Introdução')}
