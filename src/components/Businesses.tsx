@@ -1,10 +1,11 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { createClient } from '@/lib/supabase/client';
 
-const businesses = [
+const DEFAULT_BUSINESSES = [
   {
     num: '01', title: 'Engenharia & Construção',
     desc: 'Projetos de grande escala: edifícios, pontes, infraestruturas industriais e habitacionais. O coração e a identidade do Grupo.',
@@ -59,6 +60,13 @@ export default function Businesses() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
   const [active, setActive] = useState(0);
+  const [businesses, setBusinesses] = useState(DEFAULT_BUSINESSES);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'businesses_cfg').single().then(({ data }) => {
+      if (data?.value) try { setBusinesses(JSON.parse(data.value)); } catch {}
+    });
+  }, []);
 
   return (
     <section id="negocios" ref={ref} className="section bg-[var(--dark)]">

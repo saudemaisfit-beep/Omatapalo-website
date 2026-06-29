@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { GeoIcon } from './GeoDecor';
+import { createClient } from '@/lib/supabase/client';
 
-const items = [
+const DEFAULT_ITEMS = [
   { v: 55, l: 'Estaleiros de Obras Activos' },
   { v: 8,  l: 'Centros de Betão' },
   { v: 1,  l: 'Plataforma de Produção de Cuba' },
@@ -39,6 +40,13 @@ function N({ v }: { v: number }) {
 export default function OQueProduzimos() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+  const [items, setItems] = useState(DEFAULT_ITEMS);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'o_que_produzimos_cfg').single().then(({ data }) => {
+      if (data?.value) try { setItems(JSON.parse(data.value)); } catch {}
+    });
+  }, []);
 
   return (
     <section ref={ref} id="producao" aria-labelledby="producao-h" className="relative overflow-hidden">

@@ -1,17 +1,39 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/client';
+
+const DEF_CFG = {
+  hero_text: 'Através do apoio ao Clube Desportivo da Huíla, Grupo Omatapalo reafirma o seu compromisso com o desenvolvimento do desporto angolano, investindo na formação de talentos, na promoção de valores positivos e na criação de oportunidades para as futuras gerações. Acreditamos que o desporto é uma poderosa ferramenta de inclusão social, educação e transformação das comunidades.',
+  p1: 'Enquanto patrocinadora do Clube Desportivo da Huíla, a Omatapalo desempenha um papel activo na valorização do desporto nacional e no fortalecimento do futebol na Região Sul de Angola.',
+  p2: 'Um dos marcos desta parceria foi o apoio à construção do Complexo de Treino General de Exército Francisco Pereira Furtado, uma infra-estrutura moderna concebida para proporcionar melhores condições de preparação aos atletas, promover a excelência desportiva e contribuir para o crescimento sustentável do clube e da modalidade na província da Huíla.',
+  p3: 'Este investimento reflecte a visão da Omatapalo de gerar impacto positivo duradouro, apoiando iniciativas que promovem o desenvolvimento humano, social e desportivo das comunidades angolanas.',
+  metrics: [
+    { v: '180', label: 'Atletas federados', desc: 'Atletas registados e em competição federada', accent: '#C8102E' },
+    { v: '125', label: 'Em formação', desc: 'Jovens talentos nas camadas de formação do clube', accent: '#006633' },
+    { v: '60', label: 'Atletas seniores', desc: 'Equipa sénior em competição de alto nível', accent: '#FFD700' },
+    { v: 'CDH', label: 'Clube Desportivo da Huíla', desc: 'Parceria da Omatapalo com o emblema da Huíla', accent: '#C8102E' },
+  ],
+  photos: [
+    { src: '/cdh-treino-1.jpg', label: 'Formação Desportiva' },
+    { src: '/cdh-treino-2.jpg', label: 'Treino' },
+    { src: '/cdh-treino-3.jpg', label: 'Plantel' },
+    { src: '/cdh-treino-4.jpg', label: 'Competição' },
+    { src: '/cdh-treino-5.jpg', label: 'CDH' },
+  ],
+};
 
 export default function CDH() {
   const [lbIdx, setLbIdx] = useState<number | null>(null);
+  const [cfg, setCfg] = useState(DEF_CFG);
 
-  const photos = [
-    { src: '/cdh-treino-1.jpg', thumb: '/cdh-treino-1.jpg', label: 'Formação Desportiva' },
-    { src: '/cdh-treino-2.jpg', thumb: '/cdh-treino-2.jpg', label: 'Treino' },
-    { src: '/cdh-treino-3.jpg', thumb: '/cdh-treino-3.jpg', label: 'Plantel' },
-    { src: '/cdh-treino-4.jpg', thumb: '/cdh-treino-4.jpg', label: 'Competição' },
-    { src: '/cdh-treino-5.jpg', thumb: '/cdh-treino-5.jpg', label: 'CDH' },
-  ];
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'cdh_cfg').single().then(({ data }) => {
+      if (data?.value) try { setCfg(c => ({ ...c, ...JSON.parse(data.value) })); } catch {}
+    });
+  }, []);
+
+  const photos = cfg.photos.map(p => ({ src: p.src, thumb: p.src, label: p.label }));
 
   return (
     <section style={{ background: '#07101f', position: 'relative', overflow: 'hidden' }}>
@@ -42,7 +64,7 @@ export default function CDH() {
           </div>
           <div>
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1.05vw,16px)', color: '#fff', lineHeight: 1.9, margin: '0 0 clamp(20px,3vw,32px)', maxWidth: '44ch' }}>
-              Através do apoio ao Clube Desportivo da Huíla, Grupo Omatapalo reafirma o seu compromisso com o desenvolvimento do desporto angolano, investindo na formação de talentos, na promoção de valores positivos e na criação de oportunidades para as futuras gerações. Acreditamos que o desporto é uma poderosa ferramenta de inclusão social, educação e transformação das comunidades.
+              {cfg.hero_text}
             </p>
           </div>
         </div>
@@ -60,15 +82,9 @@ export default function CDH() {
               Apoio ao Desenvolvimento<br />
               <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.35)' }}>Desportivo</span>
             </h3>
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, margin: '0 0 clamp(16px,2vw,22px)' }}>
-              Enquanto patrocinadora do Clube Desportivo da Huíla, a Omatapalo desempenha um papel activo na valorização do desporto nacional e no fortalecimento do futebol na Região Sul de Angola.
-            </p>
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, margin: '0 0 clamp(16px,2vw,22px)' }}>
-              Um dos marcos desta parceria foi o apoio à construção do <strong style={{ color: '#fff', fontWeight: 700 }}>Complexo de Treino General de Exército Francisco Pereira Furtado</strong>, uma infra-estrutura moderna concebida para proporcionar melhores condições de preparação aos atletas, promover a excelência desportiva e contribuir para o crescimento sustentável do clube e da modalidade na província da Huíla.
-            </p>
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, margin: 0 }}>
-              Este investimento reflecte a visão da Omatapalo de gerar impacto positivo duradouro, apoiando iniciativas que promovem o desenvolvimento humano, social e desportivo das comunidades angolanas.
-            </p>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, margin: '0 0 clamp(16px,2vw,22px)' }}>{cfg.p1}</p>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, margin: '0 0 clamp(16px,2vw,22px)' }}>{cfg.p2}</p>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px,1vw,15px)', color: '#fff', lineHeight: 1.85, margin: 0 }}>{cfg.p3}</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -139,12 +155,7 @@ export default function CDH() {
 
       {/* ── 4 métricas CDH ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', background: '#0a1a0a' }} className="rsa-cdh-cards">
-        {[
-          { v: '180', label: 'Atletas federados', desc: 'Atletas registados e em competição federada', accent: '#C8102E' },
-          { v: '125', label: 'Em formação', desc: 'Jovens talentos nas camadas de formação do clube', accent: '#006633' },
-          { v: '60', label: 'Atletas seniores', desc: 'Equipa sénior em competição de alto nível', accent: '#FFD700' },
-          { v: 'CDH', label: 'Clube Desportivo da Huíla', desc: 'Parceria da Omatapalo com o emblema da Huíla', accent: '#C8102E' },
-        ].map((item, i) => (
+        {cfg.metrics.map((item, i) => (
           <div key={item.label} style={{ padding: 'clamp(22px,2.8vw,36px) clamp(18px,2.2vw,28px)', borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.05)' : undefined, borderTop: '3px solid ' + item.accent }}>
             <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.8rem,2.8vw,3.2rem)', color: '#fff', letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 10 }}>{item.v}</div>
             <div style={{ fontFamily: 'var(--font-label)', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#fff', marginBottom: 8 }}>{item.label}</div>

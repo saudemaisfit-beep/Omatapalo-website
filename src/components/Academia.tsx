@@ -2,19 +2,21 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { createClient } from '@/lib/supabase/client';
 
-const GALLERY = [
+const DEF_GALLERY = [
   '/Formação omatapalo.jpg',
   '/Academia-barra.jpg',
   '/academia-barra1.jpg',
   '/academia-barra2.jpg',
 ];
 
-const STATS = [
+const DEF_STATS = [
   { value: 76000, label: 'Horas de Formação', prefix: '+ ', suffix: '' },
   { value: 2021, label: 'Ano de Inauguração', prefix: '', suffix: '' },
   { value: 3200, label: 'Colaboradores Formados', prefix: '+ ', suffix: '' },
 ];
+const DEF_CFG = { paragraph: 'ACADEMIA OMATAPALO, inaugurada em 2021, tem como objetivo primordial a formação de quadros e funcionários do Grupo, com vista ao desenvolvimento e especialização dos seus profissionais.', badge: 'Desde 2021', stats: DEF_STATS, gallery: DEF_GALLERY, hero_img: '/Academia-barra.jpg' };
 
 function useCountUp(target: number, duration = 1800, active = false) {
   const [count, setCount] = useState(0);
@@ -50,6 +52,20 @@ export default function Academia() {
   const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(false);
   const [hoveredImg, setHoveredImg] = useState<number | null>(null);
+  const [cfg, setCfg] = useState(DEF_CFG);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'academia_cfg').single().then(({ data }) => {
+      if (data?.value) try { setCfg(c => ({ ...c, ...JSON.parse(data.value) })); } catch {}
+    });
+  }, []);
+  const [cfg, setCfg] = useState(DEF);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'academia_cfg').single().then(({ data }) => {
+      if (data?.value) try { setCfg(d => ({ ...d, ...JSON.parse(data.value) })); } catch {}
+    });
+  }, []);
 
   useEffect(() => {
     import('gsap').then(({ gsap }) => {
@@ -106,7 +122,7 @@ export default function Academia() {
                 />
               </div>
               <p style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(15px,1.35vw,18px)', color: '#ffffff', lineHeight: 1.85, margin: '0 0 32px' }}>
-                <strong style={{ color: '#fff' }}>ACADEMIA OMATAPALO</strong>, inaugurada em 2021, tem como objetivo primordial a formação de quadros e funcionários do Grupo, com vista ao desenvolvimento e especialização dos seus profissionais.
+                {cfg.paragraph}
               </p>
             </div>
           </div>
@@ -114,7 +130,7 @@ export default function Academia() {
           {/* Direita: imagem em destaque com badge */}
           <div className="ac-reveal" style={{ opacity: 0, position: 'relative', borderRadius: 4, overflow: 'hidden', aspectRatio: '16/10' }}>
             <Image
-              src={GALLERY[1]}
+              src={cfg.hero_img}
               alt="Academia Omatapalo"
               fill
               style={{ objectFit: 'cover', transform: hoveredImg === -1 ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.8s ease' }}
@@ -130,7 +146,7 @@ export default function Academia() {
               fontSize: '13px', letterSpacing: '0.06em',
               padding: '6px 14px', borderRadius: 2,
             }}>
-              Desde 2021
+              {cfg.badge}
             </div>
           </div>
         </div>
@@ -140,7 +156,7 @@ export default function Academia() {
 
         {/* ─── Stats bar ─── */}
         <div className="ac-reveal" style={{ opacity: 0, display: 'flex', marginTop: 0, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          {STATS.map((s, i) => (
+          {cfg.stats.map((s, i) => (
             <StatItem key={i} {...s} active={active} />
           ))}
         </div>
@@ -148,7 +164,7 @@ export default function Academia() {
 
       {/* ─── Galeria full-width com hover zoom individual ─── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 2 }}>
-        {GALLERY.map((src, i) => (
+        {cfg.gallery.map((src, i) => (
           <div
             key={i}
             className="ac-reveal"

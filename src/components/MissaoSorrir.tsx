@@ -2,6 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { createClient } from '@/lib/supabase/client';
+
+const DEF_MS = {
+  youtube_id: 'kuVu9thTbIM',
+  citacao: 'Para nós, a responsabilidade social começa na nossa casa e nas condições que damos aos nossos Colaboradores. É nesta matriz e nesta filosofia que assenta a nossa capacidade de fazer acontecer.',
+  paragrafo: 'Num país onde existe pobreza e desigualdade, a OMATAPALO considera a responsabilidade social de extrema importância. A contribuição para a melhoria da qualidade de vida das pessoas e comunidades é desenvolvida através da promoção e apoio em iniciativas nos domínios da beneficência e solidariedade social.',
+  ods_imgs: ['/ods-08.png', '/ods-09.png', '/ods-11.png', '/ods-13.png'],
+};
 
 const CARDS = [
   {
@@ -68,6 +76,13 @@ export default function MissaoSorrir() {
   const [activeCard, setActiveCard] = useState(0);
   const [videoOpen, setVideoOpen] = useState(false);
   const [statsVisible, setStatsVisible] = useState(false);
+  const [ms, setMs] = useState(DEF_MS);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'missao_sorrir_cfg').single().then(({ data }) => {
+      if (data?.value) try { setMs(m => ({ ...m, ...JSON.parse(data.value) })); } catch {}
+    });
+  }, []);
 
   const count0 = useCountUp(30, statsVisible);
   const count1 = useCountUp(12, statsVisible);
@@ -155,13 +170,13 @@ export default function MissaoSorrir() {
               lineHeight: 1.85, color: '#fff', fontStyle: 'italic',
               margin: '0 0 28px', borderLeft: '2px solid #1a396e', paddingLeft: 24,
             }}>
-              "Para nós, a responsabilidade social começa na nossa casa e nas condições que damos aos nossos Colaboradores. É nesta matriz e nesta filosofia que assenta a nossa capacidade de fazer acontecer."
+              "{ms.citacao}"
             </p>
             <p style={{
               fontFamily: 'var(--font-body)', fontSize: 'clamp(0.9rem,1.05vw,0.975rem)',
               lineHeight: 1.8, color: '#fff', margin: 0,
             }}>
-              Num país onde existe pobreza e desigualdade, a OMATAPALO considera a responsabilidade social de extrema importância. A contribuição para a melhoria da qualidade de vida das pessoas e comunidades é desenvolvida através da promoção e apoio em iniciativas nos domínios da beneficência e solidariedade social.
+              {ms.paragrafo}
             </p>
           </div>
         </div>
@@ -179,7 +194,7 @@ export default function MissaoSorrir() {
           }}
         >
           <Image
-            src="https://i.ytimg.com/vi/kuVu9thTbIM/maxresdefault.jpg"
+            src={`https://i.ytimg.com/vi/${ms.youtube_id}/maxresdefault.jpg`}
             alt="A Sustentabilidade e Responsabilidade Social na Omatapalo"
             fill
             className="object-cover"
@@ -243,7 +258,7 @@ export default function MissaoSorrir() {
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              {['/ods-08.png', '/ods-09.png', '/ods-11.png', '/ods-13.png'].map((src, i) => (
+              {ms.ods_imgs.map((src, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img key={i} src={src} alt={`ODS ${i + 8}`} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 4 }} />
               ))}
@@ -279,7 +294,7 @@ export default function MissaoSorrir() {
           >
             <iframe
               style={{ width: '100%', height: '100%', border: 'none' }}
-              src="https://www.youtube.com/embed/kuVu9thTbIM?autoplay=1&rel=0&modestbranding=1"
+              src={`https://www.youtube.com/embed/${ms.youtube_id}?autoplay=1&rel=0&modestbranding=1`}
               title="A Sustentabilidade e Responsabilidade Social na Omatapalo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

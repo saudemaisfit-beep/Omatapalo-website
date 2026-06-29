@@ -1,13 +1,29 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { createClient } from '@/lib/supabase/client';
 import Image from 'next/image';
 import { GeoIcon } from './GeoDecor';
+
+const DEF = {
+  linha1: 'CONSTRUÍMOS',
+  linha2: 'O SEU FUTURO',
+  corpo: 'Com mais de 30 anos de história e 15.000 profissionais dedicados, estamos prontos para o seu próximo grande projecto.',
+  btn1: 'Iniciar Projecto →',
+  btn2: 'Ver Portfólio',
+};
 
 export default function ConstruimosFuturo() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const [data, setData] = useState(DEF);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'construimos_futuro_cfg').single().then(({ data: d }) => {
+      if (d?.value) try { setData({ ...DEF, ...JSON.parse(d.value) }); } catch {}
+    });
+  }, []);
 
   const go = (id: string) => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -75,7 +91,7 @@ export default function ConstruimosFuturo() {
               animate={inView ? { y: '0%' } : {}}
               transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h2 className="t-hero text-white leading-none">CONSTRUÍMOS</h2>
+              <h2 className="t-hero text-white leading-none">{data.linha1}</h2>
             </motion.div>
           </div>
           <div className="overflow-hidden mb-14">
@@ -85,7 +101,7 @@ export default function ConstruimosFuturo() {
               transition={{ duration: 1.0, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               <h2 className="t-hero leading-none" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)', color: 'transparent' }}>
-                O SEU FUTURO
+                {data.linha2}
               </h2>
             </motion.div>
           </div>
@@ -102,14 +118,14 @@ export default function ConstruimosFuturo() {
             initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.55 }}
             className="t-body-xl text-white/55 max-w-lg mx-auto mb-10"
           >
-            Com mais de 30 anos de história e 15.000 profissionais dedicados, estamos prontos para o seu próximo grande projecto.
+            {data.corpo}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.7 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button onClick={() => go('#contactos')} className="btn btn-primary">Iniciar Projecto →</button>
-            <button onClick={() => go('#portfolio')} className="btn btn-ghost-white">Ver Portfólio</button>
+            <button onClick={() => go('#contactos')} className="btn btn-primary">{data.btn1}</button>
+            <button onClick={() => go('#portfolio')} className="btn btn-ghost-white">{data.btn2}</button>
           </motion.div>
         </div>
       </div>

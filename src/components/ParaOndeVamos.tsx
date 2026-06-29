@@ -1,9 +1,22 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createClient } from '@/lib/supabase/client';
+
+const DEF = {
+  titulo: 'Energias Renováveis.',
+  corpo: 'A aposta nas Energias Renováveis representa um compromisso ambicioso, que inclui uma aceleração sem precedentes do nosso crescimento no sector, suportado pela nossa história de sucesso enquanto líderes da inovação. Não se trata apenas de levar energia às comunidades, mas sim de contribuir para que estas possam ter vidas mais sustentáveis, no presente e no futuro. Estamos a implementar medidas concretas para proteger o futuro da humanidade, começando com o objectivo de nos tornarmos numa empresa 100% verde. Comprometemo-nos a entregar energia limpa, e continuaremos a expandir o nosso portefólio nesse sentido.',
+};
 
 export default function ParaOndeVamos() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [data, setData] = useState(DEF);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'para_onde_vamos_cfg').single().then(({ data: d }) => {
+      if (d?.value) try { setData({ ...DEF, ...JSON.parse(d.value) }); } catch {}
+    });
+  }, []);
 
   useEffect(() => {
     import('gsap').then(({ gsap }) => {
@@ -47,7 +60,7 @@ export default function ParaOndeVamos() {
               letterSpacing: '-0.03em', lineHeight: 0.95,
               textTransform: 'uppercase',
             }}>
-              Energias<br />Renováveis.
+              {data.titulo}
             </h2>
           </div>
 
@@ -58,7 +71,7 @@ export default function ParaOndeVamos() {
             lineHeight: 1.75,
             paddingTop: 'clamp(16px,2vh,28px)',
           }}>
-            A aposta nas Energias Renováveis representa um compromisso ambicioso, que inclui uma aceleração sem precedentes do nosso crescimento no sector, suportado pela nossa história de sucesso enquanto líderes da inovação. Não se trata apenas de levar energia às comunidades, mas sim de contribuir para que estas possam ter vidas mais sustentáveis, no presente e no futuro. Estamos a implementar medidas concretas para proteger o futuro da humanidade, começando com o objectivo de nos tornarmos numa empresa 100% verde. Comprometemo-nos a entregar energia limpa, e continuaremos a expandir o nosso portefólio nesse sentido.
+            {data.corpo}
           </p>
         </div>
       </div>

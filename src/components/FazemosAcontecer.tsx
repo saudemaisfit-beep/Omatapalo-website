@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { createClient } from '@/lib/supabase/client';
 import { GeoIcon, GeoSquare } from './GeoDecor';
 
 function Counter({ value, prefix = '', suffix = '' }: { value: number; prefix?: string; suffix?: string }) {
@@ -25,13 +26,13 @@ function Counter({ value, prefix = '', suffix = '' }: { value: number; prefix?: 
   return <span ref={ref}>{prefix}{fmt}{suffix}</span>;
 }
 
-const big = [
+const DEF_BIG = [
   { v: 15000, s: '+', l: 'Colaboradores', sub: 'em Angola e em África' },
   { v: 1500000, s: ' m²', l: 'Área Construída', sub: 'edifícios e infraestrutura' },
   { v: 5000, s: '+ km', l: 'de Estrada', sub: 'pavimentada em Angola' },
 ];
 
-const small = [
+const DEF_SMALL = [
   { v: 8,    p: '+', l: 'Estações de Tratamento de Água' },
   { v: 2000, p: '+', l: 'Documentos de Gestão e Controlo' },
   { v: 12,   p: '+', l: 'Infraestruturas de Comunicação' },
@@ -43,6 +44,14 @@ const small = [
 export default function FazemosAcontecer() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+  const [big, setBig] = useState(DEF_BIG);
+  const [small, setSmall] = useState(DEF_SMALL);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'fazemos_acontecer_cfg').single().then(({ data }) => {
+      if (data?.value) try { const d = JSON.parse(data.value); if (d.big) setBig(d.big); if (d.small) setSmall(d.small); } catch {}
+    });
+  }, []);
 
   return (
     <section ref={ref} id="fazemos" aria-labelledby="fazemos-h" className="section bg-white relative overflow-hidden">

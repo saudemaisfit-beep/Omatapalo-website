@@ -2,38 +2,26 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { createClient } from '@/lib/supabase/client';
 
-const ITEMS = [
-  {
-    quote: 'Sinto que contribuo não só para uma estrada ou um edifício, mas para o desenvolvimento da comunidade onde vivo. O Grupo Omatapalo dá-nos orgulho e motivação para fazer sempre mais e melhor.',
-    name: 'Zulmira da Costa',
-    role: 'Responsável de Apoio Administrativo',
-    photo: 'https://omatapalo.com/wp-content/uploads/27.jpg',
-  },
-  {
-    quote: 'Fui promovido depois de participar num programa interno de capacitação. Sinto que aqui há oportunidades reais de crescer e fazer a diferença.',
-    name: 'Edmar Manuel',
-    role: 'Director Executivo Administrativo',
-    photo: 'https://omatapalo.com/wp-content/uploads/29.jpg',
-  },
-  {
-    quote: 'Na obra onde trabalho, vejo diariamente como se preocupam com a nossa segurança e conforto. As formações que recebemos ajudaram-me a crescer, tanto na parte técnica, como pessoal.',
-    name: 'João Freitas',
-    role: 'Técnico de Segurança, Benguela',
-    photo: 'https://omatapalo.com/wp-content/uploads/26.jpg',
-  },
-  {
-    quote: 'Participei em acções de reflorestação promovidas pela empresa. Não é só construir, é também preservar. Isso dá sentido ao nosso trabalho.',
-    name: 'José Avelino',
-    role: 'Motorista, Malanje',
-    photo: 'https://omatapalo.com/wp-content/uploads/28.jpg',
-  },
+const DEFAULT_ITEMS = [
+  { quote: 'Sinto que contribuo não só para uma estrada ou um edifício, mas para o desenvolvimento da comunidade onde vivo. O Grupo Omatapalo dá-nos orgulho e motivação para fazer sempre mais e melhor.', name: 'Zulmira da Costa', role: 'Responsável de Apoio Administrativo', photo: 'https://omatapalo.com/wp-content/uploads/27.jpg' },
+  { quote: 'Fui promovido depois de participar num programa interno de capacitação. Sinto que aqui há oportunidades reais de crescer e fazer a diferença.', name: 'Edmar Manuel', role: 'Director Executivo Administrativo', photo: 'https://omatapalo.com/wp-content/uploads/29.jpg' },
+  { quote: 'Na obra onde trabalho, vejo diariamente como se preocupam com a nossa segurança e conforto. As formações que recebemos ajudaram-me a crescer, tanto na parte técnica, como pessoal.', name: 'João Freitas', role: 'Técnico de Segurança, Benguela', photo: 'https://omatapalo.com/wp-content/uploads/26.jpg' },
+  { quote: 'Participei em acções de reflorestação promovidas pela empresa. Não é só construir, é também preservar. Isso dá sentido ao nosso trabalho.', name: 'José Avelino', role: 'Motorista, Malanje', photo: 'https://omatapalo.com/wp-content/uploads/28.jpg' },
 ];
 
 const DURATION = 6000;
 
 export default function Testemunhos() {
+  const [ITEMS, setITEMS] = useState(DEFAULT_ITEMS);
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    createClient().from('site_settings').select('value').eq('key', 'testemunhos_cfg').single().then(({ data }) => {
+      if (data?.value) try { setITEMS(JSON.parse(data.value)); } catch {}
+    });
+  }, []);
   const [prev, setPrev] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
   const [animating, setAnimating] = useState(false);
